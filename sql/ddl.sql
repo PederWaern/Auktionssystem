@@ -35,7 +35,7 @@ CREATE TABLE leverantor
 -- produkt
 CREATE TABLE produkt (
   id INT AUTO_INCREMENT,
-  leverantor_organisationsnummer INT NOT NULL,
+  leverantor_organisationsnummer CHAR(12) NOT NULL,
   namn          VARCHAR(50),
   beskrivning VARCHAR(300),
   provision double NOT NULL ,
@@ -117,7 +117,14 @@ INSERT INTO leverantor VALUES ('444444444444', 'Friendly Old Dude', '0735444444'
 INSERT INTO leverantor VALUES ('555555555555', 'Ms. Butterscotch', '0735555555', 'msb@sell.se');
 INSERT INTO leverantor VALUES ('666666666666', 'We Got The Goods', '0735666666', 'wgtg@sell.se');
 
--- produkter
+ -- produkter
+-- INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES
+--  ("111111111111", "Ljusstake", " Ljusstake i silver - tidig barock", 0.3, img_1.jpg),
+--  ("222222222222", "Lösnäsa", "Ansiktsaccessoar för att höja stämningen på kickoffen", 0.1, img_2.jpg),
+--  ("333333333333", "Genmodifierad hamster", "Husdjuret för dig som stimuleras av överlägsenhet", 0.5, img_3.jpg),
+--  ("444444444444", "Tavelram", "Hobby-tillverkad tavelram - 100% ek", 0.25, img_4.jpg),
+--  ("5555555555555", "Tekopp", "Klassisk kolonialkopp", 0.35, img_5.jpg),
+--  ("666666666666", "Crazy-haze", "För dig som alltid är sist kvar", 0.1, img_5.jpg);
 
 -- auktioner
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (1, 3000, 1500, '2017-02-20', '2017-03-20');
