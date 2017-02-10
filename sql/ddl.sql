@@ -12,7 +12,7 @@ ort VARCHAR (50)
 
 -- kund
 CREATE TABLE kund(
-  personnummer CHAR(10),
+  personnummer INT(10),
   fornamn       VARCHAR(50) NOT NULL,
   efternamn     VARCHAR(50) NOT NULL,
   telefonnummer CHAR(13)    NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE leverantor
 -- produkt
 CREATE TABLE produkt (
   id INT AUTO_INCREMENT,
-  leverantor_organisationsnummer CHAR(12) NOT NULL,
+  leverantor_organisationsnummer INT NOT NULL,
   namn          VARCHAR(50),
   beskrivning VARCHAR(300),
   provision double NOT NULL ,
@@ -58,7 +58,7 @@ CREATE TABLE auktion (
 
 -- bud
 CREATE TABLE bud (
-  kund_personnummer CHAR(10) NOT NULL,
+  kund_personnummer INT NOT NULL,
   auktion_id INT NOT NULL,
   PRIMARY KEY (kund_personnummer, auktion_id),
   FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
@@ -100,13 +100,13 @@ INSERT into adress (gata, postnummer, ort) VALUES
 -- kunder
 INSERT INTO kund
 (personnummer, fornamn, efternamn, telefonnummer, epost, adress_id) VALUES
-  ('6808033117', 'Fritte', 'Bohman', '07374826', 'frittw.bohman@domäinen.de', 1),
-  ('3212077743', 'Anna', 'Lund', '0743782644', 'hacker.c8s@anon.w', 2),
-  ('8707736734', 'Noppe', 'Segelbåt', '0798375892', 'noppe.segelbåt@buissenes.com', 3),
-  ('7309824728', 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com', 4),
-  ('5503047294', 'Edit', 'Gärdeström', '0794782828', 'vadsadu@virus.com', 5),
-  ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', 6);
-
+  (6808033117, 'Fritte', 'Bohman', '07374826', 'frittw.bohman@domäinen.de', 1),
+  (3212077743, 'Anna', 'Lund', '0743782644', 'hacker.c8s@anon.w', 2),
+  (8707736734, 'Noppe', 'Segelbåt', '0798375892', 'noppe.segelbåt@buissenes.com', 3),
+  (7309824728, 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com', 4),
+  (5503047294, 'Edit', 'Gärdeström', '0794782828', 'vadsadu@virus.com', 5),
+  (7706034568, 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', 6);
+-- ofdneojnfewoi
 
 
 -- leverantorer
@@ -117,14 +117,7 @@ INSERT INTO leverantor VALUES ('444444444444', 'Friendly Old Dude', '0735444444'
 INSERT INTO leverantor VALUES ('555555555555', 'Ms. Butterscotch', '0735555555', 'msb@sell.se');
 INSERT INTO leverantor VALUES ('666666666666', 'We Got The Goods', '0735666666', 'wgtg@sell.se');
 
- -- produkter
- INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES
- ('111111111111', 'Ljusstake', ' Ljusstake i silver - tidig barock', 0.3, 'img_1.jpg'),
- ('222222222222', 'Lösnäsa', 'Ansiktsaccessoar för att höja stämningen på kickoffen', 0.1, 'img_2.jpg'),
- ('333333333333', 'Genmodifierad hamster', 'Husdjuret för dig som stimuleras av överlägsenhet', 0.5, 'img_3.jpg'),
- ('444444444444', 'Tavelram', 'Hobby-tillverkad tavelram - 100% ek', 0.25, 'img_4.jpg'),
- ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 0.35, 'img_5.jpg'),
- ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 0.1, 'img_5.jpg');
+-- produkter
 
 -- auktioner
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (1, 3000, 1500, '2017-02-20', '2017-03-20');
@@ -134,10 +127,3 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (5, 3000, 1500, '2017-02-20', '2017-03-20');
 
 -- bud
-INSERT INTO bud (kund_personnummer, auktion_id) VALUES
-  ('6808033117',1),
-  ('3212077743',2),
-  ('8707736734',3),
-  ('7309824728',4),
-  ('5503047294',5),
-  ('7706034568',1);
