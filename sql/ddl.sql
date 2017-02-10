@@ -10,6 +10,7 @@ postnummer CHAR (5) NOT NULL,
 ort VARCHAR (50)
 );
 
+-- kund
 CREATE TABLE kund(
   personnummer INT(10),
   fornamn       VARCHAR(50) NOT NULL,
