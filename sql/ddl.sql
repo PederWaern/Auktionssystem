@@ -90,6 +90,12 @@ CREATE TABLE avslutade_auktioner
 -- kunder
 
 -- leverantorer
+INSERT INTO leverantor VALUES ('111111111111', 'Lovely Old Stuff', '0735111111', 'los@sell.se');
+INSERT INTO leverantor VALUES ('222222222222', 'Happy Shop', '0735222222', 'hs@sell.se');
+INSERT INTO leverantor VALUES ('111111111111', 'Evil Megastore', '0735333333', 'ems@sell.se');
+INSERT INTO leverantor VALUES ('111111111111', 'Friendly Old Dude', '0735444444', 'fod@sell.se');
+INSERT INTO leverantor VALUES ('111111111111', 'Ms. Butterscotch', '0735555555', 'msb@sell.se');
+INSERT INTO leverantor VALUES ('111111111111', 'We Got The Goods', '0735111111', 'wgtg@sell.se');
 
 -- produkter
 
