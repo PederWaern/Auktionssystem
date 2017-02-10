@@ -27,7 +27,7 @@ CREATE TABLE leverantor
 (
   organisitionsnummer CHAR(12) NOT NULL ,
   name VARCHAR(50),
-  telefon_nummer VARCHAR(13),
+  telefonnummer VARCHAR(13),
   epost VARCHAR(50),
 
   PRIMARY KEY (organisitionsnummer)
@@ -42,7 +42,6 @@ CREATE TABLE produkt (
   PRIMARY KEY (id),
   FOREIGN KEY (leverantor_organisationsnummer) REFERENCES leverantor (organisitionsnummer)
 );
-
 
 -- auktion
 
