@@ -97,6 +97,15 @@ INSERT into adress (gata, postnummer, ort) VALUES
 INSERT into adress (gata, postnummer, ort) VALUES
   ('Omvägen 69', 19812,'Nedsala');
 -- kunder
+INSERT INTO kund
+(personnummer, fornamn, efternamn, telefonnummer, epost, adress_id) VALUES
+  (6808033117, "Fritte", "Bohman", "07374826", "frittw.bohman@domäinen.de", 1),
+  (3212077743, "Anna", "Lund", "0743782644", "hacker.c8s@anon.w", 2),
+  (8707736734, "Noppe", "Segelbåt", "0798375892", "noppe.segelbåt@buissenes.com", 3),
+  (7309824728, "Limpan", "Persson", "0734683844", "limpan123.ha@hotmail.com", 4),
+  (5503047294, "Edit", "Gärdeström", "0794782828", "vadsadu@virus.com", 5),
+  (7706034568, "Bella", "Bortskämd", "0783672837", "Bellam@bloggen.se", 6);
+
 
 -- leverantorer
 INSERT INTO leverantor VALUES ('111111111111', 'Lovely Old Stuff', '0735111111', 'los@sell.se');
