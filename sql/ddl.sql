@@ -31,8 +31,18 @@ CREATE TABLE leverantor
   epost VARCHAR(50),
 
   PRIMARY KEY (organisitions_nummer)
-)
+);
 -- produkt
+CREATE TABLE produkt (
+  id            INT NOT NULL,
+  leverantor_organisationsnummer INT NOT NULL,
+  namn          VARCHAR(50),
+  provision double NOT NULL ,
+  bildnamn VARCHAR(50),
+  PRIMARY KEY (id),
+  FOREIGN KEY (leverantor_id) REFERENCES leverantor (organisationsnummer)
+);
+
 
 -- auktion
 
