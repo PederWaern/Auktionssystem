@@ -79,3 +79,20 @@ CREATE TABLE avslutade_auktioner
   PRIMARY KEY (id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (produkt_id)
 );
+
+
+-- Tabeller klara
+
+# Insert DATA time
+
+-- addresser
+
+-- kunder
+
+-- leverantorer
+
+-- produkter
+
+-- auktioner
+
+-- bud
