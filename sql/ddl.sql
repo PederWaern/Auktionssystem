@@ -107,5 +107,10 @@ INSERT INTO leverantor VALUES ('666666666666', 'We Got The Goods', '0735666666',
 -- produkter
 
 -- auktioner
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (1, 3000, 1500, '2017-02-20', '2017-03-20');
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (2, 3000, 1500, '2017-02-20', '2017-03-20');
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (3, 3000, 1500, '2017-02-20', '2017-03-20');
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (4, 3000, 1500, '2017-02-20', '2017-03-20');
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (5, 3000, 1500, '2017-02-20', '2017-03-20');
 
 -- bud
