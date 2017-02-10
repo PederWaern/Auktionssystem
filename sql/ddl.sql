@@ -30,7 +30,7 @@ CREATE TABLE leverantor
   telefon_nummer VARCHAR(13),
   epost VARCHAR(50),
 
-  PRIMARY KEY (organisitions_nummer)
+  PRIMARY KEY (organisitionsnummer)
 );
 -- produkt
 CREATE TABLE produkt (
@@ -40,7 +40,7 @@ CREATE TABLE produkt (
   provision double NOT NULL ,
   bildnamn VARCHAR(50),
   PRIMARY KEY (id),
-  FOREIGN KEY (leverantor_organisationsnummer) REFERENCES leverantor (organisationsnummer)
+  FOREIGN KEY (leverantor_organisationsnummer) REFERENCES leverantor (organisitionsnummer)
 );
 
 
