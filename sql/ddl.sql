@@ -179,3 +179,4 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('7706034568',1, 1501);
 
 SELECT * FROM pagaendeauktioner;
+
