@@ -30,4 +30,12 @@ CREATE TABLE kund(
 
 -- bud
 
+CREATE TABLE bud (
+  kund_id INT NOT NULL,
+  auktion_id INT NOT NULL,
+  PRIMARY KEY (kund_id, auktion_id),
+  FOREIGN KEY (kund_id) REFERENCES kund (id),
+  FOREIGN KEY (auktion_id) REFERENCES auktion (id)
+);
+
 -- avslutade auktioner
