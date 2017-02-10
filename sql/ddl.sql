@@ -68,7 +68,7 @@ CREATE TABLE bud (
 -- avslutade auktioner
 CREATE TABLE avslutade_auktioner (
   id INT NOT NULL AUTO_INCREMENT ,
-  produkt_id INT,
+  produkt_id INT NOT NULL,
   hogsta_bud DOUBLE,
   kund_personnummer CHAR(10),
   startdatum DATE,
@@ -76,7 +76,7 @@ CREATE TABLE avslutade_auktioner (
   utgangspris DOUBLE,
   acceptpris DOUBLE,
   PRIMARY KEY (id),
-  FOREIGN KEY (produkt_id) REFERENCES produkt (produkt_id)
+  FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
 
 
