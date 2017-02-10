@@ -52,7 +52,7 @@ CREATE TABLE auktion (
   utgangspris DOUBLE NOT NULL,
   startdatum  DATE   NOT NULL,
   slutdatum   DATE   NOT NULL,
-  PRIMARY KEY (id),
+  PRIMARY KEY (id, produkt_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
 
