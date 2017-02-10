@@ -62,7 +62,7 @@ CREATE TABLE bud (
   auktion_id INT NOT NULL,
   belopp double NOT NULL ,
   tid DATETIME DEFAULT current_timestamp,
-  PRIMARY KEY (kund_personnummer, auktion_id),
+  PRIMARY KEY (auktion_id, belopp),
   FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
   FOREIGN KEY (auktion_id) REFERENCES auktion (id)
 );
