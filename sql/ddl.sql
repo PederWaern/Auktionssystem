@@ -94,6 +94,8 @@ INSERT into adress (gata, postnummer, ort) VALUES
   ('Kvadratvägen 55', 14895,'Plankholm');
 INSERT into adress (gata, postnummer, ort) VALUES
   ('Valör gatan 100', 16892,'Njutingö');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Omvägen 69', 19812,'Nedsala');
 -- kunder
 
 -- leverantorer
