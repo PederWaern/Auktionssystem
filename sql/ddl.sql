@@ -115,8 +115,6 @@ CREATE VIEW pagaendeauktioner AS
   SELECT produkt.namn, MAX(bud.belopp) AS hogsta_bud, kund.fornamn, auktion.slutdatum FROM bud INNER JOIN auktion ON bud.auktion_id = auktion.id
   INNER JOIN produkt ON auktion.produkt_id = produkt.id INNER JOIN kund ON bud.kund_personnummer = kund.personnummer
   GROUP BY produkt.id;
-SELECT *
-FROM pagaendeauktioner;
 
 -- Tabeller klara
 
