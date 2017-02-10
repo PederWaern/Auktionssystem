@@ -44,7 +44,16 @@ CREATE TABLE produkt (
 );
 
 -- auktion
-
+CREATE TABLE auktion (
+  id          INT AUTO_INCREMENT,
+  produkt_id  INT,
+  acceptpris  DOUBLE,
+  utgangspris DOUBLE NOT NULL,
+  startdatum  DATE   NOT NULL,
+  slutdatum   DATE   NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (produkt_id) REFERENCES produkt (id)
+);
 -- bud
 
 CREATE TABLE bud (
