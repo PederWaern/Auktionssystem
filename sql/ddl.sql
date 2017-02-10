@@ -89,6 +89,15 @@ CREATE PROCEDURE laggtillprodukt(IN levnummer CHAR, IN pnamn CHAR, IN pbeskrivni
     pnamn, pbeskrivning, pprov,pbildnamn);
   END;
 
+CREATE PROCEDURE lagg_till_leverantor(IN _organisitionsnummer CHAR(12), IN _namn VARCHAR(50),IN _telefonnummer VARCHAR(13),IN _epost VARCHAR(50))
+
+  BEGIN
+
+  INSERT INTO leverantor VALUES (_organisitionsnummer, _namn, _telefonnummer, _epost);
+
+  END;
+
+
 -- Views
 
 CREATE VIEW pagaendeauktioner AS
