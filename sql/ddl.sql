@@ -101,7 +101,7 @@ CREATE PROCEDURE lagg_till_leverantor(IN _organisitionsnummer CHAR(12), IN _namn
 -- Views
 CREATE VIEW avslutade_auctioner_utan_kopare AS
   SELECT
-    avslutade_auktioner.id,
+    avslutade_auktioner.id as auctions_id,
     avslutade_auktioner.produkt_id,
     produkt.namn as product_namn,
     avslutade_auktioner.acceptpris,
@@ -109,14 +109,14 @@ CREATE VIEW avslutade_auctioner_utan_kopare AS
     avslutade_auktioner.startdatum,
     avslutade_auktioner.slutdatum
   FROM avslutade_auktioner
-  INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
+  INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
+  WHERE avslutade_auktioner.hogsta_bud is NULL and avslutade_auktioner.kund_personnummer;
 
 CREATE VIEW pagaendeauktioner AS
   SELECT produkt.namn, MAX(bud.belopp) AS hogsta_bud, kund.fornamn, auktion.slutdatum FROM bud INNER JOIN auktion ON bud.auktion_id = auktion.id
   INNER JOIN produkt ON auktion.produkt_id = produkt.id INNER JOIN kund ON bud.kund_personnummer = kund.personnummer
   GROUP BY produkt.id;
 
--- Tabeller klara
 
 # Insert DATA time
 
