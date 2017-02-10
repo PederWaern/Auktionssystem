@@ -105,6 +105,7 @@ INSERT INTO kund
   (7309824728, 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com', 4),
   (5503047294, 'Edit', 'Gärdeström', '0794782828', 'vadsadu@virus.com', 5),
   (7706034568, 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', 6);
+-- ofdneojnfewoi
 
 
 -- leverantorer
