@@ -61,7 +61,7 @@ CREATE TABLE bud (
   auktion_id INT NOT NULL,
   PRIMARY KEY (kund_personnummer, auktion_id),
   FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
-  FOREIGN KEY (auktion_personnummer) REFERENCES auktion (id)
+  FOREIGN KEY (auktion_id) REFERENCES auktion (id)
 );
 
 -- avslutade auktioner
