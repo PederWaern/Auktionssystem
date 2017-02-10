@@ -4,10 +4,10 @@ USE auktionssystem;
 
 -- adress
 CREATE TABLE adress(
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  gata VARCHAR (50) NOT NULL,
-  postnummer CHAR (5) NOT NULL,
-  ort VARCHAR (50)
+id INT AUTO_INCREMENT PRIMARY KEY,
+gata VARCHAR (50) NOT NULL,
+postnummer CHAR (5) NOT NULL,
+ort VARCHAR (50)
 );
 
 -- kund
@@ -27,7 +27,7 @@ CREATE TABLE leverantor
 (
   organisitionsnummer CHAR(12) NOT NULL ,
   name VARCHAR(50),
-  telefon_nummer VARCHAR(13),
+  telefonnummer VARCHAR(13),
   epost VARCHAR(50),
 
   PRIMARY KEY (organisitionsnummer)
@@ -43,23 +43,16 @@ CREATE TABLE produkt (
   FOREIGN KEY (leverantor_organisationsnummer) REFERENCES leverantor (organisitionsnummer)
 );
 
-
 -- auktion
 
 -- bud
 
--- avslutade auktioner
-CREATE TABLE avslutade_auktioner
-(
-  id INT NOT NULL ,
-  produkt_id INT,
-  hogsta_bud DOUBLE,
-  kund_personnummer CHAR(10),
-  startdatum DATE,
-  slutdatum DATE,
-  utgangspris DOUBLE,
-  acceptpris DOUBLE,
-
-  PRIMARY KEY (id),
-  FOREIGN KEY (produkt_id) REFERENCES produkt (produkt_id)
+CREATE TABLE bud (
+  kund_id INT NOT NULL,
+  auktion_id INT NOT NULL,
+  PRIMARY KEY (kund_id, auktion_id),
+  FOREIGN KEY (kund_id) REFERENCES kund (id),
+  FOREIGN KEY (auktion_id) REFERENCES auktion (id)
 );
+
+-- avslutade auktioner
