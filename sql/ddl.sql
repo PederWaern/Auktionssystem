@@ -57,10 +57,10 @@ CREATE TABLE auktion (
 -- bud
 
 CREATE TABLE bud (
-  kund_id INT NOT NULL,
+  kund_personnummer INT NOT NULL,
   auktion_id INT NOT NULL,
-  PRIMARY KEY (kund_id, auktion_id),
-  FOREIGN KEY (kund_id) REFERENCES kund (id),
+  PRIMARY KEY (kund_personnummer, auktion_id),
+  FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
   FOREIGN KEY (auktion_id) REFERENCES auktion (id)
 );
 
