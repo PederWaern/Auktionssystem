@@ -84,10 +84,25 @@ CREATE TABLE avslutade_auktioner (
 # Insert DATA time
 
 -- addresser
-
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Medelstora Torget 1', 10101,'Everthov');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Genvägen 12', 10122,'Tvåskede');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Högbergs gatan 7', 10562,'Lågdalen');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Kvadratvägen 55', 14895,'Plankholm');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Valör gatan 100', 16892,'Njutingö');
 -- kunder
 
 -- leverantorer
+INSERT INTO leverantor VALUES ('111111111111', 'Lovely Old Stuff', '0735111111', 'los@sell.se');
+INSERT INTO leverantor VALUES ('222222222222', 'Happy Shop', '0735222222', 'hs@sell.se');
+INSERT INTO leverantor VALUES ('333333333333', 'Evil Megastore', '0735333333', 'ems@sell.se');
+INSERT INTO leverantor VALUES ('444444444444', 'Friendly Old Dude', '0735444444', 'fod@sell.se');
+INSERT INTO leverantor VALUES ('555555555555', 'Ms. Butterscotch', '0735555555', 'msb@sell.se');
+INSERT INTO leverantor VALUES ('666666666666', 'We Got The Goods', '0735666666', 'wgtg@sell.se');
 
 -- produkter
 
