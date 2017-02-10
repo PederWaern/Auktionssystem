@@ -60,6 +60,7 @@ CREATE TABLE auktion (
 CREATE TABLE bud (
   kund_personnummer CHAR(10) NOT NULL,
   auktion_id INT NOT NULL,
+  varde double NOT NULL ,
   PRIMARY KEY (kund_personnummer, auktion_id),
   FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
   FOREIGN KEY (auktion_id) REFERENCES auktion (id)
