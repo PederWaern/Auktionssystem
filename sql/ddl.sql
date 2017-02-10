@@ -37,6 +37,7 @@ CREATE TABLE produkt (
   id INT AUTO_INCREMENT,
   leverantor_organisationsnummer INT NOT NULL,
   namn          VARCHAR(50),
+  beskrivning VARCHAR(300),
   provision double NOT NULL ,
   bildnamn VARCHAR(50),
   PRIMARY KEY (id),
