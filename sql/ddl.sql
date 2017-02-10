@@ -23,8 +23,25 @@ CREATE TABLE kund(
 );
 
 -- leverantor
+CREATE TABLE leverantor
+(
+  organisitionsnummer CHAR(12) NOT NULL ,
+  name VARCHAR(50),
+  telefonnummer VARCHAR(13),
+  epost VARCHAR(50),
 
+  PRIMARY KEY (organisitionsnummer)
+);
 -- produkt
+CREATE TABLE produkt (
+  id            INT NOT NULL,
+  leverantor_organisationsnummer INT NOT NULL,
+  namn          VARCHAR(50),
+  provision double NOT NULL ,
+  bildnamn VARCHAR(50),
+  PRIMARY KEY (id),
+  FOREIGN KEY (leverantor_organisationsnummer) REFERENCES leverantor (organisitionsnummer)
+);
 
 -- auktion
 
