@@ -117,7 +117,9 @@ CREATE VIEW pagaendeauktioner AS
   INNER JOIN produkt ON auktion.produkt_id = produkt.id INNER JOIN kund ON bud.kund_personnummer = kund.personnummer
   GROUP BY produkt.id;
 
-
+create view rakna_ut_provision AS
+  SELECT avslutade_auktioner.hogsta_bud * produkt.provision from avslutade_auktioner
+  INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
 # Insert DATA time
 
 -- addresser
@@ -178,5 +180,6 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('5503047294',5, 1500),
   ('7706034568',1, 1501);
 
-SELECT * FROM pagaendeauktioner;
+SELECT auktion.acceptpris, auktion.acceptpris * produkt.provision FROM auktion INNER JOIN produkt ON auktion.produkt_id = produkt.id;
+
 
