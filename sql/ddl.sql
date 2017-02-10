@@ -86,7 +86,16 @@ CREATE TABLE avslutade_auktioner
 # Insert DATA time
 
 -- addresser
-
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Medelstora Torget 1', 10101,'Everthov');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Genvägen 12', 10122,'Tvåskede');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Högbergs gatan 7', 10562,'Lågdalen');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Kvadratvägen 55', 14895,'Plankholm');
+INSERT into adress (gata, postnummer, ort) VALUES
+  ('Valör gatan 100', 16892,'Njutingö');
 -- kunder
 
 -- leverantorer
