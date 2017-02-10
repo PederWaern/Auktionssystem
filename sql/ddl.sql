@@ -60,7 +60,7 @@ CREATE TABLE auktion (
 CREATE TABLE bud (
   kund_personnummer CHAR(10) NOT NULL,
   auktion_id INT NOT NULL,
-  varde double NOT NULL ,
+  belopp double NOT NULL ,
   PRIMARY KEY (kund_personnummer, auktion_id),
   FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
   FOREIGN KEY (auktion_id) REFERENCES auktion (id)
@@ -135,10 +135,10 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES (5, 3000, 1500, '2017-02-20', '2017-03-20');
 
 -- bud
-INSERT INTO bud (kund_personnummer, auktion_id) VALUES
-  ('6808033117',1),
-  ('3212077743',2),
-  ('8707736734',3),
-  ('7309824728',4),
-  ('5503047294',5),
-  ('7706034568',1);
+INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
+  ('6808033117',1, 1500),
+  ('3212077743',2, 1500),
+  ('8707736734',3, 1500),
+  ('7309824728',4, 1500),
+  ('5503047294',5, 1500),
+  ('7706034568',1, 1501);
