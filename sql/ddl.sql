@@ -34,7 +34,7 @@ CREATE TABLE leverantor
 );
 -- produkt
 CREATE TABLE produkt (
-  id            INT NOT NULL,
+  id INT AUTO_INCREMENT,
   leverantor_organisationsnummer INT NOT NULL,
   namn          VARCHAR(50),
   provision double NOT NULL ,
