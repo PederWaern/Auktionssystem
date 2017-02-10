@@ -83,21 +83,40 @@ CREATE TABLE avslutade_auktioner (
 
 -- Procedures
 
-CREATE PROCEDURE laggtillprodukt(IN levnummer CHAR, IN pnamn CHAR, IN pbeskrivning CHAR, IN pprov DOUBLE, IN pbildnamn CHAR)
+CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR, IN in_provision DOUBLE, IN in_bildnamn CHAR)
   BEGIN
-    INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES (levnummer,
-    pnamn, pbeskrivning, pprov,pbildnamn);
+    INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES
+      (in_lev_orgnr, in_namn, in_beskrivning, in_provision,in_bildnamn);
   END;
 
+CREATE PROCEDURE lagg_till_leverantor(IN _organisitionsnummer CHAR(12), IN _namn VARCHAR(50),IN _telefonnummer VARCHAR(13),IN _epost VARCHAR(50))
+
+  BEGIN
+
+  INSERT INTO leverantor VALUES (_organisitionsnummer, _namn, _telefonnummer, _epost);
+
+  END;
+
+
 -- Views
+CREATE VIEW avslutade_auctioner_utan_kopare AS
+  SELECT
+    avslutade_auktioner.id as auctions_id,
+    avslutade_auktioner.produkt_id,
+    produkt.namn as product_namn,
+    avslutade_auktioner.acceptpris,
+    avslutade_auktioner.utgangspris,
+    avslutade_auktioner.startdatum,
+    avslutade_auktioner.slutdatum
+  FROM avslutade_auktioner
+  INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
+  WHERE avslutade_auktioner.hogsta_bud is NULL and avslutade_auktioner.kund_personnummer;
 
 CREATE VIEW pagaendeauktioner AS
   SELECT produkt.namn, MAX(bud.belopp) AS hogsta_bud, kund.fornamn, auktion.slutdatum FROM bud INNER JOIN auktion ON bud.auktion_id = auktion.id
   INNER JOIN produkt ON auktion.produkt_id = produkt.id INNER JOIN kund ON bud.kund_personnummer = kund.personnummer
-  GROUP BY produkt.id
-  ;
+  GROUP BY produkt.id;
 
--- Tabeller klara
 
 # Insert DATA time
 
@@ -160,3 +179,4 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('7706034568',1, 1501);
 
 SELECT * FROM pagaendeauktioner;
+
