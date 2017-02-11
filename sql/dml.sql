@@ -29,3 +29,9 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
     END IF;
   END //
 DELIMITER ;
+
+-- VIEW - Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
+CREATE OR REPLACE VIEW total_order_value_per_customer AS
+SELECT kund.fornamn, kund.efternamn, kund_personnummer, sum(hogsta_bud) AS total_order_value FROM kund
+INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
+GROUP BY kund.personnummer;
