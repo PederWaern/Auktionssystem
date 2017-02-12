@@ -83,6 +83,16 @@ CREATE TABLE avslutade_auktioner (
 
 -- Procedures
 
+CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
+  BEGIN
+    IF EXISTS(SELECT * FROM bud WHERE auktion_id = in_auktion_id) THEN
+SELECT kund.fornamn, kund.efternamn, kund_personnummer, bud.belopp, bud.tid FROM bud
+INNER JOIN Kund ON kund.personnummer = bud.kund_personnummer
+WHERE auktion_id = in_auktion_id;
+      ELSE SELECT 'no active auctions on specified auction-id found';
+END IF;
+    END;
+
 CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR,
                                    IN in_provision DOUBLE, IN in_bildnamn CHAR)
   BEGIN
@@ -172,6 +182,14 @@ FROM pagaendeauktioner;
 create view rakna_ut_provision AS
   SELECT avslutade_auktioner.hogsta_bud * produkt.provision from avslutade_auktioner
   INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
+
+-- proc provision på auktionen avslutade mellan specifierat tidsintervall
+CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
+  BEGIN
+SELECT avslutade_auktioner.id, (hogsta_bud*produkt.provision) AS provision FROM avslutade_auktioner
+INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
+  END;
 
 -- VIEW - Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
 CREATE OR REPLACE VIEW total_order_value_per_customer AS
