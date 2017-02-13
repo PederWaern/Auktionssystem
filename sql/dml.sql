@@ -12,8 +12,7 @@ INSERT INTO adress (gata, postnummer, ort) VALUES
   ('Omvägen 69', 19812, 'Nedsala');
 
 -- kunder
-INSERT INTO kund
-(personnummer, fornamn, efternamn, telefonnummer, epost, losenord, adress_id) VALUES
+INSERT INTO kund (personnummer, fornamn, efternamn, telefonnummer, epost, losenord, adress_id) VALUES
   ('6808033117', 'Fritte', 'Bohman', '07374826', 'frittw.bohman@domäinen.de', '111', 1),
   ('3212077743', 'Anna', 'Lund', '0743782644', 'hacker.c8s@anon.w', '222', 2),
   ('8707736734', 'Noppe', 'Segelbåt', '0798375892', 'noppe.segelbåt@buissenes.com', '333', 3),
@@ -22,8 +21,7 @@ INSERT INTO kund
   ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', '666', 6);
 
 -- leverantorer
-INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, losenord, namn, provision)
-VALUES
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, losenord, namn, provision) VALUES
   ('111111111111', '0735111111', 'los@sell.se', '111', 'Lovely Old Stuff', 0.3),
   ('222222222222', '0735222222', 'hs@sell.se', '222', 'Happy Shop', 0.1),
   ('333333333333', '0735333333', 'ems@sell.se', '333', 'Evil Megastore', 0.5),
@@ -41,8 +39,7 @@ INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn
   ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 'img_5.jpg');
 
 -- auktioner
-INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES
   (1, 3000, 1500, '2017-02-20', '2017-03-20'),
   (2, 3000, 1500, '2017-02-20', '2017-03-20'),
   (3, 3000, 1500, '2017-02-20', '2017-03-20'),
@@ -60,7 +57,7 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('7706034568', 1, 1501),
   ('7706034568', 6, 2501);
 
--- DUMP av test inserts
+-- test select
 SELECT *
 FROM rakna_ut_provision;
 SELECT *
