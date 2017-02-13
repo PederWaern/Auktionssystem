@@ -105,17 +105,15 @@ CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
 CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR,
                                    IN in_provision DOUBLE, IN in_bildnamn CHAR)
   BEGIN
-    INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES
-      (in_lev_orgnr, in_namn, in_beskrivning, in_provision, in_bildnamn);
+    INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
+      (in_lev_orgnr, in_namn, in_beskrivning, in_bildnamn);
   END;
-
-CREATE PROCEDURE lagg_till_leverantor(IN _organisitionsnummer CHAR(12), IN _namn VARCHAR(50),
-                                      IN _telefonnummer       VARCHAR(13), IN _epost VARCHAR(50))
-
+# todo
+CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
+                                      IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
+                                      IN in_provision           DOUBLE)
   BEGIN
-
-    INSERT INTO leverantor VALUES (_organisitionsnummer, _namn, _telefonnummer, _epost);
-
+    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_provision);
   END;
 
 -- lägg till auktion procedure
@@ -174,7 +172,7 @@ CREATE VIEW pagaendeauktioner AS
     b2.hogsta_bud,
     b2.auktion_id,
     bud.tid
-  FROM (SELECT DISTINCT
+  FROM (SELECT
           auktion_id,
           MAX(belopp) AS hogsta_bud
         FROM bud
@@ -187,7 +185,6 @@ CREATE VIEW pagaendeauktioner AS
 
 SELECT *
 FROM pagaendeauktioner;
-
 
 -- View rakna ut provision TODO - DOESNT WORK
 CREATE VIEW rakna_ut_provision AS
