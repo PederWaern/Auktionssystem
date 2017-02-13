@@ -119,7 +119,7 @@ CREATE PROCEDURE flytta_pagaende_till_avslutad_auktion(IN in_auktion_id INT)
   END //
 DELIMITER ;
 
-/* lagg_bug */
+/* lagg_bud */
 DELIMITER //
 CREATE PROCEDURE lagg_bud(IN  in_kund_personnummer CHAR(10), IN in_auktion_id INT, IN in_belopp DOUBLE,
                           OUT meddelande           VARCHAR(50))
