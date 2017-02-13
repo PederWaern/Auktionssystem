@@ -222,7 +222,7 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
     END IF;
   END //
 DELIMITER ;
--- pagaende auktioner, procedur som visar preliminar provision i kronor samt auktions information innom ett visst
+-- pagaende auktioner, procedur som visar preliminar provision i kronor samt auktions information innom ett visst tidsintervall
 DROP PROCEDURE IF EXISTS provision_pagaende_auktioner_specifierat_tidsintervall;
 CREATE PROCEDURE provision_pagaende_auktioner_specifierat_tidsintervall(IN in_slutdatum_start DATE,
                                                                            in_slutdatum_slut  DATE)
