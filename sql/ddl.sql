@@ -81,6 +81,7 @@ CREATE TABLE avslutade_auktioner (
   slutdatum         DATE,
   utgangspris       DOUBLE,
   acceptpris        DOUBLE,
+  datum_sald        DATE DEFAULT CURRENT_DATE,
   PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
