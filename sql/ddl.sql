@@ -69,7 +69,7 @@ CREATE TABLE bud (
 
 -- avslutade auktioner
 CREATE TABLE avslutade_auktioner (
-  id                INT NOT NULL AUTO_INCREMENT,
+  auktion_id                INT NOT NULL,
   produkt_id        INT NOT NULL,
   hogsta_bud        DOUBLE,
   kund_personnummer CHAR(10),
@@ -187,11 +187,15 @@ SELECT *
 FROM pagaendeauktioner;
 
 -- View rakna ut provision TODO - DOESNT WORK
+DROP VIEW rakna_ut_provision;
 CREATE VIEW rakna_ut_provision AS
-  SELECT avslutade_auktioner.hogsta_bud * produkt.provision
+  SELECT avslutade_auktioner.hogsta_bud * leverantor.provision
   FROM avslutade_auktioner
-    INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
+    INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
+    inner JOIN leverantor on produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
+INSERT INTO avslutade_auktioner (auktion_id, produkt_id, hogsta_bud) VALUES (1,1, 1000),(2,2,1000);
+SELECT * from rakna_ut_provision;
 -- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
   BEGIN
