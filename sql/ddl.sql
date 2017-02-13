@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS auktionssystem;
 CREATE DATABASE auktionssystem;
 USE auktionssystem;
+SET GLOBAL event_scheduler = ON;
 
 -- adress
 CREATE TABLE adress (
@@ -85,6 +86,35 @@ CREATE TABLE wawa (
   testInt INT PRIMARY KEY
 );
 -- Procedures
+/* flytta_pagaende_till_avslutad_auktion */
+-- Kopiera relevant data från pågående aktion till avslutad aktion.
+-- Ta bort från pågående auktion
+DELIMITER //
+CREATE PROCEDURE flytta_pagaende_till_avslutad_auktion(IN in_auktion_id INT)
+  BEGIN
+    INSERT INTO avslutade_auktioner (auktion_id, produkt_id, acceptpris, kund_personnummer,hogsta_bud , startdatum, slutdatum, utgangspris)
+      SELECT
+        auktion.id,
+        produkt_id,
+        acceptpris,
+        kund_personnummer                                   AS kund,
+        (SELECT max(belopp)
+         FROM auktion
+           LEFT JOIN bud
+             ON auktion.id = bud.auktion_id
+         WHERE auktion_id = in_auktion_id AND kund_personnummer = kund) AS max,
+        startdatum,
+        slutdatum,
+        utgangspris
+      FROM auktion
+        LEFT JOIN bud ON auktion.id = bud.auktion_id
+      WHERE auktion.id = in_auktion_id
+      ORDER BY max DESC
+      LIMIT 1;
+    DELETE FROM auktion
+    WHERE auktion.id = in_auktion_id;
+  END //
+DELIMITER ;
 
 CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
   BEGIN
@@ -119,7 +149,7 @@ CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_
   END;
 
 -- lägg till auktion procedure
-SET GLOBAL event_scheduler = ON;
+
 DELIMITER //
 CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT, IN in_acceptpris INT,
                                    IN in_startdatum DATE, IN in_slutdatum DATE, OUT out_date_error_message VARCHAR(100))
@@ -148,14 +178,6 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
       VALUES (in_produkt_id, in_acceptpris, in_utgangspris, in_startdatum, in_slutdatum);
     END IF;
     -- create move and delete, on set end date. starts when auction is create.
-  END;
-CREATE EVENT wawa
-  ON SCHEDULE AT current_timestamp + INTERVAL 10 SECOND
-DO
-  BEGIN
-    DECLARE auktionToDelete INT;
-    set auktionToDelete = (SELECT auktion.id from auktion WHERE auktion.id = max(auktion.id));
-    DELETE FROM auktion WHERE auktion.id = auktionToDelete;
   END //
 DELIMITER ;
 
@@ -171,45 +193,35 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
       INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
     WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
   END;
-
-  /* flytta_pagaende_till_avslutad_auktion */
--- Kopiera relevant data från pågående aktion till avslutad aktion.
--- Ta bort från pågående auktion
+-- Event auktion datum check
 DELIMITER //
-CREATE PROCEDURE flytta_pagaende_till_avslutad_auktion(IN in_auktion_id INT)
+CREATE EVENT auktion_slutdatum_check
+  ON SCHEDULE EVERY 10 SECOND
+DO
   BEGIN
-    INSERT INTO avslutade_auktioner (auktion_id,
-                                     produkt_id,
-                                     acceptpris,
-                                     hogsta_bud,
-                                     kund_personnummer,
-                                     startdatum,
-                                     slutdatum,
-                                     utgangspris)
-      SELECT
-        auktion.id,
-        produkt_id,
-        acceptpris,
-        kund_personnummer                                   AS kund,
-        (SELECT max(belopp)
-         FROM auktion
-           LEFT JOIN bud
-             ON auktion.id = bud.auktion_id
-         WHERE auktion_id = 1 AND kund_personnummer = kund) AS max,
-        startdatum,
-        slutdatum,
-        utgangspris
+    DECLARE kontroll_slutford INT DEFAULT FALSE;
+    DECLARE kontroll_auktion_id INT;
+    DECLARE kontroll_auktion_cursor CURSOR FOR
+      SELECT auktion.id
       FROM auktion
-        LEFT JOIN bud ON auktion.id = bud.auktion_id
-      WHERE auktion.id = 5
-      ORDER BY max DESC
-      LIMIT 1;
-    DELETE FROM auktion
-    WHERE auktion.id = in_auktion_id;
+      WHERE slutdatum = current_date;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET kontroll_slutford = TRUE;
+
+    OPEN kontroll_auktion_cursor;
+    hamta_auktion_id: LOOP
+      FETCH kontroll_auktion_cursor
+      INTO kontroll_auktion_id;
+      IF kontroll_slutford
+      THEN
+        LEAVE hamta_auktion_id;
+      END IF;
+      CALL flytta_pagaende_till_avslutad_auktion(kontroll_auktion_id);
+    END LOOP;
   END //
 DELIMITER ;
-
+show EVENTS ;
 -- View avslutade auktioner utan kopare
+DROP VIEW IF EXISTS avslutade_auktioner_utan_kopare;
 CREATE VIEW avslutade_auktioner_utan_kopare AS
   SELECT
     avslutade_auktioner.auktion_id AS auctions_id,
@@ -221,7 +233,7 @@ CREATE VIEW avslutade_auktioner_utan_kopare AS
     avslutade_auktioner.slutdatum
   FROM avslutade_auktioner
     INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
-  WHERE avslutade_auktioner.hogsta_bud IS NULL AND avslutade_auktioner.kund_personnummer;
+  WHERE avslutade_auktioner.hogsta_bud IS NULL AND avslutade_auktioner.kund_personnummer IS NULL;
 
 -- View för pågående auktioner inklusive högsta bud och budgivare
 DROP VIEW IF EXISTS pagaende_auktioner;

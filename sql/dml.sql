@@ -63,7 +63,9 @@ VALUES (3, 3000, 1500, '2017-02-20', '2017-03-20');
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
 VALUES (4, 3000, 1500, '2017-02-20', '2017-03-20');
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES (5, 3000, 1500, '2017-02-20', '2017-03-20');
+VALUES (5, 3000, 1500, '2017-01-20', '2017-02-13');
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
+VALUES (6, 3000, 2500, '2017-01-20', '2017-02-13');
 
 -- bud
 INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
@@ -72,10 +74,12 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('8707736734', 3, 1500),
   ('7309824728', 4, 1500),
   ('5503047294', 5, 1500),
-  ('7706034568', 1, 1501);
+  ('7706034568', 1, 1501),
+  ('7706034568', 6, 2501);
 
 
 -- DUMP av test inserts
-INSERT INTO avslutade_auktioner (auktion_id, produkt_id, hogsta_bud) VALUES (1, 1, 1000), (2, 2, 1000);
 SELECT * from rakna_ut_provision;
-
+SELECT * from avslutade_auktioner;
+SELECT * FROM avslutade_auktioner_utan_kopare;
+SELECT * from auktion;
