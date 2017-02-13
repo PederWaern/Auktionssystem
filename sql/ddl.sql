@@ -222,6 +222,22 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
     END IF;
   END //
 DELIMITER ;
+-- pagaende auktioner, procedur som visar preliminar provision i kronor samt auktions information innom ett visst
+DROP PROCEDURE IF EXISTS provision_pagaende_auktioner_specifierat_tidsintervall;
+CREATE PROCEDURE provision_pagaende_auktioner_specifierat_tidsintervall(IN in_slutdatum_start DATE, in_slutdatum_slut DATE)
+  BEGIN
+    SELECT
+      auktion.*,
+      bud.belopp as hogsta_bud,
+      concat_ws(' ',leverantor.provision * 100,'%')                  AS provisions_andel,
+      max(bud.belopp) * leverantor.provision AS provision_pa_aktuellt_bud
+    FROM auktion
+      LEFT JOIN bud ON auktion.id = bud.auktion_id
+      LEFT JOIN produkt ON auktion.produkt_id = produkt.id
+      LEFT JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+    WHERE slutdatum BETWEEN in_slutdatum_start AND in_slutdatum_slut
+    GROUP BY auktion.id;
+  END;
 
 
 -- proc provision på auktioner avslutade mellan specifierat tidsintervall
