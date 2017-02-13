@@ -26,9 +26,10 @@ CREATE TABLE kund (
 CREATE TABLE leverantor
 (
   organisitionsnummer CHAR(12) NOT NULL,
-  name                VARCHAR(50),
+  namn                VARCHAR(50) NOT NULL,
   telefonnummer       VARCHAR(13),
-  epost               VARCHAR(50),
+  epost               VARCHAR(50) NOT NULL,
+  provision           DOUBLE NOT NULL,
 
   PRIMARY KEY (organisitionsnummer)
 );
@@ -38,7 +39,6 @@ CREATE TABLE produkt (
   leverantor_organisationsnummer CHAR(12) NOT NULL,
   namn                           VARCHAR(50),
   beskrivning                    VARCHAR(300),
-  provision                      DOUBLE   NOT NULL,
   bildnamn                       VARCHAR(50),
   PRIMARY KEY (id),
   FOREIGN KEY (leverantor_organisationsnummer) REFERENCES leverantor (organisitionsnummer)
