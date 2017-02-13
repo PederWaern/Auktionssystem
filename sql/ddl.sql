@@ -127,22 +127,26 @@ CREATE PROCEDURE lagg_bud(IN  in_kund_personnummer CHAR(10), IN in_auktion_id IN
   BEGIN
     -- Kolla så att budet är större än utgångspris och större än nuvarande maxbud
     IF in_belopp >= (SELECT utgangspris
-                    FROM auktion
-                    WHERE auktion.id = in_auktion_id)
+                     FROM auktion
+                     WHERE auktion.id = in_auktion_id)
        AND (in_belopp > (SELECT MAX(bud.belopp)
-                        FROM bud
-                        WHERE bud.auktion_id = in_auktion_id)
+                         FROM bud
+                         WHERE bud.auktion_id = in_auktion_id)
             OR (SELECT MAX(bud.belopp)
-                        FROM bud
-                        WHERE bud.auktion_id = in_auktion_id) IS NULL)
+                FROM bud
+                WHERE bud.auktion_id = in_auktion_id) IS NULL)
     THEN
       -- kolla om budet är över eller lika med accept-priset
       -- lägg budet med samma värde som accept-priset
       -- flytta till avslutade auktioner
-      IF in_belopp >= (SELECT auktion.acceptpris FROM auktion WHERE auktion.id = in_auktion_id)
+      IF in_belopp >= (SELECT auktion.acceptpris
+                       FROM auktion
+                       WHERE auktion.id = in_auktion_id)
       THEN
         INSERT INTO bud (kund_personnummer, auktion_id, belopp)
-        VALUES (in_kund_personnummer, in_auktion_id, (SELECT auktion.acceptpris FROM auktion WHERE auktion.id = in_auktion_id));
+        VALUES (in_kund_personnummer, in_auktion_id, (SELECT auktion.acceptpris
+                                                      FROM auktion
+                                                      WHERE auktion.id = in_auktion_id));
         CALL flytta_pagaende_till_avslutad_auktion(in_auktion_id);
         SET meddelande = 'Produkten köptes för acceptpris';
       ELSE
@@ -155,7 +159,7 @@ CREATE PROCEDURE lagg_bud(IN  in_kund_personnummer CHAR(10), IN in_auktion_id IN
     END IF;
   END //
 DELIMITER ;
-
+-- budhistorik for specifik auktion
 CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
   BEGIN
     IF EXISTS(SELECT *
@@ -174,7 +178,7 @@ CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
     ELSE SELECT 'no active auctions on specified auction-id found';
     END IF;
   END;
-
+-- Lagg till produkt
 CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR, IN in_bildnamn CHAR)
   BEGIN
     INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
@@ -183,13 +187,12 @@ CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_
 # todo
 CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
                                       IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
-                                      IN in_provision           DOUBLE)
+                                      IN in_losenord            VARCHAR(50), IN in_provision           DOUBLE)
   BEGIN
-    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_provision);
+    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_losenord, in_provision);
   END;
 
 -- lägg till auktion procedure
-
 DELIMITER //
 CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT, IN in_acceptpris INT,
                                    IN in_startdatum DATE, IN in_slutdatum DATE, OUT out_date_error_message VARCHAR(100))
@@ -217,12 +220,11 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
       INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
       VALUES (in_produkt_id, in_acceptpris, in_utgangspris, in_startdatum, in_slutdatum);
     END IF;
-    -- create move and delete, on set end date. starts when auction is create.
   END //
 DELIMITER ;
 
 
--- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
+-- proc provision på auktioner avslutade mellan specifierat tidsintervall
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
   BEGIN
     SELECT
@@ -268,7 +270,7 @@ SHOW EVENTS;
 /***************************************
     VIEWS
 ***************************************/
--- View avslutade auktioner utan kopare
+-- View for avslutade auktioner utan kopare
 DROP VIEW IF EXISTS avslutade_auktioner_utan_kopare;
 CREATE VIEW avslutade_auktioner_utan_kopare AS
   SELECT
@@ -283,7 +285,7 @@ CREATE VIEW avslutade_auktioner_utan_kopare AS
     INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
   WHERE avslutade_auktioner.hogsta_bud IS NULL AND avslutade_auktioner.kund_personnummer IS NULL;
 
--- View för pågående auktioner inklusive högsta bud och budgivare
+-- View for pågående auktioner inklusive hogsta bud och budgivare
 DROP VIEW IF EXISTS pagaende_auktioner;
 CREATE VIEW pagaende_auktioner AS
   SELECT
@@ -306,14 +308,14 @@ CREATE VIEW pagaende_auktioner AS
   WHERE bud.belopp = b2.hogsta_bud;
 
 -- View rakna ut provision TODO - needs oversight
-
+DROP VIEW IF EXISTS rakna_ut_provision;
 CREATE VIEW rakna_ut_provision AS
   SELECT avslutade_auktioner.hogsta_bud * leverantor.provision
   FROM avslutade_auktioner
     INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
     INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
--- VIEW - Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
+-- VIEW - Visa en kundlista på alla kunder som kopt nagot, samt summan for deras totala ordervarde.
 CREATE OR REPLACE VIEW total_order_value_per_customer AS
   SELECT
     kund.fornamn,
