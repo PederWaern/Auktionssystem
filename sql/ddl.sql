@@ -25,11 +25,11 @@ CREATE TABLE kund (
 -- leverantor
 CREATE TABLE leverantor
 (
-  organisitionsnummer CHAR(12) NOT NULL,
+  organisitionsnummer CHAR(12)    NOT NULL,
   namn                VARCHAR(50) NOT NULL,
   telefonnummer       VARCHAR(13),
   epost               VARCHAR(50) NOT NULL,
-  provision           DOUBLE NOT NULL,
+  provision           DOUBLE      NOT NULL,
 
   PRIMARY KEY (organisitionsnummer)
 );
@@ -85,13 +85,22 @@ CREATE TABLE avslutade_auktioner (
 
 CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
   BEGIN
-    IF EXISTS(SELECT * FROM bud WHERE auktion_id = in_auktion_id) THEN
-SELECT kund.fornamn, kund.efternamn, kund_personnummer, bud.belopp, bud.tid FROM bud
-INNER JOIN Kund ON kund.personnummer = bud.kund_personnummer
-WHERE auktion_id = in_auktion_id;
-      ELSE SELECT 'no active auctions on specified auction-id found';
-END IF;
-    END;
+    IF EXISTS(SELECT *
+              FROM bud
+              WHERE auktion_id = in_auktion_id)
+    THEN
+      SELECT
+        kund.fornamn,
+        kund.efternamn,
+        kund_personnummer,
+        bud.belopp,
+        bud.tid
+      FROM bud
+        INNER JOIN Kund ON kund.personnummer = bud.kund_personnummer
+      WHERE auktion_id = in_auktion_id;
+    ELSE SELECT 'no active auctions on specified auction-id found';
+    END IF;
+  END;
 
 CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR,
                                    IN in_provision DOUBLE, IN in_bildnamn CHAR)
@@ -179,26 +188,37 @@ CREATE VIEW pagaendeauktioner AS
 SELECT *
 FROM pagaendeauktioner;
 
-create view rakna_ut_provision AS
-  SELECT avslutade_auktioner.hogsta_bud * produkt.provision from avslutade_auktioner
-  INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
+CREATE VIEW rakna_ut_provision AS
+  SELECT avslutade_auktioner.hogsta_bud * produkt.provision
+  FROM avslutade_auktioner
+    INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
 
 -- proc provision på auktionen avslutade mellan specifierat tidsintervall
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
   BEGIN
-SELECT avslutade_auktioner.id, (hogsta_bud*produkt.provision) AS provision FROM avslutade_auktioner
-INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
-WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
+    SELECT
+      avslutade_auktioner.id,
+      (hogsta_bud * produkt.provision) AS provision
+    FROM avslutade_auktioner
+      INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+    WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
   END;
 
 -- VIEW - Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
 CREATE OR REPLACE VIEW total_order_value_per_customer AS
-SELECT kund.fornamn, kund.efternamn, kund_personnummer, sum(hogsta_bud) AS total_order_value FROM kund
-INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
-GROUP BY kund.personnummer;
+  SELECT
+    kund.fornamn,
+    kund.efternamn,
+    kund_personnummer,
+    sum(hogsta_bud) AS total_order_value
+  FROM kund
+    INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
+  GROUP BY kund.personnummer;
 
 
-
-
-SELECT auktion.acceptpris, auktion.acceptpris * produkt.provision FROM auktion INNER JOIN produkt ON auktion.produkt_id = produkt.id;
+SELECT
+  auktion.acceptpris,
+  auktion.acceptpris * produkt.provision
+FROM auktion
+  INNER JOIN produkt ON auktion.produkt_id = produkt.id;
 
