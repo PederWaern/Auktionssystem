@@ -83,6 +83,16 @@ CREATE TABLE avslutade_auktioner (
 
 -- Procedures
 
+CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
+  BEGIN
+    IF EXISTS(SELECT * FROM bud WHERE auktion_id = in_auktion_id) THEN
+SELECT kund.fornamn, kund.efternamn, kund_personnummer, bud.belopp, bud.tid FROM bud
+INNER JOIN Kund ON kund.personnummer = bud.kund_personnummer
+WHERE auktion_id = in_auktion_id;
+      ELSE SELECT 'no active auctions on specified auction-id found';
+END IF;
+    END;
+
 CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR,
                                    IN in_provision DOUBLE, IN in_bildnamn CHAR)
   BEGIN
@@ -98,6 +108,37 @@ CREATE PROCEDURE lagg_till_leverantor(IN _organisitionsnummer CHAR(12), IN _namn
     INSERT INTO leverantor VALUES (_organisitionsnummer, _namn, _telefonnummer, _epost);
 
   END;
+
+-- lägg till auktion procedure
+DELIMITER //
+CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT, IN in_acceptpris INT,
+                                   IN in_startdatum DATE, IN in_slutdatum DATE, OUT out_date_error_message VARCHAR(100))
+  BEGIN
+    DECLARE product_exist INT;
+    DECLARE product_for_sale INT;
+    SELECT COUNT(*)
+    INTO product_exist
+    FROM produkt
+    WHERE id = in_produkt_id;
+    IF product_exist != 1
+    THEN SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Please enter a valid product number'; END IF;
+    SELECT COUNT(*)
+    INTO product_for_sale
+    FROM auktion
+    WHERE produkt_id = in_produkt_id;
+
+    IF product_for_sale = 1
+    THEN SET out_date_error_message = 'The product is alredy for sale';
+    ELSEIF in_startdatum < CURRENT_DATE OR in_slutdatum < CURRENT_DATE OR in_startdatum > in_slutdatum
+      THEN SET out_date_error_message = 'dates are incorrect';
+        SELECT out_date_error_message;
+    ELSE
+      INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
+      VALUES (in_produkt_id, in_acceptpris, in_utgangspris, in_startdatum, in_slutdatum);
+    END IF;
+  END //
+DELIMITER ;
 
 -- Views
 CREATE VIEW avslutade_auktioner_utan_kopare AS
@@ -141,68 +182,22 @@ FROM pagaendeauktioner;
 create view rakna_ut_provision AS
   SELECT avslutade_auktioner.hogsta_bud * produkt.provision from avslutade_auktioner
   INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
-# Insert DATA time
 
--- addresser
-INSERT INTO adress (gata, postnummer, ort) VALUES
-  ('Medelstora Torget 1', 10101, 'Everthov');
-INSERT INTO adress (gata, postnummer, ort) VALUES
-  ('Genvägen 12', 10122, 'Tvåskede');
-INSERT INTO adress (gata, postnummer, ort) VALUES
-  ('Högbergs gatan 7', 10562, 'Lågdalen');
-INSERT INTO adress (gata, postnummer, ort) VALUES
-  ('Kvadratvägen 55', 14895, 'Plankholm');
-INSERT INTO adress (gata, postnummer, ort) VALUES
-  ('Valör gatan 100', 16892, 'Njutingö');
-INSERT INTO adress (gata, postnummer, ort) VALUES
-  ('Omvägen 69', 19812, 'Nedsala');
--- kunder
-INSERT INTO kund
-(personnummer, fornamn, efternamn, telefonnummer, epost, adress_id) VALUES
-  ('6808033117', 'Fritte', 'Bohman', '07374826', 'frittw.bohman@domäinen.de', 1),
-  ('3212077743', 'Anna', 'Lund', '0743782644', 'hacker.c8s@anon.w', 2),
-  ('8707736734', 'Noppe', 'Segelbåt', '0798375892', 'noppe.segelbåt@buissenes.com', 3),
-  ('7309824728', 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com', 4),
-  ('5503047294', 'Edit', 'Gärdeström', '0794782828', 'vadsadu@virus.com', 5),
-  ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', 6);
+-- proc provision på auktionen avslutade mellan specifierat tidsintervall
+CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
+  BEGIN
+SELECT avslutade_auktioner.id, (hogsta_bud*produkt.provision) AS provision FROM avslutade_auktioner
+INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
+  END;
 
--- leverantorer
-INSERT INTO leverantor VALUES ('111111111111', 'Lovely Old Stuff', '0735111111', 'los@sell.se');
-INSERT INTO leverantor VALUES ('222222222222', 'Happy Shop', '0735222222', 'hs@sell.se');
-INSERT INTO leverantor VALUES ('333333333333', 'Evil Megastore', '0735333333', 'ems@sell.se');
-INSERT INTO leverantor VALUES ('444444444444', 'Friendly Old Dude', '0735444444', 'fod@sell.se');
-INSERT INTO leverantor VALUES ('555555555555', 'Ms. Butterscotch', '0735555555', 'msb@sell.se');
-INSERT INTO leverantor VALUES ('666666666666', 'We Got The Goods', '0735666666', 'wgtg@sell.se');
+-- VIEW - Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
+CREATE OR REPLACE VIEW total_order_value_per_customer AS
+SELECT kund.fornamn, kund.efternamn, kund_personnummer, sum(hogsta_bud) AS total_order_value FROM kund
+INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
+GROUP BY kund.personnummer;
 
--- produkter
-INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES
-  ('111111111111', 'Ljusstake', ' Ljusstake i silver - tidig barock', 0.3, 'img_1.jpg'),
-  ('222222222222', 'Lösnäsa', 'Ansiktsaccessoar för att höja stämningen på kickoffen', 0.1, 'img_2.jpg'),
-  ('333333333333', 'Genmodifierad hamster', 'Husdjuret för dig som stimuleras av överlägsenhet', 0.5, 'img_3.jpg'),
-  ('444444444444', 'Tavelram', 'Hobby-tillverkad tavelram - 100% ek', 0.25, 'img_4.jpg'),
-  ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 0.35, 'img_5.jpg'),
-  ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 0.1, 'img_5.jpg');
 
--- auktioner
-INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES (1, 3000, 1500, '2017-02-20', '2017-03-20');
-INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES (2, 3000, 1500, '2017-02-20', '2017-03-20');
-INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES (3, 3000, 1500, '2017-02-20', '2017-03-20');
-INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES (4, 3000, 1500, '2017-02-20', '2017-03-20');
-INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
-VALUES (5, 3000, 1500, '2017-02-20', '2017-03-20');
-
--- bud
-INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
-  ('6808033117', 1, 1500),
-  ('3212077743', 2, 1500),
-  ('8707736734', 3, 1500),
-  ('7309824728', 4, 1500),
-  ('5503047294', 5, 1500),
-  ('7706034568', 1, 1501);
 
 
 SELECT auktion.acceptpris, auktion.acceptpris * produkt.provision FROM auktion INNER JOIN produkt ON auktion.produkt_id = produkt.id;
