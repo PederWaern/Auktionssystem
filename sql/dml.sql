@@ -1,4 +1,5 @@
 USE auktionssystem;
+
 # Insert DATA time
 
 -- addresser
@@ -77,3 +78,4 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
 -- DUMP av test inserts
 INSERT INTO avslutade_auktioner (auktion_id, produkt_id, hogsta_bud) VALUES (1, 1, 1000), (2, 2, 1000);
 SELECT * from rakna_ut_provision;
+

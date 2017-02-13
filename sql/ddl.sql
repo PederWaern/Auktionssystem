@@ -81,7 +81,9 @@ CREATE TABLE avslutade_auktioner (
   PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
-
+CREATE TABLE wawa (
+  testInt INT PRIMARY KEY
+);
 -- Procedures
 
 CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
@@ -117,6 +119,7 @@ CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_
   END;
 
 -- lägg till auktion procedure
+SET GLOBAL event_scheduler = ON;
 DELIMITER //
 CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT, IN in_acceptpris INT,
                                    IN in_startdatum DATE, IN in_slutdatum DATE, OUT out_date_error_message VARCHAR(100))
@@ -144,8 +147,18 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
       INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
       VALUES (in_produkt_id, in_acceptpris, in_utgangspris, in_startdatum, in_slutdatum);
     END IF;
+    -- create move and delete, on set end date. starts when auction is create.
+  END;
+CREATE EVENT wawa
+  ON SCHEDULE AT current_timestamp + INTERVAL 10 SECOND
+DO
+  BEGIN
+    DECLARE auktionToDelete INT;
+    set auktionToDelete = (SELECT auktion.id from auktion WHERE auktion.id = max(auktion.id));
+    DELETE FROM auktion WHERE auktion.id = auktionToDelete;
   END //
 DELIMITER ;
+
 
 -- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
