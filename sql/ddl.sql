@@ -77,11 +77,11 @@ CREATE TABLE avslutade_auktioner (
   produkt_id        INT NOT NULL,
   hogsta_bud        DOUBLE,
   kund_personnummer CHAR(10),
-  startdatum        DATE,
-  slutdatum         DATE,
-  utgangspris       DOUBLE,
+  startdatum        DATE NOT NULL,
+  slutdatum         DATE NOT NULL,
+  utgangspris       DOUBLE NOT NULL,
   acceptpris        DOUBLE,
-  datum_sald        DATE DEFAULT CURRENT_DATE,
+  datum_sald        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
@@ -342,4 +342,3 @@ CREATE OR REPLACE VIEW total_order_value_per_customer AS
   FROM kund
     INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
   GROUP BY kund.personnummer;
-
