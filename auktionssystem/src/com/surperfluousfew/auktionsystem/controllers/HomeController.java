@@ -38,17 +38,34 @@ public class HomeController {
     public void setSceneAddAuktion(ActionEvent actionEvent) throws Exception{
         Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
         stage = getParentStage(root);
-        stage.setScene(new Scene(addAuktionScene, 1000, 1000));
+        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
     }
 
     public void setSceneAddKund(ActionEvent actionEvent) throws Exception{
         Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
         stage = getParentStage(root);
-        stage.setScene(new Scene(addAuktionScene, 1000, 1000));
+        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
     }
 
     private Stage getParentStage(Parent parent){
         return (Stage) parent.getScene().getWindow();
     }
 
+    public void setSceneBudHistorik(ActionEvent actionEvent) throws Exception{
+        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/budHistorik.fxml"));
+        stage = getParentStage(root);
+        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
+    }
+
+    public void setSceneKundLista(ActionEvent actionEvent) throws Exception {
+        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/kundlista.fxml"));
+        stage = getParentStage(root);
+        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
+    }
+
+    public void setSceneAddLeverantor(ActionEvent actionEvent) throws Exception {
+        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addLeverantor.fxml"));
+        stage = getParentStage(root);
+        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
+    }
 }
