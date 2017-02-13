@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS auktionssystem;
 CREATE DATABASE auktionssystem;
 USE auktionssystem;
-SET GLOBAL event_scheduler = ON;
+-- SET GLOBAL event_scheduler = ON;
 
 -- adress
 CREATE TABLE adress (
@@ -334,3 +334,11 @@ FROM auktion
   INNER JOIN produkt ON auktion.produkt_id = produkt.id
   INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
+-- VIEW prov per månad
+CREATE VIEW provision_per_manad AS
+  SELECT YEAR(slutdatum) AS År,
+      MONTHNAME(slutdatum) AS Månad, sum(hogsta_bud*leverantor.provision) AS Provision
+    FROM avslutade_auktioner
+      INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+      INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+GROUP BY YEAR(slutdatum), MONTH(slutdatum);
