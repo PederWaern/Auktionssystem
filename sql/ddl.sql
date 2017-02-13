@@ -187,9 +187,10 @@ CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_
 # todo
 CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
                                       IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
-                                      IN in_losenord            VARCHAR(50), IN in_provision           DOUBLE)
+                                      IN in_losenord            VARCHAR(50), IN in_provision DOUBLE)
   BEGIN
-    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_losenord, in_provision);
+    INSERT INTO leverantor
+    VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_losenord, in_provision);
   END;
 
 -- lägg till auktion procedure
@@ -212,7 +213,7 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
     WHERE produkt_id = in_produkt_id;
 
     IF product_for_sale = 1
-    THEN SET out_date_error_message = 'The product is alredy for sale';
+    THEN SET out_date_error_message = 'The product is already for sale';
     ELSEIF in_startdatum < CURRENT_DATE OR in_slutdatum < CURRENT_DATE OR in_startdatum > in_slutdatum
       THEN SET out_date_error_message = 'dates are incorrect';
         SELECT out_date_error_message;
@@ -234,6 +235,22 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
       INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
       INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
     WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
+  END;
+-- pagaende auktioner, procedur som visar preliminar provision i kronor samt auktions information innom ett visst
+DROP PROCEDURE IF EXISTS provision_pagaende_auktioner_specifierat_tidsintervall;
+CREATE PROCEDURE provision_pagaende_auktioner_specifierat_tidsintervall(IN in_slutdatum_start DATE, in_slutdatum_slut DATE)
+  BEGIN
+    SELECT
+      auktion.*,
+      bud.belopp as hogsta_bud,
+      concat_ws(' ',leverantor.provision * 100,'%')                  AS provisions_andel,
+      max(bud.belopp) * leverantor.provision AS provision_pa_aktuellt_bud
+    FROM auktion
+      LEFT JOIN bud ON auktion.id = bud.auktion_id
+      LEFT JOIN produkt ON auktion.produkt_id = produkt.id
+      LEFT JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+    WHERE slutdatum BETWEEN in_slutdatum_start AND in_slutdatum_slut
+    GROUP BY auktion.id;
   END;
 
 /***************************************
@@ -325,12 +342,4 @@ CREATE OR REPLACE VIEW total_order_value_per_customer AS
   FROM kund
     INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
   GROUP BY kund.personnummer;
-
--- test select
-SELECT
-  auktion.acceptpris,
-  auktion.acceptpris * leverantor.provision
-FROM auktion
-  INNER JOIN produkt ON auktion.produkt_id = produkt.id
-  INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 

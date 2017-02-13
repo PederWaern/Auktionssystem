@@ -45,7 +45,7 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
   (3, 3000, 1500, '2017-02-20', '2017-03-20'),
   (4, 3000, 1500, '2017-02-20', '2017-03-20'),
   (5, 3000, 1500, '2017-01-20', '2017-02-13'),
-  (6, 3000, 2500, '2017-01-20', '2017-02-13');
+  (6, 3000, 2500, '2017-01-20', '2017-02-14');
 
 -- bud
 INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
@@ -54,8 +54,9 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('8707736734', 3, 1500),
   ('7309824728', 4, 1500),
   ('5503047294', 5, 1500),
-  ('7706034568', 1, 1501),
-  ('7706034568', 6, 2501);
+  ('7706034568', 1, 1501)
+  ;
+
 
 -- test select
 SELECT *
