@@ -69,7 +69,7 @@ CREATE TABLE bud (
 
 -- avslutade auktioner
 CREATE TABLE avslutade_auktioner (
-  auktion_id                INT NOT NULL,
+  auktion_id        INT NOT NULL,
   produkt_id        INT NOT NULL,
   hogsta_bud        DOUBLE,
   kund_personnummer CHAR(10),
@@ -150,9 +150,9 @@ DELIMITER ;
 -- Views
 CREATE VIEW avslutade_auktioner_utan_kopare AS
   SELECT
-    avslutade_auktioner.id AS auctions_id,
+    avslutade_auktioner.auktion_id AS auctions_id,
     avslutade_auktioner.produkt_id,
-    produkt.namn           AS product_namn,
+    produkt.namn                   AS product_namn,
     avslutade_auktioner.acceptpris,
     avslutade_auktioner.utgangspris,
     avslutade_auktioner.startdatum,
@@ -187,24 +187,23 @@ SELECT *
 FROM pagaendeauktioner;
 
 -- View rakna ut provision TODO - DOESNT WORK
-DROP VIEW rakna_ut_provision;
+
 CREATE VIEW rakna_ut_provision AS
   SELECT avslutade_auktioner.hogsta_bud * leverantor.provision
   FROM avslutade_auktioner
     INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
-    inner JOIN leverantor on produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
+    INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
-INSERT INTO avslutade_auktioner (auktion_id, produkt_id, hogsta_bud) VALUES (1,1, 1000),(2,2,1000);
-SELECT * from rakna_ut_provision;
+
 -- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
   BEGIN
     SELECT
-      avslutade_auktioner.id,
+      avslutade_auktioner.auktion_id,
       (hogsta_bud * leverantor.provision) AS provision
     FROM avslutade_auktioner
       INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
-      INNER JOIN leverantor on produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+      INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
     WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
   END;
 
@@ -222,7 +221,8 @@ CREATE OR REPLACE VIEW total_order_value_per_customer AS
 
 SELECT
   auktion.acceptpris,
-  auktion.acceptpris * produkt.provision
+  auktion.acceptpris * leverantor.provision
 FROM auktion
-  INNER JOIN produkt ON auktion.produkt_id = produkt.id;
+  INNER JOIN produkt ON auktion.produkt_id = produkt.id
+  INNER JOIN leverantor on produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
