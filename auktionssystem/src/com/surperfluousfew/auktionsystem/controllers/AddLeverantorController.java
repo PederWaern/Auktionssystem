@@ -15,6 +15,10 @@ public class AddLeverantorController {
     @FXML
     Parent root;
 
+    private void addLeverantor(){
+
+    }
+
     public void goBack(ActionEvent actionEvent) throws Exception {
         Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
         stage = stageHandler.getParentStage(root);

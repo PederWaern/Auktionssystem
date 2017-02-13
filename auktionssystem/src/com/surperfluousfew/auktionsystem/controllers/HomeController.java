@@ -31,9 +31,9 @@ public class HomeController {
 
 
     public void setScenePGA(ActionEvent actionEvent) throws Exception {
-        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));
+        Parent pgaScene = FXMLLoader.load(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));
         stage = stageHandler.getParentStage(root);
-        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
+        stage.setScene(new Scene(pgaScene, SCENE_WIDTH, SCENE_HEIGHT));
     }
 
 
