@@ -54,9 +54,7 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('8707736734', 3, 1500),
   ('7309824728', 4, 1500),
   ('5503047294', 5, 1500),
-  ('7706034568', 1, 1501)
-  ;
-
+  ('7706034568', 1, 1501);
 
 -- test select
 SELECT *
@@ -67,3 +65,14 @@ SELECT *
 FROM avslutade_auktioner_utan_kopare;
 SELECT *
 FROM auktion;
+
+
+/**********************
+  JAVAFUNKTIONALITET
+***********************/
+
+-- registrera en produkt
+  INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
+  ('?','?','?');
+
+  
