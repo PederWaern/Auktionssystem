@@ -82,9 +82,7 @@ CREATE TABLE avslutade_auktioner (
   PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
-CREATE TABLE wawa (
-  testInt INT PRIMARY KEY
-);
+
 -- Procedures
 /* flytta_pagaende_till_avslutad_auktion */
 -- Kopiera relevant data från pågående aktion till avslutad aktion.
