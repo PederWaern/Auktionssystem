@@ -25,21 +25,32 @@ INSERT INTO kund
   ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', 6);
 
 -- leverantorer
-INSERT INTO leverantor VALUES ('111111111111', 'Lovely Old Stuff', '0735111111', 'los@sell.se');
-INSERT INTO leverantor VALUES ('222222222222', 'Happy Shop', '0735222222', 'hs@sell.se');
-INSERT INTO leverantor VALUES ('333333333333', 'Evil Megastore', '0735333333', 'ems@sell.se');
-INSERT INTO leverantor VALUES ('444444444444', 'Friendly Old Dude', '0735444444', 'fod@sell.se');
-INSERT INTO leverantor VALUES ('555555555555', 'Ms. Butterscotch', '0735555555', 'msb@sell.se');
-INSERT INTO leverantor VALUES ('666666666666', 'We Got The Goods', '0735666666', 'wgtg@sell.se');
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision)
+VALUES ('111111111111', '0735111111', 'los@sell.se', 'Lovely Old Stuff', 0.3);
+
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision)
+VALUES ('222222222222', '0735222222', 'hs@sell.se', 'Happy Shop', 0.1);
+
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision)
+VALUES ('333333333333', '0735333333', 'ems@sell.se', 'Evil Megastore', 0.5);
+
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision)
+VALUES ('444444444444', '0735444444', 'fod@sell.se', 'Friendly Old Dude', 0.25);
+
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision)
+VALUES ('555555555555', '0735555555', 'msb@sell.se', 'Ms. Butterscotch', 0.35);
+
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision)
+VALUES ('666666666666', '0735666666', 'wgtg@sell.se', 'We Got The Goods', 0.1);
 
 -- produkter
-INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, provision, bildnamn) VALUES
-  ('111111111111', 'Ljusstake', ' Ljusstake i silver - tidig barock', 0.3, 'img_1.jpg'),
-  ('222222222222', 'Lösnäsa', 'Ansiktsaccessoar för att höja stämningen på kickoffen', 0.1, 'img_2.jpg'),
-  ('333333333333', 'Genmodifierad hamster', 'Husdjuret för dig som stimuleras av överlägsenhet', 0.5, 'img_3.jpg'),
-  ('444444444444', 'Tavelram', 'Hobby-tillverkad tavelram - 100% ek', 0.25, 'img_4.jpg'),
-  ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 0.35, 'img_5.jpg'),
-  ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 0.1, 'img_5.jpg');
+INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
+  ('111111111111', 'Ljusstake', ' Ljusstake i silver - tidig barock', 'img_1.jpg'),
+  ('222222222222', 'Lösnäsa', 'Ansiktsaccessoar för att höja stämningen på kickoffen', 'img_2.jpg'),
+  ('333333333333', 'Genmodifierad hamster', 'Husdjuret för dig som stimuleras av överlägsenhet', 'img_3.jpg'),
+  ('444444444444', 'Tavelram', 'Hobby-tillverkad tavelram - 100% ek', 'img_4.jpg'),
+  ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 'img_5.jpg'),
+  ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 'img_5.jpg');
 
 -- auktioner
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
@@ -61,5 +72,3 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('7309824728', 4, 1500),
   ('5503047294', 5, 1500),
   ('7706034568', 1, 1501);
-
-
