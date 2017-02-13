@@ -117,6 +117,42 @@ CREATE PROCEDURE flytta_pagaende_till_avslutad_auktion(IN in_auktion_id INT)
   END //
 DELIMITER ;
 
+/* lagg_bug */
+DELIMITER //
+CREATE PROCEDURE lagg_bud(IN  in_kund_personnummer CHAR(10), IN in_auktion_id INT, IN in_belopp DOUBLE,
+                          OUT meddelande           VARCHAR(50))
+  BEGIN
+    -- Kolla så att budet är större än utgångspris och större än nuvarande maxbud
+    IF in_belopp >= (SELECT utgangspris
+                    FROM auktion
+                    WHERE auktion.id = in_auktion_id)
+       AND (in_belopp > (SELECT MAX(bud.belopp)
+                        FROM bud
+                        WHERE bud.auktion_id = in_auktion_id)
+            OR (SELECT MAX(bud.belopp)
+                        FROM bud
+                        WHERE bud.auktion_id = in_auktion_id) IS NULL)
+    THEN
+      -- kolla om budet är över eller lika med accept-priset
+      -- lägg budet med samma värde som accept-priset
+      -- flytta till avslutade auktioner
+      IF in_belopp >= (SELECT auktion.acceptpris FROM auktion WHERE auktion.id = in_auktion_id)
+      THEN
+        INSERT INTO bud (kund_personnummer, auktion_id, belopp)
+        VALUES (in_kund_personnummer, in_auktion_id, (SELECT auktion.acceptpris FROM auktion WHERE auktion.id = in_auktion_id));
+        CALL flytta_pagaende_till_avslutad_auktion(in_auktion_id);
+        SET meddelande = 'Produkten köptes för acceptpris';
+      ELSE
+        INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES (in_kund_personnummer, in_auktion_id, in_belopp);
+        SET meddelande = 'Budet lades till';
+      END IF;
+    -- Annars, skriv ut felmeddelande
+    ELSE
+      SET meddelande = 'Ett fel har uppstått. Inget bud lades till.';
+    END IF;
+  END //
+DELIMITER ;
+
 CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
   BEGIN
     IF EXISTS(SELECT *
