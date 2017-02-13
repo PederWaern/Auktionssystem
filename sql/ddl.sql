@@ -77,11 +77,11 @@ CREATE TABLE avslutade_auktioner (
   produkt_id        INT NOT NULL,
   hogsta_bud        DOUBLE,
   kund_personnummer CHAR(10),
-  startdatum        DATE,
-  slutdatum         DATE,
-  utgangspris       DOUBLE,
+  startdatum        DATE NOT NULL,
+  slutdatum         DATE NOT NULL,
+  utgangspris       DOUBLE NOT NULL,
   acceptpris        DOUBLE,
-  datum_sald        DATE DEFAULT CURRENT_DATE,
+  datum_sald        DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
