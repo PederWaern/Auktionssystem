@@ -83,7 +83,10 @@ CREATE TABLE avslutade_auktioner (
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
 
--- Procedures
+/***************************************
+    PROCEDURES
+***************************************/
+
 /* flytta_pagaende_till_avslutad_auktion */
 -- Kopiera relevant data från pågående aktion till avslutad aktion.
 -- Ta bort från pågående auktion
@@ -191,6 +194,10 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
       INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
     WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
   END;
+
+/***************************************
+    EVENTS
+***************************************/
 -- Event auktion datum check
 DELIMITER //
 CREATE EVENT auktion_slutdatum_check
@@ -218,6 +225,10 @@ DO
   END //
 DELIMITER ;
 show EVENTS ;
+
+/***************************************
+    VIEWS
+***************************************/
 -- View avslutade auktioner utan kopare
 DROP VIEW IF EXISTS avslutade_auktioner_utan_kopare;
 CREATE VIEW avslutade_auktioner_utan_kopare AS
