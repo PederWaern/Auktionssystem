@@ -224,21 +224,34 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
 DELIMITER ;
 -- pagaende auktioner, procedur som visar preliminar provision i kronor samt auktions information innom ett visst
 DROP PROCEDURE IF EXISTS provision_pagaende_auktioner_specifierat_tidsintervall;
-CREATE PROCEDURE provision_pagaende_auktioner_specifierat_tidsintervall(IN in_slutdatum_start DATE, in_slutdatum_slut DATE)
+CREATE PROCEDURE provision_pagaende_auktioner_specifierat_tidsintervall(IN in_slutdatum_start DATE,
+                                                                           in_slutdatum_slut  DATE)
   BEGIN
     SELECT
-      auktion.*,
-      bud.belopp as hogsta_bud,
-      concat_ws(' ',leverantor.provision * 100,'%')                  AS provisions_andel,
-      max(bud.belopp) * leverantor.provision AS provision_pa_aktuellt_bud
-    FROM auktion
-      LEFT JOIN bud ON auktion.id = bud.auktion_id
-      LEFT JOIN produkt ON auktion.produkt_id = produkt.id
-      LEFT JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-    WHERE slutdatum BETWEEN in_slutdatum_start AND in_slutdatum_slut
-    GROUP BY auktion.id;
+      auktion.id                              AS auktion_id,
+      auktion.produkt_id,
+      auktion.acceptpris,
+      auktion.utgangspris,
+      auktion.startdatum,
+      auktion.slutdatum,
+      b2.hogsta_bud,
+      b2.beraknad_provision,
+      CONCAT(leverantor.provision * 100, '%') AS provisionsandel
+    FROM (
+           SELECT
+             bud.auktion_id,
+             max(bud.belopp)                        AS hogsta_bud,
+             max(bud.belopp * leverantor.provision) AS beraknad_provision
+           FROM auktion
+             INNER JOIN bud ON bud.auktion_id = auktion.id
+             INNER JOIN produkt ON auktion.produkt_id = produkt.id
+             INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+           GROUP BY auktion_id) AS b2
+      RIGHT JOIN auktion ON auktion.id = b2.auktion_id
+      INNER JOIN produkt ON auktion.produkt_id = produkt.id
+      INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+    WHERE auktion.slutdatum BETWEEN in_slutdatum_start AND in_slutdatum_slut;
   END;
-
 
 -- proc provision på auktioner avslutade mellan specifierat tidsintervall
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
