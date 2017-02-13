@@ -4,11 +4,12 @@
 <?import javafx.scene.layout.GridPane?>
 
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112-ea" fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController">
+<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/8.0.112-ea" fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController">
    <children>
-      <Button fx:id="bNyAuktion" mnemonicParsing="false" text="Nya Auktion" GridPane.rowIndex="0"/>
-      <Button fx:id="bNyKund" mnemonicParsing="false" text="Ny Kund" GridPane.rowIndex="1" />
-      <Button fx:id="bNyLev" mnemonicParsing="false" text="Ny Leverantor" GridPane.rowIndex="2"/>
+      <Button fx:id="bAddAuktion" mnemonicParsing="false" text="Nya Auktion" GridPane.rowIndex="0" onAction="#setSceneAddAuktion"/>
+      <Button fx:id="bAddKund" mnemonicParsing="false" text="Ny Kund" GridPane.rowIndex="1" onAction="#setSceneAddKund"/>
+      <Button fx:id="bAddLev" mnemonicParsing="false" text="Ny Leverantor" GridPane.rowIndex="2"/>
       <Button fx:id="bPagaendeAuktioner" mnemonicParsing="false" text="Pågående Auktioner" GridPane.rowIndex="3" onAction="#setScenePGA"/>
       <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="4" />
    </children>
