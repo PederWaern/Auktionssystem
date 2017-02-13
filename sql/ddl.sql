@@ -126,22 +126,26 @@ CREATE PROCEDURE lagg_bud(IN  in_kund_personnummer CHAR(10), IN in_auktion_id IN
   BEGIN
     -- Kolla så att budet är större än utgångspris och större än nuvarande maxbud
     IF in_belopp >= (SELECT utgangspris
-                    FROM auktion
-                    WHERE auktion.id = in_auktion_id)
+                     FROM auktion
+                     WHERE auktion.id = in_auktion_id)
        AND (in_belopp > (SELECT MAX(bud.belopp)
-                        FROM bud
-                        WHERE bud.auktion_id = in_auktion_id)
+                         FROM bud
+                         WHERE bud.auktion_id = in_auktion_id)
             OR (SELECT MAX(bud.belopp)
-                        FROM bud
-                        WHERE bud.auktion_id = in_auktion_id) IS NULL)
+                FROM bud
+                WHERE bud.auktion_id = in_auktion_id) IS NULL)
     THEN
       -- kolla om budet är över eller lika med accept-priset
       -- lägg budet med samma värde som accept-priset
       -- flytta till avslutade auktioner
-      IF in_belopp >= (SELECT auktion.acceptpris FROM auktion WHERE auktion.id = in_auktion_id)
+      IF in_belopp >= (SELECT auktion.acceptpris
+                       FROM auktion
+                       WHERE auktion.id = in_auktion_id)
       THEN
         INSERT INTO bud (kund_personnummer, auktion_id, belopp)
-        VALUES (in_kund_personnummer, in_auktion_id, (SELECT auktion.acceptpris FROM auktion WHERE auktion.id = in_auktion_id));
+        VALUES (in_kund_personnummer, in_auktion_id, (SELECT auktion.acceptpris
+                                                      FROM auktion
+                                                      WHERE auktion.id = in_auktion_id));
         CALL flytta_pagaende_till_avslutad_auktion(in_auktion_id);
         SET meddelande = 'Produkten köptes för acceptpris';
       ELSE
@@ -182,9 +186,9 @@ CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_
 # todo
 CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
                                       IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
-                                      IN in_provision           DOUBLE)
+                                      IN in_losenord            VARCHAR(50), IN in_provision           DOUBLE)
   BEGIN
-    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_provision);
+    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_losenord, in_provision);
   END;
 
 -- lägg till auktion procedure
