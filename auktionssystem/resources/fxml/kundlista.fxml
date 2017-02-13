@@ -1,0 +1,12 @@
+<?import javafx.scene.layout.GridPane?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<GridPane fx:id="root" fx:controller="com.surperfluousfew.auktionsystem.controllers.KundlistaController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <children>
+        <Label text="Kund Lista"/>
+        <Button fx:id="bBack" text="Back" onAction="#goBack"/>
+    </children>
+</GridPane>

@@ -9,8 +9,10 @@
    <children>
       <Button fx:id="bAddAuktion" mnemonicParsing="false" text="Nya Auktion" GridPane.rowIndex="0" onAction="#setSceneAddAuktion"/>
       <Button fx:id="bAddKund" mnemonicParsing="false" text="Ny Kund" GridPane.rowIndex="1" onAction="#setSceneAddKund"/>
-      <Button fx:id="bAddLev" mnemonicParsing="false" text="Ny Leverantor" GridPane.rowIndex="2"/>
+      <Button fx:id="bAddLev" mnemonicParsing="false" text="Ny Leverantor" GridPane.rowIndex="2" onAction="#setSceneAddLeverantor"/>
       <Button fx:id="bPagaendeAuktioner" mnemonicParsing="false" text="Pågående Auktioner" GridPane.rowIndex="3" onAction="#setScenePGA"/>
-      <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="4" />
+      <Button fx:id="bBudHistorik" mnemonicParsing="false" text="Bud Historik" GridPane.rowIndex="4" onAction="#setSceneBudHistorik"/>
+      <Button fx:id="bKundLista" mnemonicParsing="false" text="Visa Kundlista" GridPane.rowIndex="5" onAction="#setSceneKundLista"/>
+
    </children>
 </GridPane>

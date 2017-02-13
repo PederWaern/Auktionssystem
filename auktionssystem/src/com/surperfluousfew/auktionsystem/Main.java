@@ -11,11 +11,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Auktionsystem");
-        primaryStage.setHeight(1000);
-        primaryStage.setWidth(1000);
-        primaryStage.setScene(new Scene(root, 1000, 1000));
+        primaryStage.setHeight(300);
+        primaryStage.setWidth(400);
+        primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
