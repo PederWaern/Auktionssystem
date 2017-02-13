@@ -65,6 +65,7 @@ CREATE TABLE bud (
   PRIMARY KEY (auktion_id, belopp),
   FOREIGN KEY (kund_personnummer) REFERENCES kund (personnummer),
   FOREIGN KEY (auktion_id) REFERENCES auktion (id)
+    ON DELETE CASCADE
 );
 
 -- avslutade auktioner
@@ -157,6 +158,43 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
       INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
     WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
   END;
+
+  /* flytta_pagaende_till_avslutad_auktion */
+-- Kopiera relevant data från pågående aktion till avslutad aktion.
+-- Ta bort från pågående auktion
+DELIMITER //
+CREATE PROCEDURE flytta_pagaende_till_avslutad_auktion(IN in_auktion_id INT)
+  BEGIN
+    INSERT INTO avslutade_auktioner (auktion_id,
+                                     produkt_id,
+                                     acceptpris,
+                                     hogsta_bud,
+                                     kund_personnummer,
+                                     startdatum,
+                                     slutdatum,
+                                     utgangspris)
+      SELECT
+        auktion.id,
+        produkt_id,
+        acceptpris,
+        kund_personnummer                                   AS kund,
+        (SELECT max(belopp)
+         FROM auktion
+           LEFT JOIN bud
+             ON auktion.id = bud.auktion_id
+         WHERE auktion_id = 1 AND kund_personnummer = kund) AS max,
+        startdatum,
+        slutdatum,
+        utgangspris
+      FROM auktion
+        LEFT JOIN bud ON auktion.id = bud.auktion_id
+      WHERE auktion.id = 5
+      ORDER BY max DESC
+      LIMIT 1;
+    DELETE FROM auktion
+    WHERE auktion.id = in_auktion_id;
+  END //
+DELIMITER ;
 
 -- View avslutade auktioner utan kopare
 CREATE VIEW avslutade_auktioner_utan_kopare AS
