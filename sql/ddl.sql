@@ -77,7 +77,7 @@ CREATE TABLE avslutade_auktioner (
   slutdatum         DATE,
   utgangspris       DOUBLE,
   acceptpris        DOUBLE,
-  PRIMARY KEY (id),
+  PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
 
@@ -201,9 +201,10 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
   BEGIN
     SELECT
       avslutade_auktioner.id,
-      (hogsta_bud * produkt.provision) AS provision
+      (hogsta_bud * leverantor.provision) AS provision
     FROM avslutade_auktioner
       INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+      INNER JOIN leverantor on produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
     WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
   END;
 
