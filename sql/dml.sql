@@ -75,4 +75,35 @@ FROM auktion;
   INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
   ('?','?','?');
 
+ -- lägg till auktion
+
+call lägg_till_auktion('?','?','?','?','?','?','?');
+
+-- lista pågående auktioner
+
+SELECT * from pagaende_auktioner;
+
+-- se budhistorik för en viss auktion samt vilka kunder som lagt bud
+
+call budhistorik_specificerad_auktion('?');
+
+-- Vilka auktioner avslutas inom ett visst datum intervall och vad blir provisionen
+
+call provision_specifierat_tidsintervall('?', '?');
+
+-- Visa view på avslutade auktioner utan köpare
+
+SELECT * from avslutade_auktioner_utan_kopare;
+
+-- visa kundlista med kunder som köpt något samt deras totala ordervärde är
+
+SELECT * from total_order_value_per_customer;
+
+-- vad är den totala provisionen per månad
+
+SELECT * from provision_per_manad;
+
+
+
+
   
