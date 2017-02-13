@@ -102,8 +102,7 @@ CREATE PROCEDURE budhistorik_specificerad_auktion(IN in_auktion_id INT)
     END IF;
   END;
 
-CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR,
-                                   IN in_provision DOUBLE, IN in_bildnamn CHAR)
+CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_beskrivning CHAR, IN in_bildnamn CHAR)
   BEGIN
     INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
       (in_lev_orgnr, in_namn, in_beskrivning, in_bildnamn);
@@ -147,7 +146,19 @@ CREATE PROCEDURE lägg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT,
   END //
 DELIMITER ;
 
--- Views
+-- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
+CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
+  BEGIN
+    SELECT
+      avslutade_auktioner.auktion_id,
+      (hogsta_bud * leverantor.provision) AS provision
+    FROM avslutade_auktioner
+      INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+      INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+    WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
+  END;
+
+-- View avslutade auktioner utan kopare
 CREATE VIEW avslutade_auktioner_utan_kopare AS
   SELECT
     avslutade_auktioner.auktion_id AS auctions_id,
@@ -162,8 +173,8 @@ CREATE VIEW avslutade_auktioner_utan_kopare AS
   WHERE avslutade_auktioner.hogsta_bud IS NULL AND avslutade_auktioner.kund_personnummer;
 
 -- View för pågående auktioner inklusive högsta bud och budgivare
-DROP VIEW IF EXISTS pagaendeauktioner;
-CREATE VIEW pagaendeauktioner AS
+DROP VIEW IF EXISTS pagaende_auktioner;
+CREATE VIEW pagaende_auktioner AS
   SELECT
     kund.personnummer,
     Concat(kund.fornamn, ' ', kund.efternamn) AS namn,
@@ -183,29 +194,13 @@ CREATE VIEW pagaendeauktioner AS
     INNER JOIN produkt ON produkt.id = auktion.produkt_id
   WHERE bud.belopp = b2.hogsta_bud;
 
-SELECT *
-FROM pagaendeauktioner;
-
--- View rakna ut provision TODO - DOESNT WORK
+-- View rakna ut provision TODO - needs oversight
 
 CREATE VIEW rakna_ut_provision AS
   SELECT avslutade_auktioner.hogsta_bud * leverantor.provision
   FROM avslutade_auktioner
     INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
     INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
-
-
--- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
-CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
-  BEGIN
-    SELECT
-      avslutade_auktioner.auktion_id,
-      (hogsta_bud * leverantor.provision) AS provision
-    FROM avslutade_auktioner
-      INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
-      INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-    WHERE slutdatum BETWEEN in_startdatum AND in_slutdatum;
-  END;
 
 -- VIEW - Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
 CREATE OR REPLACE VIEW total_order_value_per_customer AS
@@ -218,11 +213,11 @@ CREATE OR REPLACE VIEW total_order_value_per_customer AS
     INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
   GROUP BY kund.personnummer;
 
-
+-- test select
 SELECT
   auktion.acceptpris,
   auktion.acceptpris * leverantor.provision
 FROM auktion
   INNER JOIN produkt ON auktion.produkt_id = produkt.id
-  INNER JOIN leverantor on produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
+  INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
