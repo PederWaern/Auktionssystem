@@ -11,17 +11,44 @@ import javafx.stage.Stage;
 
 public class HomeController {
 
-    public void initialize(){
-    }
+    private Stage stage;
+    final static int SCENE_WIDTH = 1000;
+    final static int SCENE_HEIGHT = 1000;
 
     @FXML
+    Parent root;
+
+    /*@FXML
     Button bPagaendeAuktioner;
+    @FXML
+    Button bAddAuktion;
+    @FXML
+    Button bAddLev;
+    @FXML
+    Button bAddKund;*/
+
 
     public void setScenePGA(ActionEvent actionEvent) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
-
-
+        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));
+        stage = getParentStage(root);
+        stage.setScene(new Scene(addAuktionScene, SCENE_WIDTH, SCENE_HEIGHT));
     }
 
+
+    public void setSceneAddAuktion(ActionEvent actionEvent) throws Exception{
+        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
+        stage = getParentStage(root);
+        stage.setScene(new Scene(addAuktionScene, 1000, 1000));
+    }
+
+    public void setSceneAddKund(ActionEvent actionEvent) throws Exception{
+        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
+        stage = getParentStage(root);
+        stage.setScene(new Scene(addAuktionScene, 1000, 1000));
+    }
+
+    private Stage getParentStage(Parent parent){
+        return (Stage) parent.getScene().getWindow();
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.surperfluousfew.auktionsystem;
 
+import com.surperfluousfew.auktionsystem.controllers.HomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
         primaryStage.setTitle("Auktionsystem");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setHeight(1000);
+        primaryStage.setWidth(1000);
+        primaryStage.setScene(new Scene(root, 1000, 1000));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
