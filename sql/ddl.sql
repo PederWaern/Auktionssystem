@@ -18,6 +18,7 @@ CREATE TABLE kund (
   efternamn     VARCHAR(50) NOT NULL,
   telefonnummer CHAR(13)    NOT NULL,
   epost         VARCHAR(50) NOT NULL,
+  losenord      VARCHAR(50) NOT NULL,
   adress_id     INT,
   PRIMARY KEY (personnummer),
   FOREIGN KEY (adress_id) REFERENCES adress (id)
@@ -30,6 +31,7 @@ CREATE TABLE leverantor
   namn                VARCHAR(50) NOT NULL,
   telefonnummer       VARCHAR(13),
   epost               VARCHAR(50) NOT NULL,
+  losenord            VARCHAR(50) NOT NULL,
   provision           DOUBLE      NOT NULL,
 
   PRIMARY KEY (organisitionsnummer)
@@ -93,12 +95,12 @@ CREATE TABLE avslutade_auktioner (
 DELIMITER //
 CREATE PROCEDURE flytta_pagaende_till_avslutad_auktion(IN in_auktion_id INT)
   BEGIN
-    INSERT INTO avslutade_auktioner (auktion_id, produkt_id, acceptpris, kund_personnummer,hogsta_bud , startdatum, slutdatum, utgangspris)
+    INSERT INTO avslutade_auktioner (auktion_id, produkt_id, acceptpris, kund_personnummer, hogsta_bud, startdatum, slutdatum, utgangspris)
       SELECT
         auktion.id,
         produkt_id,
         acceptpris,
-        kund_personnummer                                   AS kund,
+        kund_personnummer                                               AS kund,
         (SELECT max(belopp)
          FROM auktion
            LEFT JOIN bud
@@ -224,7 +226,7 @@ DO
     END LOOP;
   END //
 DELIMITER ;
-show EVENTS ;
+SHOW EVENTS;
 
 /***************************************
     VIEWS
