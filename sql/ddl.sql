@@ -188,12 +188,14 @@ CREATE VIEW pagaendeauktioner AS
 SELECT *
 FROM pagaendeauktioner;
 
+
+-- View rakna ut provision TODO - DOESNT WORK
 CREATE VIEW rakna_ut_provision AS
   SELECT avslutade_auktioner.hogsta_bud * produkt.provision
   FROM avslutade_auktioner
     INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id;
 
--- proc provision på auktionen avslutade mellan specifierat tidsintervall
+-- proc provision på auktionen avslutade mellan specifierat tidsintervall TODO - DOESNT WORK
 CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_slutdatum DATE)
   BEGIN
     SELECT
