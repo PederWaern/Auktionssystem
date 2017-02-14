@@ -53,4 +53,9 @@ public class HomeController {
         Parent addLeverantorScene = FXMLLoader.load(getClass().getResource("/fxml/addLeverantor.fxml"));
         root.setCenter(addLeverantorScene);
     }
+
+    public void setSceneForsaljning(ActionEvent actionEvent) throws Exception{
+        Parent addLeverantorScene = FXMLLoader.load(getClass().getResource("/fxml/forsaljningsstatistik.fxml"));
+        root.setCenter(addLeverantorScene);
+    }
 }

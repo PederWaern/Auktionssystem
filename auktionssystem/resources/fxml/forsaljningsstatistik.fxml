@@ -2,17 +2,23 @@
 
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.ToggleGroup?>
 <BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112-ea"
             fx:controller="com.surperfluousfew.auktionsystem.controllers.ForsaljningsstatistikController">
+
     <children>
 
     </children>
     <top>
         <HBox BorderPane.alignment="CENTER">
             <children>
-                <RadioButton fx:id="rbKunder" mnemonicParsing="false" text="Kunder" onAction="#showKunder"/>
-                <RadioButton fx:id="rbAuktioner" mnemonicParsing="false" text="Auktioner" onAction="#showAuktioner"/>
-                <RadioButton fx:id="rbProvision" mnemonicParsing="false" text="Provision" onAction="#showProvision"/>
+                <fx:define>
+                    <ToggleGroup fx:id="group"/>
+                </fx:define>
+                <RadioButton fx:id="rbKunder" toggleGroup="$group" mnemonicParsing="false" text="Kunder" onAction="#showKunder"/>
+                <RadioButton fx:id="rbAuktioner" toggleGroup="$group" mnemonicParsing="false" text="Auktioner" onAction="#showAuktioner"/>
+                <RadioButton fx:id="rbProvision" toggleGroup="$group" mnemonicParsing="false" text="Provision" onAction="#showProvision"/>
             </children>
         </HBox>
     </top>

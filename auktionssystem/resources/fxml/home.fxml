@@ -9,18 +9,16 @@
     <left>
         <GridPane>
             <children>
-                <Button fx:id="bAddAuktion" mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Ny Auktion"
+                <Button mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Ny Auktion"
                         GridPane.rowIndex="0"/>
-                <Button fx:id="bAddKund" mnemonicParsing="false" onAction="#setSceneAddKund" text="Ny Kund"
+                <Button mnemonicParsing="false" onAction="#setSceneAddKund" text="Ny Kund"
                         GridPane.rowIndex="1"/>
-                <Button fx:id="bAddLev" mnemonicParsing="false" onAction="#setSceneAddLeverantor" text="Ny Leverantor"
+                <Button mnemonicParsing="false" onAction="#setSceneAddLeverantor" text="Ny Leverantor"
                         GridPane.rowIndex="2"/>
-                <Button fx:id="bPagaendeAuktioner" mnemonicParsing="false" onAction="#setScenePGA"
+                <Button mnemonicParsing="false" onAction="#setScenePGA"
                         text="Pågående Auktioner" GridPane.rowIndex="3"/>
-                <Button fx:id="bBudHistorik" mnemonicParsing="false" onAction="#setSceneBudHistorik" text="Bud Historik"
+                <Button mnemonicParsing="false" onAction="#setSceneForsaljning" text="Försäljningsstatistik"
                         GridPane.rowIndex="4"/>
-                <Button fx:id="bKundLista" mnemonicParsing="false" onAction="#setSceneKundLista" text="Visa Kundlista"
-                        GridPane.rowIndex="5"/>
             </children>
         </GridPane>
     </left>
