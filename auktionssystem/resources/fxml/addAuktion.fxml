@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.AddAuktionController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.112-ea"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.surperfluousfew.auktionsystem.controllers.AddAuktionController">
     <children>
-      <ChoiceBox fx:id="cbProdukt" prefWidth="150.0" GridPane.columnIndex="1"/>
-      <Label text="Utgångspris:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-      <TextField fx:id="txfUpris" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-      <Label text="Acceptpris:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-      <TextField fx:id="txfApris" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-      <DatePicker fx:id="dpStart" promptText="Startdatum" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-      <DatePicker fx:id="dpSlut" promptText="Slutdatum" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+        <ChoiceBox fx:id="cbProdukt" prefWidth="150.0" GridPane.columnIndex="1"/>
+        <Label text="Utgångspris:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="txfUpris" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Acceptpris:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <TextField fx:id="txfApris" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <DatePicker fx:id="dpStart" promptText="Startdatum" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <DatePicker fx:id="dpSlut" promptText="Slutdatum" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
     </children>
 </GridPane>
