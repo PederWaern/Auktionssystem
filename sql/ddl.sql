@@ -363,11 +363,15 @@ FROM auktion
   INNER JOIN produkt ON auktion.produkt_id = produkt.id
   INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
--- VIEW prov per månad
+-- VIEW provision per månad
+DROP VIEW IF EXISTS provision_per_manad;
+
 CREATE VIEW provision_per_manad AS
-  SELECT YEAR(slutdatum) AS År,
-      MONTHNAME(slutdatum) AS Månad, sum(hogsta_bud*leverantor.provision) AS Provision
+  SELECT YEAR(datum_sald) AS År,
+      MONTHNAME(datum_sald) AS Månad, sum(hogsta_bud*leverantor.provision) AS Provision
     FROM avslutade_auktioner
       INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
       INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-GROUP BY YEAR(slutdatum), MONTH(slutdatum);
+      GROUP BY År, Månad, Provision;
+
+SELECT * from provision_per_manad;

@@ -11,6 +11,5 @@
           fx:controller="com.surperfluousfew.auktionsystem.controllers.AddAuktionController">
     <children>
         <Label text="addAuktion"/>
-        <Button fx:id="bBack" text="Back" onAction="#goBack"/>
     </children>
 </GridPane>
