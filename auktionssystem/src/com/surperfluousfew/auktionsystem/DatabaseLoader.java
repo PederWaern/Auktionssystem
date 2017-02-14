@@ -2,6 +2,7 @@ package com.surperfluousfew.auktionsystem;
 
 import com.surperfluousfew.auktionsystem.models.Admin;
 import com.surperfluousfew.auktionsystem.models.Adress;
+import com.surperfluousfew.auktionsystem.models.Leverantor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,11 +24,13 @@ public class DatabaseLoader {
     private ResultSet resultSet = null;
 
     private List<Adress> addresses = null;
+    private List<Leverantor> leverantorer = null;
+
     private List<Admin> admins = null;
 
     public DatabaseLoader() {
         try {
-            FileInputStream in = new FileInputStream("/Users/christopherolsson/Documents/Nackademin/Databasteknik/Examination/Auktionssystem/auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("../auktionssystem/configuration/db.properties");
             properties.load(in);
             String driver = properties.getProperty("jdbc.driver");
             if (driver != null) {
