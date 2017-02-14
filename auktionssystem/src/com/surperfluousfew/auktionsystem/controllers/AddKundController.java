@@ -1,5 +1,6 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
+import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -30,7 +31,9 @@ public class AddKundController {
     @FXML
     Button bAddKund;
 
+    private DatabaseLoader dbLoader = new DatabaseLoader();
     public void addKund(ActionEvent actionEvent) {
 
     }
+
 }
