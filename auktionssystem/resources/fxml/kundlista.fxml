@@ -6,10 +6,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.KundlistaController">
+<?import javafx.scene.control.TextArea?>
+<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0,91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.KundlistaController">
     <children>
         <Label text="Kund Lista" />
-      <ComboBox fx:id="kundLista" prefWidth="150.0" />
+      <ComboBox fx:id="kundLista" prefWidth="150.0" onAction="#kundSelected"/>
+        <Label fx:id="lblOrderValue" GridPane.rowIndex="1" />
+
      
     </children>
    <columnConstraints>
