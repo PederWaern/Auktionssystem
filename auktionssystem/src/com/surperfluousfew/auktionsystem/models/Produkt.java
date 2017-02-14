@@ -15,6 +15,23 @@ public class Produkt {
         this.bildnamn = bildnamn;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public Leverantor getLeverantor() {
+        return leverantor;
+    }
 
+    public String getNamn() {
+        return namn;
+    }
+
+    public String getBeskrivning() {
+        return beskrivning;
+    }
+
+    public String getBildnamn() {
+        return bildnamn;
+    }
 }
