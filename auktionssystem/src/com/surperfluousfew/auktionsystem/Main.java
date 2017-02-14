@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/logIn.fxml"));
         primaryStage.setTitle("Auktionsystem");
         primaryStage.setHeight(300);
         primaryStage.setWidth(400);
