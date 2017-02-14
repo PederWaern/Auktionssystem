@@ -85,12 +85,12 @@ CREATE TABLE bud (
 
 -- avslutade auktioner
 CREATE TABLE avslutade_auktioner (
-  auktion_id        INT NOT NULL,
-  produkt_id        INT NOT NULL,
+  auktion_id        INT    NOT NULL,
+  produkt_id        INT    NOT NULL,
   hogsta_bud        DOUBLE,
   kund_personnummer CHAR(10),
-  startdatum        DATE NOT NULL,
-  slutdatum         DATE NOT NULL,
+  startdatum        DATE   NOT NULL,
+  slutdatum         DATE   NOT NULL,
   utgangspris       DOUBLE NOT NULL,
   acceptpris        DOUBLE,
   datum_sald        DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -199,9 +199,9 @@ CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_
 # todo
 CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
                                       IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
-                                      IN in_losenord            VARCHAR(50), IN in_provision           DOUBLE)
+  ,                                   IN in_provision           DOUBLE)
   BEGIN
-    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_losenord, in_provision);
+    INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_provision);
   END;
 
 -- lägg till auktion procedure
@@ -283,7 +283,7 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
 -- Event auktion datum check
 DELIMITER //
 CREATE EVENT auktion_slutdatum_check
-  ON SCHEDULE EVERY 10 SECOND
+  ON SCHEDULE EVERY 1 DAY
 DO
   BEGIN
     DECLARE kontroll_slutford INT DEFAULT FALSE;
@@ -378,9 +378,11 @@ FROM auktion
 -- VIEW prov per månad
 DROP VIEW IF EXISTS provision_per_manad;
 CREATE VIEW provision_per_manad AS
-  SELECT YEAR(datum_sald) AS År,
-      MONTHNAME(datum_sald) AS Månad, sum(hogsta_bud*leverantor.provision) AS Provision
-    FROM avslutade_auktioner
-      INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
-      INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-GROUP BY År, Månad, Provision;
+  SELECT
+    YEAR(datum_sald)                       AS År,
+    MONTHNAME(datum_sald)                  AS Månad,
+    sum(hogsta_bud * leverantor.provision) AS Provision
+  FROM avslutade_auktioner
+    INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
+    INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
+  GROUP BY År, Månad, Provision;
