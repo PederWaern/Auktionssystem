@@ -311,6 +311,32 @@ public class DatabaseLoader {
         return admins;
     }
 
+
+    public ArrayList<TotalOrderVärdePerKund> totalOrderVärdePerKundLista () {
+        setup();
+        ArrayList<TotalOrderVärdePerKund> list = new ArrayList<>();
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM total_order_value_per_customer");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+               String fornamn = resultSet.getString(1);
+               String efternamn = resultSet.getString(2);
+               String personNummer = resultSet.getString(3);
+               double totaltOrderVärde = resultSet.getDouble(4);
+
+               list.add(new TotalOrderVärdePerKund(fornamn,efternamn,personNummer, totaltOrderVärde));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return list;
+    }
+
     public void addNewAddressToDatabase(int id, String gata, String postnummer, String ort) {
         setup();
         try {
@@ -337,7 +363,7 @@ public class DatabaseLoader {
             preparedStatement.setString(4, telefonnummer);
             preparedStatement.setString(5, epost);
             preparedStatement.setInt(6, address_id);
-            preparedStatement.executeQuery()
+            preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
