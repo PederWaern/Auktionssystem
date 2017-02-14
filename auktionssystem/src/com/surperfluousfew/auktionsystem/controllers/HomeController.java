@@ -24,16 +24,6 @@ public class HomeController {
     @FXML
     GridPane gpHome;
 
-    /*@FXML
-    Button bPagaendeAuktioner;
-    @FXML
-    Button bAddAuktion;
-    @FXML
-    Button bAddLev;
-    @FXML
-    Button bAddKund;*/
-
-
     public void setScenePGA(ActionEvent actionEvent) throws Exception {
         Parent pgaScene = FXMLLoader.load(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));
         root.setCenter(pgaScene);

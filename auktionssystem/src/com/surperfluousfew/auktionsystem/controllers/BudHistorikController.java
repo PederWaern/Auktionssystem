@@ -15,10 +15,4 @@ public class BudHistorikController {
     @FXML
     Parent root;
 
-    public void goBack(ActionEvent actionEvent) throws Exception {
-        Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
-        stage = stageHandler.getParentStage(root);
-        stage.setScene(new Scene(homeScreen));
-    }
-
 }
