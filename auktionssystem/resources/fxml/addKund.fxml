@@ -1,11 +1,37 @@
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:id="root" fx:controller="com.surperfluousfew.auktionsystem.controllers.AddKundController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/8.0.112-ea" fx:controller="com.surperfluousfew.auktionsystem.controllers.AddKundController">
     <children>
-        <Label text="Add Kund Screen! whoooooooooo"/>
+        <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+      <TextField fx:id="txfFirstName" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label text="Last Name:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <TextField fx:id="txfLastName" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+        <Label text="Personnummer" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="txfPnummer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Telefonnummer" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+      <TextField fx:id="txfTelnummer" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <Label text="Epost:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+      <TextField fx:id="txfEpost" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="Gata:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+      <TextField fx:id="txfGata" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+        <Label text="Postnummer:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="txfPostnummer" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Ort:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+        <TextField fx:id="txfOrt" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+        <Button fx:id="bAddKund" text="Lägg till" onAction="#addKund"/>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
