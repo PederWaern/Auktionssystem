@@ -327,6 +327,24 @@ public class DatabaseLoader {
         }
     }
 
+    public void addNewKundToDatabase(String personnummer, String fornamn, String efternamn, String telefonnummer, String epost, int address_id) {
+        setup();
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO kund VALUES (?,?,?,?,?,?)");
+            preparedStatement.setString(1, personnummer);
+            preparedStatement.setString(2, fornamn);
+            preparedStatement.setString(3, efternamn);
+            preparedStatement.setString(4, telefonnummer);
+            preparedStatement.setString(5, epost);
+            preparedStatement.setInt(6, address_id);
+            preparedStatement.executeQuery()
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+    }
+
     private void closeResources() {
         try {
             if (resultSet != null) {
