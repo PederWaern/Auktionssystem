@@ -51,7 +51,7 @@ public class AddKundController {
         String inPostnummer = txfPostnummer.getText();
         String inOrt = txfOrt.getText();
         int addressId = createNewOrUseExistingAddress(inGata, inPostnummer, inOrt);
-//        System.out.printf("%s %s %s %s %s", inPersonnummer, inFornamn, inEfternamn, inTelefonnummer, inEpost);
+        System.out.printf("%s %s %s %s %s", inPersonnummer, inFornamn, inEfternamn, inTelefonnummer, inEpost);
         System.out.println(addressId);
 
     }

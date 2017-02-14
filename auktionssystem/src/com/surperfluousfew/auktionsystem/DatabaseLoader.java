@@ -52,7 +52,7 @@ public class DatabaseLoader {
 
     public DatabaseLoader() {
         try {
-            FileInputStream in = new FileInputStream("../auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -340,11 +340,11 @@ public class DatabaseLoader {
     public void addNewAddressToDatabase(String gata, String postnummer, String ort) {
         setup();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO adress VALUES (?,?,?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO adress (gata, postnummer, ort) VALUES (?,?,?)");
             preparedStatement.setString(1, gata);
             preparedStatement.setString(2, postnummer);
             preparedStatement.setString(3, ort);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -352,17 +352,17 @@ public class DatabaseLoader {
         }
     }
 
-    public void addNewKundToDatabase(String personnummer, String fornamn, String efternamn, String telefonnummer, String epost, int address_id) {
+    public void addNewKundToDatabase(String personnummer, String fornamn, String efternamn, String telefonnummer, String epost, int addressId) {
         setup();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO kund VALUES (?,?,?,?,?,?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO kund (personnummer, fornamn, efternamn, telefonnummer, epost, address_id) VALUES (?,?,?,?,?,?)");
             preparedStatement.setString(1, personnummer);
             preparedStatement.setString(2, fornamn);
             preparedStatement.setString(3, efternamn);
             preparedStatement.setString(4, telefonnummer);
             preparedStatement.setString(5, epost);
-            preparedStatement.setInt(6, address_id);
-            preparedStatement.executeQuery();
+            preparedStatement.setInt(6, addressId);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
