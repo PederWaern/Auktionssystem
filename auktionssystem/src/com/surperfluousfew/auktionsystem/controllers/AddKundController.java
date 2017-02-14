@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.List;
@@ -33,6 +34,8 @@ public class AddKundController {
     TextField txfOrt;
     @FXML
     Button bAddKund;
+    @FXML
+    Label labelNyKundStatus;
 
     private DatabaseLoader dbLoader = new DatabaseLoader();
 
@@ -50,9 +53,10 @@ public class AddKundController {
         String inGata = txfGata.getText();
         String inPostnummer = txfPostnummer.getText();
         String inOrt = txfOrt.getText();
-        int addressId = createNewOrUseExistingAddress(inGata, inPostnummer, inOrt);
-        System.out.printf("%s %s %s %s %s", inPersonnummer, inFornamn, inEfternamn, inTelefonnummer, inEpost);
-        System.out.println(addressId);
+        if (addKundInputParameterCheck()) {
+            int addressId = createNewOrUseExistingAddress(inGata, inPostnummer, inOrt);
+            dbLoader.addNewKundToDatabase(inPersonnummer, inFornamn, inEfternamn, inTelefonnummer, inEpost, addressId);
+        }
 
     }
 
@@ -73,6 +77,26 @@ public class AddKundController {
             }
         }
         return 0;
+    }
+
+    /**
+     * Warning may contain tedious if-statemenets...
+     */
+    private boolean addKundInputParameterCheck() {
+        if (txfPnummer.getText().isEmpty() || txfFirstName.getText().isEmpty() || txfLastName.getText().isEmpty() || txfTelnummer.getText().isEmpty() ||
+                txfEpost.getText().isEmpty() || txfGata.getText().isEmpty() || txfPostnummer.getText().isEmpty() || txfOrt.getText().isEmpty()) {
+            labelNyKundStatus.setText("Misslyckades att skapa ny kund, alla fält måste fyllas i");
+            return false;
+        } else if (txfPnummer.getText().length() != 10) {
+            labelNyKundStatus.setText("Misslyckades att skapa ny kund, personnummer får endast innehålla 10 tecken");
+            return false;
+        } else if (txfPostnummer.getText().length() != 5) {
+            labelNyKundStatus.setText("Misslyckades att skapa ny kund, postnummer får endast innehålla 5 tecken");
+            return false;
+        } else {
+            labelNyKundStatus.setText("skapar kund med inmatade parametrar");
+            return true;
+        }
     }
 
 }
