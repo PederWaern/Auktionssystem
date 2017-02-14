@@ -22,4 +22,6 @@ public class AddAuktionController {
         stage.setScene(new Scene(homeScreen));
     }
 
+
+
 }
