@@ -26,7 +26,7 @@
         <TextField fx:id="txfPostnummer" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         <Label text="Ort:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
         <TextField fx:id="txfOrt" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
-        <Button fx:id="bAddKund" text="Lägg till" onAction="#addKund"/>
+        <Button fx:id="bAddKund" text="Lägg till" onAction="#addKund" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
     </children>
    <columnConstraints>
       <ColumnConstraints />
