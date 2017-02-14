@@ -78,11 +78,11 @@ FROM auktion;
 
 -- registrera en produkt
   INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
-  ('?','?','?', '?');
+  (?,?,?,?);
 
  -- lägg till auktion
 
-call lagg_till_auktion ('?','?','?','?','?','?','?');
+call lagg_till_auktion (?,?,?,?,?,?)
 
 -- lista pågående auktioner
 

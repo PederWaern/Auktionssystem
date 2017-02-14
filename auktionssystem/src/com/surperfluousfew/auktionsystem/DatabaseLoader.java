@@ -19,6 +19,7 @@ public class DatabaseLoader {
 
     private Connection connection = null;
     private Statement statement = null;
+    private CallableStatement callableStatement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
@@ -52,7 +53,7 @@ public class DatabaseLoader {
 
     public DatabaseLoader() {
         try {
-            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("/Users/christopherolsson/Documents/Nackademin/Databasteknik/Examination/Auktionssystem/auktionssystem/configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -371,13 +372,44 @@ public class DatabaseLoader {
         }
     }
 
+    public String addNewAcution(int produktId, double utgangspris, Double acceptpris, String startdatum, String slutdatum) {
+        setup();
+        try {
+            callableStatement = connection.prepareCall("{call lagg_till_auktion (?,?,?,?,?,?)}");
+            callableStatement.setInt(1, produktId);
+            callableStatement.setDouble(2, utgangspris);
+            if (acceptpris == null) {
+                callableStatement.setNull(3, Types.DOUBLE);
+            } else {
+                callableStatement.setDouble(3, acceptpris);
+            }
+            callableStatement.setDate(4, Date.valueOf(startdatum));
+            callableStatement.setDate(5, Date.valueOf(slutdatum));
+            callableStatement.registerOutParameter(6, Types.VARCHAR);
+            callableStatement.executeUpdate();
+            return callableStatement.getString(6);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return null;
+    }
+
     private void closeResources() {
         try {
             if (resultSet != null) {
                 resultSet.close();
             }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
             if (statement != null) {
                 statement.close();
+            }
+            if (callableStatement != null) {
+                callableStatement.close();
             }
             if (connection != null) {
                 connection.close();

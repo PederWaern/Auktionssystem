@@ -206,7 +206,7 @@ CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_
 
 -- lägg till auktion procedure
 DELIMITER //
-CREATE PROCEDURE lagg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT, IN in_acceptpris INT,
+CREATE PROCEDURE lagg_till_auktion(IN in_produkt_id INT, IN in_utgangspris DOUBLE, IN in_acceptpris DOUBLE,
                                    IN in_startdatum DATE, IN in_slutdatum DATE, OUT out_date_error_message VARCHAR(100))
   BEGIN
     DECLARE product_exist INT;
@@ -217,20 +217,21 @@ CREATE PROCEDURE lagg_till_auktion(IN in_produkt_id INT, IN in_utgangspris INT, 
     WHERE id = in_produkt_id;
     IF product_exist != 1
     THEN SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Please enter a valid product number'; END IF;
+    SET MESSAGE_TEXT = 'Felaktigt produktnummer'; END IF;
     SELECT COUNT(*)
     INTO product_for_sale
     FROM auktion
     WHERE produkt_id = in_produkt_id;
 
     IF product_for_sale = 1
-    THEN SET out_date_error_message = 'The product is alredy for sale';
+    THEN SET out_date_error_message = 'Produkten är redan till försäljning';
     ELSEIF in_startdatum < CURRENT_DATE OR in_slutdatum < CURRENT_DATE OR in_startdatum > in_slutdatum
-      THEN SET out_date_error_message = 'dates are incorrect';
+      THEN SET out_date_error_message = 'Felaktiga datum';
         SELECT out_date_error_message;
     ELSE
       INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
       VALUES (in_produkt_id, in_acceptpris, in_utgangspris, in_startdatum, in_slutdatum);
+      SET out_date_error_message 'Du la till en auktion!'
     END IF;
   END //
 DELIMITER ;

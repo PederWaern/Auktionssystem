@@ -9,7 +9,7 @@
     <left>
         <GridPane>
             <children>
-                <Button fx:id="bAddAuktion" mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Nya Auktion"
+                <Button fx:id="bAddAuktion" mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Ny Auktion"
                         GridPane.rowIndex="0"/>
                 <Button fx:id="bAddKund" mnemonicParsing="false" onAction="#setSceneAddKund" text="Ny Kund"
                         GridPane.rowIndex="1"/>

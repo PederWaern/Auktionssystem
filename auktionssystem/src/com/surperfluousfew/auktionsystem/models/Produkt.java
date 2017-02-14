@@ -34,4 +34,9 @@ public class Produkt {
     public String getBildnamn() {
         return bildnamn;
     }
+
+    @Override
+    public String toString() {
+        return namn;
+    }
 }

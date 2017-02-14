@@ -11,7 +11,21 @@
         <TextField fx:id="txfUpris" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label text="Acceptpris:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
         <TextField fx:id="txfApris" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-        <DatePicker fx:id="dpStart" promptText="Startdatum" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <DatePicker fx:id="dpSlut" promptText="Slutdatum" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+        <DatePicker fx:id="dpStart"
+                    promptText="Startdatum"
+                    GridPane.columnIndex="1"
+                    GridPane.rowIndex="2"/>
+
+        <DatePicker fx:id="dpSlut"
+                    promptText="Slutdatum"
+                    GridPane.columnIndex="3"
+                    GridPane.rowIndex="2"/>
+
+        <Button fx:id="addAuction"
+                text="Lägg till"
+                GridPane.columnIndex="1"
+                GridPane.rowIndex="3"
+                onAction="#add"/>
     </children>
 </GridPane>
