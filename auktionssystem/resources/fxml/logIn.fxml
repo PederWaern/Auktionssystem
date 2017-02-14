@@ -17,7 +17,7 @@
         <Label text="Anställningsnummer:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <TextField fx:id="txfAnstallninsnummer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <TextField fx:id="txfPassword" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <PasswordField fx:id="txfPassword" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         <Button fx:id="bLogIn" mnemonicParsing="false" text="Log In" onAction="#logIn"/>
 
 

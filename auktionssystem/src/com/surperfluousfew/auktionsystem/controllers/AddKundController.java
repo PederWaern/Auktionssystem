@@ -57,7 +57,6 @@ public class AddKundController {
             int addressId = createNewOrUseExistingAddress(inGata, inPostnummer, inOrt);
             dbLoader.addNewKundToDatabase(inPersonnummer, inFornamn, inEfternamn, inTelefonnummer, inEpost, addressId);
         }
-
     }
 
     private int createNewOrUseExistingAddress(String inGata, String inPostunmmer, String inOrt) {
