@@ -247,13 +247,7 @@ public void loadAuktion(){
                 String efterNamn = resultSet.getString(3);
                 String telefonNummer = resultSet.getString(4);
                 String epost = resultSet.getString(5);
-                Adress adress = null;
-                for (Adress a : addresses
-                        ) {
-                    if (a.getId() == resultSet.getInt(6)) {
-                        adress = a;
-                    }
-                }
+                Adress adress = getAddress(resultSet.getInt(6));
 
                 kunder.add(new Kund(personNummer, forNamn, efterNamn, telefonNummer, epost, adress));
             }
