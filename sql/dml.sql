@@ -82,7 +82,7 @@ FROM auktion;
 
  -- lägg till auktion
 
-call lägg_till_auktion ('?','?','?','?','?','?','?');
+call lagg_till_auktion ('?','?','?','?','?','?','?');
 
 -- lista pågående auktioner
 
