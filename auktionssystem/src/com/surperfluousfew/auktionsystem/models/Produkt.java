@@ -5,15 +5,13 @@ public class Produkt {
     private Leverantor leverantor;
     private String namn;
     private String beskrivning;
-    private Double provision;
     private String bildnamn;
 
-    public Produkt(int id, Leverantor leverantor, String namn, String beskrivning, Double provision, String bildnamn) {
+    public Produkt(int id, Leverantor leverantor, String namn, String beskrivning, String bildnamn) {
         this.id = id;
         this.leverantor = leverantor;
         this.namn = namn;
         this.beskrivning = beskrivning;
-        this.provision = provision;
         this.bildnamn = bildnamn;
     }
 

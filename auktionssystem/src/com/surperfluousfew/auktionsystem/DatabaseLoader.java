@@ -90,6 +90,40 @@ public class DatabaseLoader {
         }
     }
 
+public void loadProdukt(){
+        produkter = new ArrayList<>();
+        setup();
+    try {
+        statement = connection.createStatement();
+        statement.executeQuery("SELECT * FROM produkt ");
+        resultSet = statement.getResultSet();
+        while (resultSet.next()){
+
+             int id = resultSet.getInt(1);
+            String namn = resultSet.getString(3);
+             String beskrivning = resultSet.getString(4);
+             String bildNamn = resultSet.getString(5);
+             Leverantor leverantor = null;
+            for (Leverantor l: leverantorer
+                 ) {
+                if(l.getOrganisitionsnummer().equals(resultSet.getString(2))){
+
+                    leverantor = l;
+                }
+            }
+
+            produkter.add(new Produkt(id, leverantor, namn, beskrivning, bildNamn));
+
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        closeResources();
+    }
+
+
+}
 
 
     public void loadAddresses() {
@@ -112,6 +146,39 @@ public class DatabaseLoader {
             closeResources();
         }
     }
+
+    public void loadKund(){
+        kunder = new ArrayList<>();
+        setup();
+
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT  * FROM kund");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+
+                String personNummer = resultSet.getString(1);
+                String forNamn = resultSet.getString(2);
+                String efterNamn = resultSet.getString(3);
+                String telefonNummer = resultSet.getString(4);
+                String epost = resultSet.getString(5);
+                Adress adress = null;
+                for (Adress a : addresses
+                        ) {
+                    if (a.getId() == resultSet.getInt(6)) {
+                        adress = a;
+                    }
+                }
+
+                kunder.add(new Kund(personNummer, forNamn, efterNamn, telefonNummer, epost, adress));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeResources();
+        }
+    }
+
 
     public void loadAdmins() {
         admins = new ArrayList<>();
