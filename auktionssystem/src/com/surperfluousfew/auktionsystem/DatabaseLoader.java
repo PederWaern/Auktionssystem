@@ -29,7 +29,25 @@ public class DatabaseLoader {
     private List<Auktion> auktioner = null;
     private List<Bud> bud = null;
 
+    public List<Kund> getKunder() {
+        return kunder;
+    }
 
+    public List<Adress> getAddresses() {
+        return addresses;
+    }
+
+    public List<Leverantor> getLeverantorer() {
+        return leverantorer;
+    }
+
+    public List<Produkt> getProdukter() {
+        return produkter;
+    }
+
+    public List<Auktion> getAuktioner() {
+        return auktioner;
+    }
 
     public DatabaseLoader() {
         try {
@@ -91,10 +109,10 @@ public class DatabaseLoader {
         }
     }
 
-public void loadProdukt(){
+    public void loadProdukt(){
         produkter = new ArrayList<>();
         setup();
-    try {
+        try {
         statement = connection.createStatement();
         statement.executeQuery("SELECT * FROM produkt ");
         resultSet = statement.getResultSet();
