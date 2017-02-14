@@ -1,6 +1,5 @@
 package com.surperfluousfew.auktionsystem;
 
-import com.surperfluousfew.auktionsystem.controllers.HomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
