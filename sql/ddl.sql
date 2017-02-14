@@ -199,7 +199,7 @@ CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_
 # todo
 CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
                                       IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
-  ,                                   IN in_provision           DOUBLE)
+                                   IN in_provision           DOUBLE)
   BEGIN
     INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_provision);
   END;
