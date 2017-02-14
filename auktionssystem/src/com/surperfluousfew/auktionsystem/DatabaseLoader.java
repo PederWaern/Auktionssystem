@@ -19,6 +19,7 @@ public class DatabaseLoader {
 
     private Connection connection = null;
     private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
     private List<Admin> admins = null;
@@ -86,148 +87,144 @@ public class DatabaseLoader {
     }
 
 
-    public void loadLeverantor(){
+    public void loadLeverantor() {
         leverantorer = new ArrayList<>();
         setup();
         try {
             statement = connection.createStatement();
             statement.executeQuery("SELECT * FROM leverantor");
             resultSet = statement.getResultSet();
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
                 leverantorer.add(new Leverantor
                         (resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4)));
+                                resultSet.getString(2),
+                                resultSet.getString(3),
+                                resultSet.getString(4)));
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             closeResources();
         }
     }
 
-    public void loadProdukt(){
+    public void loadProdukt() {
         produkter = new ArrayList<>();
         setup();
         try {
-        statement = connection.createStatement();
-        statement.executeQuery("SELECT * FROM produkt ");
-        resultSet = statement.getResultSet();
-        while (resultSet.next()){
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM produkt ");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
 
-             int id = resultSet.getInt(1);
-            String namn = resultSet.getString(3);
-             String beskrivning = resultSet.getString(4);
-             String bildNamn = resultSet.getString(5);
-             Leverantor leverantor = null;
-            for (Leverantor l: leverantorer
-                 ) {
-                if(l.getOrganisitionsnummer().equals(resultSet.getString(2))){
+                int id = resultSet.getInt(1);
+                String namn = resultSet.getString(3);
+                String beskrivning = resultSet.getString(4);
+                String bildNamn = resultSet.getString(5);
+                Leverantor leverantor = null;
+                for (Leverantor l : leverantorer
+                        ) {
+                    if (l.getOrganisitionsnummer().equals(resultSet.getString(2))) {
 
-                    leverantor = l;
+                        leverantor = l;
+                    }
                 }
+
+                produkter.add(new Produkt(id, leverantor, namn, beskrivning, bildNamn));
+
             }
 
-            produkter.add(new Produkt(id, leverantor, namn, beskrivning, bildNamn));
-
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
         }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }finally {
-        closeResources();
     }
-}
 
-public void loadBud() {
-    bud = new ArrayList<>();
-    setup();
+    public void loadBud() {
+        bud = new ArrayList<>();
+        setup();
 
-    try {
-        statement = connection.createStatement();
-        statement.executeQuery("SELECT * FROM bud");
-        resultSet = statement.getResultSet();
-        while (resultSet.next()){
-            Kund kund = null;
-            Auktion auktion = null;
-            double belopp = resultSet.getDouble(3);
-            String tid = resultSet.getString(4);
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM bud");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                Kund kund = null;
+                Auktion auktion = null;
+                double belopp = resultSet.getDouble(3);
+                String tid = resultSet.getString(4);
 
-            for (Kund k: kunder) {
-                if (k.getPersonnummer().equals(resultSet.getString(1))) {
-                    kund = k;
+                for (Kund k : kunder) {
+                    if (k.getPersonnummer().equals(resultSet.getString(1))) {
+                        kund = k;
+                    }
                 }
+
+                for (Auktion a : auktioner) {
+                    if (a.getId() == resultSet.getInt(2)) {
+                        auktion = a;
+                    }
+                }
+
+                bud.add(new Bud(kund, auktion, belopp, tid));
             }
 
-            for (Auktion a : auktioner) {
-                if (a.getId() == resultSet.getInt(2)) {
-                    auktion = a;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+    }
+
+    private void setAuktionsBud() {
+
+        for (Auktion a :
+                auktioner) {
+            for (Bud b : bud) {
+                if (b.getAuktion().getId() == a.getId())
+                    a.getBudArrayList().add(b);
+            }
+        }
+    }
+
+    public void loadAuktion() {
+        auktioner = new ArrayList<>();
+        setup();
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM auktion");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt(1);
+                Produkt produkt = null;
+                double acceptPris = resultSet.getDouble(3);
+                double utgangsPris = resultSet.getDouble(4);
+                String startDatum = resultSet.getString(5);
+                String slutDatum = resultSet.getString(6);
+
+                for (Produkt p : produkter
+                        ) {
+                    if (p.getId() == resultSet.getInt(2)) {
+
+                        produkt = p;
+
+                    }
                 }
+
+                auktioner.add(new Auktion(id, produkt, acceptPris, utgangsPris, startDatum, slutDatum));
+
             }
 
-            bud.add(new Bud(kund, auktion, belopp, tid));
-        }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }finally {
-        closeResources();
-    }
-}
-
-private void setAuktionsBud() {
-
-    for (Auktion a:
-          auktioner) {
-        for (Bud b: bud) {
-            if (b.getAuktion().getId() == a.getId())
-                a.getBudArrayList().add(b);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
         }
     }
-}
-
-public void loadAuktion(){
-    auktioner = new ArrayList<>();
-    setup();
-    try {
-        statement = connection.createStatement();
-        statement.executeQuery("SELECT * FROM auktion");
-        resultSet = statement.getResultSet();
-        while (resultSet.next()){
-
-            int id = resultSet.getInt(1);
-            Produkt produkt  = null;
-            double acceptPris = resultSet.getDouble(3);
-            double utgangsPris = resultSet.getDouble(4);
-            String startDatum = resultSet.getString(5);
-            String slutDatum = resultSet.getString(6);
-
-            for (Produkt p: produkter
-                 ) {
-                if(p.getId() == resultSet.getInt(2)){
-
-                    produkt = p;
-
-                }
-            }
-
-            auktioner.add(new Auktion(id, produkt, acceptPris, utgangsPris, startDatum, slutDatum));
-
-        }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }finally {
-        closeResources();
-    }
-
-
-
-
-}
 
     public void loadAddresses() {
         addresses = new ArrayList<>();
@@ -250,7 +247,7 @@ public void loadAuktion(){
         }
     }
 
-    public void loadKund(){
+    public void loadKund() {
         kunder = new ArrayList<>();
         setup();
 
@@ -271,7 +268,7 @@ public void loadAuktion(){
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             closeResources();
         }
     }
@@ -303,7 +300,7 @@ public void loadAuktion(){
 
     private Adress getAddress(int addressId) {
         for (Adress adress : addresses) {
-            if(adress.getId() == addressId) {
+            if (adress.getId() == addressId) {
                 return adress;
             }
         }
@@ -314,6 +311,10 @@ public void loadAuktion(){
         return admins;
     }
 
+    public void addNewAddress(int id, String gata, String postnummer, String ort) {
+        setup();
+
+    }
 
     private void closeResources() {
         try {
