@@ -1,8 +1,6 @@
 package com.surperfluousfew.auktionsystem;
 
-import com.surperfluousfew.auktionsystem.models.Admin;
-import com.surperfluousfew.auktionsystem.models.Adress;
-import com.surperfluousfew.auktionsystem.models.Leverantor;
+import com.surperfluousfew.auktionsystem.models.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,10 +21,15 @@ public class DatabaseLoader {
     private Statement statement = null;
     private ResultSet resultSet = null;
 
+    private List<Admin> admins = null;
+    private List<Kund> kunder = null;
     private List<Adress> addresses = null;
     private List<Leverantor> leverantorer = null;
+    private List<Produkt> produkter = null;
+    private List<Auktion> auktioner = null;
+    private List<Bud> bud = null;
 
-    private List<Admin> admins = null;
+
 
     public DatabaseLoader() {
         try {
@@ -62,6 +65,32 @@ public class DatabaseLoader {
             e.printStackTrace();
         }
     }
+
+
+    public void loadLeverantor(){
+        leverantorer = new ArrayList<>();
+        setup();
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM leverantor");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()){
+
+                leverantorer.add(new Leverantor
+                        (resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeResources();
+        }
+    }
+
+
 
     public void loadAddresses() {
         addresses = new ArrayList<>();
