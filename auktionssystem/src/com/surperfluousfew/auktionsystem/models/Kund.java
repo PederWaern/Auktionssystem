@@ -24,4 +24,32 @@ public class Kund {
         this.efternamn = efternamn;
         this.orderSum = orderSum;
     }
+
+    public String getPersonnummer() {
+        return personnummer;
+    }
+
+    public String getFornamn() {
+        return fornamn;
+    }
+
+    public String getEfternamn() {
+        return efternamn;
+    }
+
+    public String getTelefonnummer() {
+        return telefonnummer;
+    }
+
+    public String getEpost() {
+        return epost;
+    }
+
+    public double getOrderSum() {
+        return orderSum;
+    }
+
+    public Adress getAdress() {
+        return adress;
+    }
 }

@@ -1,7 +1,6 @@
 package com.surperfluousfew.auktionsystem.models;
 
 import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
 
 public class Auktion {
     private int id;
@@ -63,6 +62,10 @@ public class Auktion {
 
     public void setSlutDatum(String slutDatum) {
         this.slutDatum = slutDatum;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public ArrayList<Bud> getBudArrayList() {

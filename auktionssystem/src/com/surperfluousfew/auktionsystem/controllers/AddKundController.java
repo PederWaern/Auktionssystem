@@ -9,10 +9,6 @@ import javafx.scene.control.TextField;
 
 public class AddKundController {
 
-
-
-
-
     @FXML
     Parent root;
     @FXML

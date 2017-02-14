@@ -1,40 +1,32 @@
 package com.surperfluousfew.auktionsystem.models;
 
 public class Bud {
-    private double belopp;
-    private String tid;
-    private Kund bidder;
 
-    public Bud(double belopp, String tid, Kund bidder) {
+    Kund kund;
+    Auktion auktion;
+    double belopp;
+    String tid;
 
+    public Bud(Kund kund, Auktion auktion, double belopp, String tid) {
+        this.kund = kund;
+        this.auktion = auktion;
         this.belopp = belopp;
         this.tid = tid;
-        this.bidder = bidder;
+    }
+
+    public Kund getKund() {
+        return kund;
+    }
+
+    public Auktion getAuktion() {
+        return auktion;
     }
 
     public double getBelopp() {
         return belopp;
     }
 
-    public void setBelopp(double belopp) {
-        this.belopp = belopp;
-    }
-
     public String getTid() {
         return tid;
     }
-
-    public void setTid(String tid) {
-        this.tid = tid;
-    }
-
-    public Kund getBidder() {
-        return bidder;
-    }
-
-    public void setBidder(Kund bidder) {
-        this.bidder = bidder;
-    }
-
-
 }

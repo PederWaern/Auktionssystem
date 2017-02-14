@@ -124,6 +124,46 @@ public void loadProdukt(){
     }
 }
 
+public void loadBud() {
+    bud = new ArrayList<>();
+    setup();
+
+    try {
+        statement = connection.createStatement();
+        statement.executeQuery("SELECT * FROM bud");
+        resultSet = statement.getResultSet();
+        while (resultSet.next()){
+            Kund kund = null;
+            Auktion auktion = null;
+            double belopp = resultSet.getDouble(3);
+            String tid = resultSet.getString(4);
+
+            for (Kund k: kunder) {
+                if (k.getPersonnummer().equals(resultSet.getString(1))) {
+                    kund = k;
+                }
+            }
+
+            for (Auktion a : auktioner) {
+                if (a.getId() == resultSet.getInt(2)) {
+                    auktion = a;
+                }
+            }
+
+            bud.add(new Bud(kund, auktion, belopp, tid));
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        closeResources();
+    }
+}
+
+private void setAuktionsBud() {
+
+}
+
 public void loadAuktion(){
     auktioner = new ArrayList<>();
     setup();
