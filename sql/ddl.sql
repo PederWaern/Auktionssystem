@@ -13,14 +13,27 @@ CREATE TABLE adress (
 
 -- kund
 CREATE TABLE kund (
-  personnummer  CHAR(10),
+  personnummer  CHAR(10)    NOT NULL,
   fornamn       VARCHAR(50) NOT NULL,
   efternamn     VARCHAR(50) NOT NULL,
-  telefonnummer CHAR(13)    NOT NULL,
+  telefonnummer CHAR(13),
   epost         VARCHAR(50) NOT NULL,
-  losenord      VARCHAR(50) NOT NULL,
   adress_id     INT,
   PRIMARY KEY (personnummer),
+  FOREIGN KEY (adress_id) REFERENCES adress (id)
+);
+
+-- admin
+CREATE TABLE admin (
+  anstallningsnummer INT(10) AUTO_INCREMENT,
+  personnummer       CHAR(10)    NOT NULL UNIQUE,
+  fornamn            VARCHAR(50) NOT NULL,
+  efternamn          VARCHAR(50) NOT NULL,
+  telefonnummer      CHAR(13)    NOT NULL,
+  epost              VARCHAR(50) NOT NULL,
+  losenord           VARCHAR(50) NOT NULL,
+  adress_id          INT,
+  PRIMARY KEY (anstallningsnummer),
   FOREIGN KEY (adress_id) REFERENCES adress (id)
 );
 
@@ -31,7 +44,6 @@ CREATE TABLE leverantor
   namn                VARCHAR(50) NOT NULL,
   telefonnummer       VARCHAR(13),
   epost               VARCHAR(50) NOT NULL,
-  losenord            VARCHAR(50) NOT NULL,
   provision           DOUBLE      NOT NULL,
 
   PRIMARY KEY (organisitionsnummer)
@@ -363,15 +375,11 @@ FROM auktion
   INNER JOIN produkt ON auktion.produkt_id = produkt.id
   INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
--- VIEW provision per månad
-DROP VIEW IF EXISTS provision_per_manad;
-
+-- VIEW prov per månad
 CREATE VIEW provision_per_manad AS
-  SELECT YEAR(datum_sald) AS År,
-      MONTHNAME(datum_sald) AS Månad, sum(hogsta_bud*leverantor.provision) AS Provision
+  SELECT YEAR(slutdatum) AS År,
+      MONTHNAME(slutdatum) AS Månad, sum(hogsta_bud*leverantor.provision) AS Provision
     FROM avslutade_auktioner
       INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
       INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-      GROUP BY År, Månad, Provision;
-
-SELECT * from provision_per_manad;
+GROUP BY YEAR(slutdatum), MONTH(slutdatum);
