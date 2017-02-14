@@ -311,9 +311,20 @@ public class DatabaseLoader {
         return admins;
     }
 
-    public void addNewAddress(int id, String gata, String postnummer, String ort) {
+    public void addNewAddressToDatabase(int id, String gata, String postnummer, String ort) {
         setup();
-
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO adress VALUES (?,?,?,?)");
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, gata);
+            preparedStatement.setString(3, postnummer);
+            preparedStatement.setString(4, ort);
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
     }
 
     private void closeResources() {
