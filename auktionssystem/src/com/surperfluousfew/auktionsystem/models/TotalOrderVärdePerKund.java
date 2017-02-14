@@ -28,4 +28,14 @@ public class TotalOrderVärdePerKund {
     public double getTotalOrderVarde() {
         return totalOrderVarde;
     }
+
+    @Override
+    public String toString() {
+        return "TotalOrderVärdePerKund{" +
+                "fornamn='" + fornamn + '\'' +
+                ", efternamn='" + efternamn + '\'' +
+                ", personNummer='" + personNummer + '\'' +
+                ", totalOrderVarde=" + totalOrderVarde +
+                '}';
+    }
 }
