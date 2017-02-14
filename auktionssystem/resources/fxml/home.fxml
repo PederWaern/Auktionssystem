@@ -3,7 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController">
+            fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController"
+            prefHeight="600"
+            prefWidth="800">
     <left>
         <GridPane>
             <children>
