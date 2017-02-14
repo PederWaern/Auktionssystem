@@ -29,7 +29,6 @@ public class HomeController {
         root.setCenter(pgaScene);
     }
 
-
     public void setSceneAddAuktion(ActionEvent actionEvent) throws Exception{
         Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
         root.setCenter(addAuktionScene);
