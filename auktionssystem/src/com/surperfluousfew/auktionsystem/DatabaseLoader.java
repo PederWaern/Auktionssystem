@@ -162,6 +162,13 @@ public void loadBud() {
 
 private void setAuktionsBud() {
 
+    for (Auktion a:
+          auktioner) {
+        for (Bud b: bud) {
+            if (b.getAuktion().getId() == a.getId())
+                a.getBudArrayList().add(b);
+        }
+    }
 }
 
 public void loadAuktion(){
