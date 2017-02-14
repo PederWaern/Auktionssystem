@@ -121,10 +121,47 @@ public void loadProdukt(){
     }finally {
         closeResources();
     }
+}
+
+public void loadAuktion(){
+    auktioner = new ArrayList<>();
+    setup();
+    try {
+        statement = connection.createStatement();
+        statement.executeQuery("SELECT * FROM auktion");
+        resultSet = statement.getResultSet();
+        while (resultSet.next()){
+
+            int id = resultSet.getInt(1);
+            Produkt produkt  = null;
+            double acceptPris = resultSet.getDouble(3);
+            double utgangsPris = resultSet.getDouble(4);
+            String startDatum = resultSet.getString(5);
+            String slutDatum = resultSet.getString(6);
+
+            for (Produkt p: produkter
+                 ) {
+                if(p.getId() == resultSet.getInt(2)){
+
+                    produkt = p;
+
+                }
+            }
+
+            auktioner.add(new Auktion(id, produkt, acceptPris, utgangsPris, startDatum, slutDatum));
+
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        closeResources();
+    }
+
+
 
 
 }
-
 
     public void loadAddresses() {
         addresses = new ArrayList<>();
