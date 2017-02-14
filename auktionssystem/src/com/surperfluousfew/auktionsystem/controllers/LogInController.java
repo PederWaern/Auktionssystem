@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -16,13 +15,13 @@ public class LogInController {
     @FXML
     Parent root;
     @FXML
-    TextField txfEmail;
+    TextField txfAnstallninsnummer;
     @FXML
     TextField txfPassword;
 
 
     public void logIn(ActionEvent actionEvent) throws Exception {
-        String email = txfEmail.getText();
+        String email = txfAnstallninsnummer.getText();
         String password = txfPassword.getText();
         if (true){
             Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));

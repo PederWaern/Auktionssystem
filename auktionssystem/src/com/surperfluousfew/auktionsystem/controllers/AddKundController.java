@@ -1,26 +1,40 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
-import com.surperfluousfew.auktionsystem.StageHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
 
 public class AddKundController {
 
-    Stage stage;
-    StageHandler stageHandler = new StageHandler();
+
+
+
 
     @FXML
     Parent root;
+    @FXML
+    TextField txfFirstName;
+    @FXML
+    TextField txfLastName;
+    @FXML
+    TextField txfPnummer;
+    @FXML
+    TextField txfEpost;
+    @FXML
+    TextField txfTelnummer;
+    @FXML
+    TextField txfGata;
+    @FXML
+    TextField txfPostnummer;
+    @FXML
+    TextField txfOrt;
+    @FXML
+    Button bAddKund;
 
-    public void goBack(ActionEvent actionEvent) throws Exception {
-        Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
-        stage = stageHandler.getParentStage(root);
-        stage.setScene(new Scene(homeScreen));
+    public void addKund(ActionEvent actionEvent) {
+
     }
-
-
 }
