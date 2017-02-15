@@ -66,7 +66,7 @@ public class AddAuktionController {
             String startdatum = (dpStart.getValue() != null) ? String.valueOf(dpStart.getValue()) : null;
             String slutdatum = (dpSlut.getValue() != null) ? String.valueOf(dpSlut.getValue()) : null;
             if (startdatum != null && slutdatum != null) {
-                message = dbLoader.addNewAcution(produkt.getId(), utgangspris, acceptpris, startdatum, slutdatum);
+                message = dbLoader.addNewAuction(produkt.getId(), utgangspris, acceptpris, startdatum, slutdatum);
             } else {
                 message = "Ange ett startdatum och ett slutdatum";
             }
