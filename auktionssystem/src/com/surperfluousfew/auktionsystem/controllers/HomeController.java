@@ -42,7 +42,7 @@ public class HomeController {
     }
 
     public void setSceneAuktioner(ActionEvent actionEvent) throws Exception{
-        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/auktionTidsinterval.fxml"));
+        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/auktionTidsintervall.fxml"));
         root.getChildren().clear();
         root.getChildren().add(auktionScene);
     }

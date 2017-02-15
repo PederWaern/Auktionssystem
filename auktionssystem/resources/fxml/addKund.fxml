@@ -10,18 +10,18 @@
 
 <GridPane fx:id="root" alignment="center" hgap="10" prefHeight="550" prefWidth="800" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.AddKundController">
     <children>
-        <Label text="Fyll i alla fält, sedan på lägg till knappen för att skapa en kund" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Fyll i alla fält och tryck på &quot;Lägg till&quot; för att lägga till en ny kund" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <GridPane hgap="10.0" vgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <children>
-                <Label text="First Name:">
+                <Label text="Förnamn:">
                     <tooltip>
                         <Tooltip text="Max 50 characters" />
                     </tooltip>
                 </Label>
                 <TextField fx:id="txfFirstName" GridPane.columnIndex="2" />
-                <Label text="Last Name:" GridPane.columnIndex="3" />
+                <Label text="Efternamn:" GridPane.columnIndex="3" />
                 <TextField fx:id="txfLastName" GridPane.columnIndex="4" />
-                <Label text="Personnummer" GridPane.rowIndex="1" />
+                <Label text="Personnummer:" GridPane.rowIndex="1" />
                 <TextField fx:id="txfPnummer" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <Label text="Telefonnummer" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                 <TextField fx:id="txfTelnummer" GridPane.columnIndex="4" GridPane.rowIndex="1" />
