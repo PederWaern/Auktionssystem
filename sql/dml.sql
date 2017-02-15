@@ -41,7 +41,9 @@ INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn
   ('333333333333', 'Genmodifierad hamster', 'Husdjuret för dig som stimuleras av överlägsenhet', 'img_3.jpg'),
   ('444444444444', 'Tavelram', 'Hobby-tillverkad tavelram - 100% ek', 'img_4.jpg'),
   ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 'img_5.jpg'),
-  ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 'img_5.jpg');
+  ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 'img_5.jpg'),
+  ('666666666666', 'Soffa', '90-tal IKEA', 'img_6.jpg'),
+  ('666666666666', 'Fåtölj', 'Vintage, superskön', 'img_7.jpg');
 
 -- auktioner
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES
@@ -50,7 +52,9 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
   (3, 3000, 1500, '2017-02-20', '2017-03-20'),
   (4, 3000, 1500, '2017-02-20', '2017-03-20'),
   (5, 3000, 1500, '2017-01-20', '2017-02-13'),
-  (6, 3000, 2500, '2017-01-20', '2017-02-14');
+  (6, 3000, 2500, '2017-01-20', '2017-02-14'),
+  (7, 3000, 1000, '2017-01-01', '2017-02-01'),
+  (8, 3000, 1000, '2017-01-01', '2017-02-01');
 
 -- bud
 INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
@@ -59,17 +63,18 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('8707736734', 3, 1500),
   ('7309824728', 4, 1500),
   ('5503047294', 5, 1500),
-  ('7706034568', 1, 1501);
+  ('7706034568', 7, 2000),
+  ('7706034568', 8, 1520);
+
 
 -- test select
 SELECT *
 FROM rakna_ut_provision;
-SELECT *
-FROM avslutade_auktioner;
+
+SELECT * FROM avslutade_auktioner;
 SELECT *
 FROM avslutade_auktioner_utan_kopare;
-SELECT *
-FROM auktion;
+SELECT * FROM auktion;
 
 
 /**********************
@@ -110,4 +115,4 @@ SELECT * from provision_per_manad;
 
 
 
-
+Call budhistorik_specificerad_auktion(1);

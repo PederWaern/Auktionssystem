@@ -284,7 +284,7 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
 -- Event auktion datum check
 DELIMITER //
 CREATE EVENT auktion_slutdatum_check
-  ON SCHEDULE EVERY 1 DAY
+  ON SCHEDULE EVERY 10 SECOND
 DO
   BEGIN
     DECLARE kontroll_slutford INT DEFAULT FALSE;
@@ -292,7 +292,7 @@ DO
     DECLARE kontroll_auktion_cursor CURSOR FOR
       SELECT auktion.id
       FROM auktion
-      WHERE slutdatum = current_date;
+      WHERE slutdatum <= current_date;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET kontroll_slutford = TRUE;
 
     OPEN kontroll_auktion_cursor;
