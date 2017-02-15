@@ -426,15 +426,9 @@ public class DatabaseLoader {
             resultSet = callableStatement.executeQuery();
 
             while (resultSet.next()){
-                list.add(resultSet.getInt(1)
-                        + "\t" + resultSet.getInt(2)
-                        + "\t" + resultSet.getDouble(3)
-                        + "\t" + resultSet.getDouble(4)
-                        + "\t" + resultSet.getString(5)
-                        + "\t" + resultSet.getString(6)
-                        + "\t" + resultSet.getDouble(7)
-                        + "\t" + resultSet.getDouble(8)
-                        + "\t" + resultSet.getString(9));
+                list.add(resultSet.getString(1)
+                        + "\t" + resultSet.getString(7)
+                        + "\t" + resultSet.getString(10));
 
             }
 
