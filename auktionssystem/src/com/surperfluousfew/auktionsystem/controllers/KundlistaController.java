@@ -1,22 +1,11 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
-import com.surperfluousfew.auktionsystem.StageHandler;
-import com.surperfluousfew.auktionsystem.models.Kund;
 import com.surperfluousfew.auktionsystem.models.TotalOrderVärdePerKund;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
-
-
 import java.util.ArrayList;
 
 public class KundlistaController {
@@ -24,13 +13,18 @@ public class KundlistaController {
     TotalOrderVärdePerKund kund;
     private DatabaseLoader databaseLoader = new DatabaseLoader();
     private ObservableList<TotalOrderVärdePerKund> totalOrderVärdePerKunds;
+    private ArrayList<String> names = new ArrayList<>();
+    private ArrayList<String> pnummers = new ArrayList<>();
+    private ArrayList<Double> order = new ArrayList<>();
+
 
     @FXML
-    private Parent root;
+    ListView lvPnummer;
     @FXML
-    ComboBox kundLista;
+    ListView lvNamn;
     @FXML
-    private Label lblOrderValue;
+    ListView lvOrder;
+
 
 
 
@@ -41,18 +35,22 @@ public class KundlistaController {
     private void loadAllCustomers(){
 
         totalOrderVärdePerKunds  = FXCollections.observableList(databaseLoader.totalOrderVärdePerKundLista());
-
         for (TotalOrderVärdePerKund t :
                 totalOrderVärdePerKunds) {
-            kundLista.getItems().add(t.getFornamn() + " " + t.getEfternamn());
+            names.add(t.getFornamn()+ " " + t.getEfternamn());
+            pnummers.add(t.getPersonNummer());
+            order.add(t.getTotalOrderVarde());
         }
+        lvPnummer.setItems(FXCollections.observableList(pnummers));
+        lvNamn.setItems(FXCollections.observableList(names));
+        lvOrder.setItems(FXCollections.observableList(order));
 
 
     }
 
-    public void kundSelected(){
-        kund = (TotalOrderVärdePerKund) kundLista.getSelectionModel().getSelectedItem();
-        lblOrderValue.setText(kund.getFornamn() + "\n" + kund.getEfternamn() + "\n" + kund.getPersonNummer() + "\n" + kund.getTotalOrderVarde());
+    private String displayMessage(TotalOrderVärdePerKund kund){
+        return (kund.getPersonNummer() + "\n" + kund.getFornamn() + " " + kund.getEfternamn() + "\n"
+        + kund.getTotalOrderVarde());
     }
 
 }
