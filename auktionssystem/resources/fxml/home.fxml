@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController"
-            prefHeight="600"
-            prefWidth="800">
-    <left>
-        <GridPane>
-            <children>
-                <Button mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Ny Auktion"
-                        GridPane.rowIndex="0"/>
-                <Button mnemonicParsing="false" onAction="#setSceneAddKund" text="Ny Kund"
-                        GridPane.rowIndex="1"/>
-                <Button mnemonicParsing="false" onAction="#setSceneAddLeverantor" text="Ny Leverantor"
-                        GridPane.rowIndex="2"/>
-                <Button mnemonicParsing="false" onAction="#setScenePGA"
-                        text="Pågående Auktioner" GridPane.rowIndex="3"/>
-                <Button mnemonicParsing="false" onAction="#setSceneForsaljning" text="Försäljningsstatistik"
-                        GridPane.rowIndex="4"/>
-            </children>
-        </GridPane>
-    </left>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-    <center>
-        <GridPane fx:id="gpHome" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            </rowConstraints>
-        </GridPane>
-    </center>
 
-</BorderPane>
+<SplitPane dividerPositions="0.5"
+           orientation="VERTICAL"
+           xmlns="http://javafx.com/javafx/8.0.111"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController"
+           prefHeight="600"
+           prefWidth="800"
+>
+   <items>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Lägg till">
+            <items>
+              <MenuItem fx:id="setSceneAddAuktion" mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Auktion" />
+                  <MenuItem mnemonicParsing="false" onAction="#setSceneAddKund" text="Kund" />
+                  <MenuItem mnemonicParsing="false" onAction="#setSceneAddLeverantor" text="Leverantör" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Vyer">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#setScenePGA" text="Pågående auktioner" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Försäljningsstatestik">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#setSceneForsaljning" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="root">
+         <children>
+              <GridPane fx:id="gpHome">
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+              </GridPane>
+         </children>
+      </AnchorPane>
+   </items>
+</SplitPane>
