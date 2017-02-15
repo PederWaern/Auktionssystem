@@ -2,30 +2,30 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.ProvisionController">
-   <center>
-      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.ProvisionController">
+   <children>
+      <TableView fx:id="tableView" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
         <columns>
-            <TableColumn text="År">
+            <TableColumn prefWidth="100.0" text="År">
                 <cellValueFactory>
-                    <PropertyValueFactory property="år"/>
+                    <PropertyValueFactory property="år" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Månad">
+            <TableColumn prefWidth="100.0" text="Månad">
                 <cellValueFactory>
-                    <PropertyValueFactory property="manad"/>
+                    <PropertyValueFactory property="manad" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Total">
+            <TableColumn prefWidth="100.0" text="Total">
                 <cellValueFactory>
-                    <PropertyValueFactory property="provision"/>
+                    <PropertyValueFactory property="provision" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
       </TableView>
-   </center>
-</BorderPane>
+   </children>
+</AnchorPane>
