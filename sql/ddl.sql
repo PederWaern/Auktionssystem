@@ -232,7 +232,7 @@ CREATE PROCEDURE lagg_till_auktion(IN in_produkt_id INT, IN in_utgangspris DOUBL
     ELSE
       INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
       VALUES (in_produkt_id, in_acceptpris, in_utgangspris, in_startdatum, in_slutdatum);
-      SET out_date_error_message 'Du la till en auktion!'
+      SET out_date_error_message = 'Du la till en auktion!';
     END IF;
   END //
 DELIMITER ;
