@@ -24,9 +24,9 @@ public class HomeController {
     }
 
     public void setSceneAddKund(ActionEvent actionEvent) throws Exception {
-        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
+        Parent kundScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
         root.getChildren().clear();
-        root.getChildren().add(auktionScene);
+        root.getChildren().add(kundScene);
     }
 
     public void setSceneKundLista(ActionEvent actionEvent) throws Exception {

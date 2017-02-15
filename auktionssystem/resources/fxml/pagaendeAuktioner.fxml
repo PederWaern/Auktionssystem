@@ -1,50 +1,53 @@
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.CheckBox?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<GridPane fx:id="root" fx:controller="com.surperfluousfew.auktionsystem.controllers.PagaendeAuktionerController"
-            xmlns:fx="http://javafx.com/fxml" alignment="CENTER" vgap="10" prefHeight="550" prefWidth="800">
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane fx:id="root" alignment="CENTER" prefHeight="550" prefWidth="800" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.surperfluousfew.auktionsystem.controllers.PagaendeAuktionerController">
 
 
+    <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="0" />
 
-            <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
-
-            <TableView fx:id="tableView" GridPane.rowIndex="1" GridPane.halignment="CENTER" prefHeight="400" prefWidth="700">
-                <columns>
-                    <TableColumn text="Personnummer">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="personnummer"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Förnamn" >
-                        <cellValueFactory>
-                            <PropertyValueFactory property="fornamn"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Efternamn">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="efternamn"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Tid">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="tid"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Bud">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="bud"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                </columns>
-            </TableView>
+    <TableView fx:id="tableView" prefHeight="400" prefWidth="700" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <columns>
+            <TableColumn text="Personnummer">
+                <cellValueFactory>
+                    <PropertyValueFactory property="personnummer" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Förnamn">
+                <cellValueFactory>
+                    <PropertyValueFactory property="fornamn" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Efternamn">
+                <cellValueFactory>
+                    <PropertyValueFactory property="efternamn" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Tid">
+                <cellValueFactory>
+                    <PropertyValueFactory property="tid" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Bud">
+                <cellValueFactory>
+                    <PropertyValueFactory property="bud" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 
 </GridPane>
