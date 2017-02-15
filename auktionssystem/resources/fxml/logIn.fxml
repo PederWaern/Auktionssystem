@@ -10,7 +10,7 @@
     <children>
         <GridPane fx:id="root" prefHeight="200.0" prefWidth="400.0">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" text="Logga in">
+                <Label alignment="CENTER" contentDisplay="CENTER" text="Inloggning">
                     <padding>
                         <Insets bottom="20.0" right="50.0"/>
                     </padding>
@@ -44,7 +44,7 @@
                     </GridPane.margin>
                 </PasswordField>
 
-                <Button fx:id="bLogIn" mnemonicParsing="false" onAction="#logIn" text="Log In" GridPane.columnIndex="1"
+                <Button fx:id="bLogIn" mnemonicParsing="false" onAction="#logIn" text="Logga in" GridPane.columnIndex="1"
                         GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets top="2.0"/>
