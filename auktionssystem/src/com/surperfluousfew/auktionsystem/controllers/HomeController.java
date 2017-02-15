@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class HomeController {
 
     final static int SCENE_WIDTH = 1000;
-    final static int SCENE_HEIGHT = 1000;
+    final static int SCENE_HEIGHT = 500;
 
     StageHandler stageHandler = new StageHandler();
     private Stage stage;
