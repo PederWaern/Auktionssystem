@@ -1,17 +1,11 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
-import com.surperfluousfew.auktionsystem.StageHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class HomeController {
 
@@ -26,19 +20,19 @@ public class HomeController {
         root.getChildren().add(pgaScene);
     }
 
-    public void setSceneAddAuktion(ActionEvent actionEvent) throws Exception{
+    public void setSceneAddAuktion(ActionEvent actionEvent) throws Exception {
         Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
         root.getChildren().clear();
         root.getChildren().add(addAuktionScene);
     }
 
-    public void setSceneAddKund(ActionEvent actionEvent) throws Exception{
+    public void setSceneAddKund(ActionEvent actionEvent) throws Exception {
         Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
         root.getChildren().clear();
         root.getChildren().add(addAuktionScene);
     }
 
-    public void setSceneBudHistorik(ActionEvent actionEvent) throws Exception{
+    public void setSceneBudHistorik(ActionEvent actionEvent) throws Exception {
         Parent budHistorikScene = FXMLLoader.load(getClass().getResource("/fxml/budHistorik.fxml"));
         root.getChildren().clear();
         root.getChildren().add(budHistorikScene);
@@ -56,7 +50,7 @@ public class HomeController {
         root.getChildren().add(addLeverantorScene);
     }
 
-    public void setSceneForsaljning(ActionEvent actionEvent) throws Exception{
+    public void setSceneForsaljning(ActionEvent actionEvent) throws Exception {
         Parent addLeverantorScene = FXMLLoader.load(getClass().getResource("/fxml/forsaljningsstatistik.fxml"));
         root.getChildren().clear();
         root.getChildren().add(addLeverantorScene);
