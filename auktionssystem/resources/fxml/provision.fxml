@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.ProvisionController">
+   <center>
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+            <TableColumn text="År">
+                <cellValueFactory>
+                    <PropertyValueFactory property="år"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Månad">
+                <cellValueFactory>
+                    <PropertyValueFactory property="manad"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Total">
+                <cellValueFactory>
+                    <PropertyValueFactory property="provision"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

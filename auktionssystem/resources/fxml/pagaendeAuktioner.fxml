@@ -20,7 +20,7 @@
     </top>
     <center>
         <HBox alignment="center">
-            <TableView fx:id="tableView"  prefWidth="450" >
+            <TableView fx:id="tableView"  prefWidth="450"  >
                 <columns>
                     <TableColumn text="Personnummer">
                         <cellValueFactory>
