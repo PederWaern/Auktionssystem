@@ -372,7 +372,7 @@ public class DatabaseLoader {
         }
     }
 
-    public String addNewAcution(int produktId, double utgangspris, Double acceptpris, String startdatum, String slutdatum) {
+    public String addNewAuction(int produktId, double utgangspris, Double acceptpris, String startdatum, String slutdatum) {
         setup();
         try {
             callableStatement = connection.prepareCall("{call lagg_till_auktion (?,?,?,?,?,?)}");

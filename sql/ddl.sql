@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS auktionssystem;
 CREATE DATABASE auktionssystem;
 USE auktionssystem;
--- SET GLOBAL event_scheduler = ON;
+SET GLOBAL event_scheduler = ON;
 
 -- adress
 CREATE TABLE adress (
@@ -97,6 +97,7 @@ CREATE TABLE avslutade_auktioner (
   PRIMARY KEY (auktion_id),
   FOREIGN KEY (produkt_id) REFERENCES produkt (id)
 );
+
 
 /***************************************
     PROCEDURES
@@ -284,7 +285,7 @@ CREATE PROCEDURE provision_specifierat_tidsintervall(IN in_startdatum DATE, in_s
 -- Event auktion datum check
 DELIMITER //
 CREATE EVENT auktion_slutdatum_check
-  ON SCHEDULE EVERY 1 DAY
+  ON SCHEDULE EVERY 10 SECOND
 DO
   BEGIN
     DECLARE kontroll_slutford INT DEFAULT FALSE;
@@ -292,7 +293,7 @@ DO
     DECLARE kontroll_auktion_cursor CURSOR FOR
       SELECT auktion.id
       FROM auktion
-      WHERE slutdatum = current_date;
+      WHERE slutdatum <= current_date;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET kontroll_slutford = TRUE;
 
     OPEN kontroll_auktion_cursor;
@@ -387,3 +388,72 @@ CREATE VIEW provision_per_manad AS
     INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
     INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
   GROUP BY År, Månad, Provision;
+
+USE auktionssystem;
+
+# Insert DATA time
+
+-- addresser
+INSERT INTO adress (gata, postnummer, ort) VALUES
+  ('Medelstora Torget 1', 10101, 'Everthov'),
+  ('Genvägen 12', 10122, 'Tvåskede'),
+  ('Högbergs gatan 7', 10562, 'Lågdalen'),
+  ('Kvadratvägen 55', 14895, 'Plankholm'),
+  ('Valör gatan 100', 16892, 'Njutingö'),
+  ('Omvägen 69', 19812, 'Nedsala'),
+  ('Östermalmstorg 53', 54634, 'Stockholm');
+
+-- kunder
+INSERT INTO kund (personnummer, fornamn, efternamn, telefonnummer, epost, adress_id) VALUES
+  ('6808033117', 'Fritte', 'Bohman', '0737482653', 'frittw.bohman@domäinen.de',  1),
+  ('3212077743', 'Anna', 'Lund', '0743782644', 'hacker.c8s@anon.w', 2),
+  ('8707736734', 'Noppe', 'Segelbåt', '0798375892', 'noppe.segelbåt@buissenes.com', 3),
+  ('7309824728', 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com',  4),
+  ('5503047294', 'Edit', 'Gärdeström', '0794782828', 'vadsadu@virus.com', 5),
+  ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se',  6);
+
+  -- admins
+INSERT INTO admin (personnummer, fornamn, efternamn, telefonnummer, epost, losenord, adress_id) VALUES
+  ('1703052157', 'Gunnar', 'Tillhamre', '0738463987', 'gunnar.tillhamre@domäinen.de', '111', 7);
+
+-- leverantorer
+INSERT INTO leverantor (organisitionsnummer, telefonnummer, epost, namn, provision) VALUES
+  ('111111111111', '0735111111', 'los@sell.se', 'Lovely Old Stuff', 0.3),
+  ('222222222222', '0735222222', 'hs@sell.se', 'Happy Shop', 0.1),
+  ('333333333333', '0735333333', 'ems@sell.se', 'Evil Megastore', 0.5),
+  ('444444444444', '0735444444', 'fod@sell.se', 'Friendly Old Dude', 0.25),
+  ('555555555555', '0735555555', 'msb@sell.se', 'Ms. Butterscotch', 0.35),
+  ('666666666666', '0735666666', 'wgtg@sell.se', 'We Got The Goods', 0.1);
+
+-- produkter
+INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
+  ('111111111111', 'Ljusstake', ' Ljusstake i silver - tidig barock', 'img_1.jpg'),
+  ('222222222222', 'Lösnäsa', 'Ansiktsaccessoar för att höja stämningen på kickoffen', 'img_2.jpg'),
+  ('333333333333', 'Genmodifierad hamster', 'Husdjuret för dig som stimuleras av överlägsenhet', 'img_3.jpg'),
+  ('444444444444', 'Tavelram', 'Hobby-tillverkad tavelram - 100% ek', 'img_4.jpg'),
+  ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 'img_5.jpg'),
+  ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 'img_5.jpg'),
+  ('666666666666', 'Soffa', '90-tal IKEA', 'img_6.jpg'),
+  ('666666666666', 'Fåtölj', 'Vintage, superskön', 'img_7.jpg');
+
+-- auktioner
+INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES
+  (1, 3000, 1500, '2017-02-20', '2017-03-20'),
+  (2, 3000, 1500, '2017-02-20', '2017-03-20'),
+  (3, 3000, 1500, '2017-02-20', '2017-03-20'),
+  (4, 3000, 1500, '2017-02-20', '2017-03-20'),
+  (5, 3000, 1500, '2017-01-20', '2017-02-13'),
+  (6, 3000, 2500, '2017-01-20', '2017-02-14'),
+  (7, 3000, 1000, '2017-01-01', '2017-02-01'),
+  (8, 3000, 1000, '2017-01-01', '2017-02-01');
+
+-- bud
+INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
+  ('6808033117', 1, 1500),
+  ('3212077743', 2, 1500),
+  ('8707736734', 3, 1500),
+  ('7309824728', 4, 1500),
+  ('5503047294', 5, 1500),
+  ('7706034568', 7, 2000),
+  ('7706034568', 8, 1520),
+  ('7706034568', 1, 2000);
