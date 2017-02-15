@@ -23,7 +23,7 @@
          <children>
             <DatePicker fx:id="dpStart" promptText="Startdatum" />
             <DatePicker fx:id="dpSlut" promptText="Slutdatum" />
-            <Button fx:id="btSubmit" mnemonicParsing="false" text="Button" onAction="#getAuktioner"/>
+            <Button mnemonicParsing="false" text="Button" onAction="#getAuktioner"/>
          </children>
       </HBox>
    </top>
