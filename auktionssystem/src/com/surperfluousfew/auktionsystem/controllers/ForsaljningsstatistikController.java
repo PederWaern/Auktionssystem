@@ -25,7 +25,8 @@ public class ForsaljningsstatistikController {
         root.setCenter(auktionScene);
     }
 
-    public void showProvision(ActionEvent actionEvent) {
-
+    public void showProvision(ActionEvent actionEvent) throws Exception {
+        Parent provisionScene = FXMLLoader.load(getClass().getResource("/fxml/provision.fxml"));
+        root.setCenter(provisionScene);
     }
 }

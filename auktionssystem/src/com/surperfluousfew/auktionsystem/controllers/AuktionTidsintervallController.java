@@ -49,6 +49,8 @@ public class AuktionTidsintervallController {
 
     public void getAuktioner(ActionEvent actionEvent) {
         {
+            clearAllLists();
+            lvBerprov.getItems().clear();
             loadAllAuktions();
             for (AuktionTidsintervall a :
                     oList) {
@@ -64,5 +66,13 @@ public class AuktionTidsintervallController {
             lvHogstaBud.setItems(FXCollections.observableList(highestBids));
             lvSlutdatum.setItems(FXCollections.observableList(dates));
         }
+    }
+
+    private void clearAllLists(){
+        lvBerprov.getItems().clear();
+        lvSlutdatum.getItems().clear();
+        lvHogstaBud.getItems().clear();
+        lvName.getItems().clear();
+        lvProvandel.getItems().clear();
     }
 }
