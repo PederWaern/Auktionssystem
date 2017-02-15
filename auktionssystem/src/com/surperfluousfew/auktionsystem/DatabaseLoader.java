@@ -416,9 +416,9 @@ public class DatabaseLoader {
         }
     }
 
-    public List<String> getAuktionTidsintervall(String startDatum, String slutSatum){
+    public List<AuktionTidsintervall> getAuktionTidsintervall(String startDatum, String slutSatum){
         setup();
-        List<String> list = new ArrayList<>();
+        List<AuktionTidsintervall> list = new ArrayList<>();
         try {
             callableStatement = connection.prepareCall("{CALL provision_pagaende_auktioner_specifierat_tidsintervall(?,?)}");
             callableStatement.setString(1, startDatum);
@@ -426,9 +426,11 @@ public class DatabaseLoader {
             resultSet = callableStatement.executeQuery();
 
             while (resultSet.next()){
-                list.add(resultSet.getString(1)
-                        + "\t" + resultSet.getString(7)
-                        + "\t" + resultSet.getString(10));
+                list.add(new AuktionTidsintervall(resultSet.getString(1),
+                        resultSet.getString(7),
+                        resultSet.getDouble(8),
+                        resultSet.getDouble(9),
+                        resultSet.getString(10)));
 
             }
 
