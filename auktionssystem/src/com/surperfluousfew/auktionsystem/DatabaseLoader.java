@@ -57,7 +57,7 @@ public class DatabaseLoader {
 
     public DatabaseLoader() {
         try {
-            FileInputStream in = new FileInputStream("C:/Users/an/DatagripProjects/Auktionssystem/auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
 
             properties.load(in);
 
@@ -174,7 +174,6 @@ public class DatabaseLoader {
                         auktion = a;
                     }
                 }
-
                 bud.add(new Bud(kund, auktion, belopp, tid));
             }
 
@@ -185,7 +184,7 @@ public class DatabaseLoader {
         }
     }
 
-    private void setAuktionsBud() {
+    public void setAuktionsBud() {
 
         for (Auktion a :
                 auktioner) {
@@ -220,9 +219,7 @@ public class DatabaseLoader {
 
                     }
                 }
-
                 auktioner.add(new Auktion(id, produkt, acceptPris, utgangsPris, startDatum, slutDatum));
-
             }
 
         } catch (SQLException e) {
