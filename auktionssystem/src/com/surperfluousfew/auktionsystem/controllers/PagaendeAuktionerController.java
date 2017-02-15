@@ -2,6 +2,7 @@ package com.surperfluousfew.auktionsystem.controllers;
 
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.StageHandler;
+import com.surperfluousfew.auktionsystem.models.Auktion;
 import com.surperfluousfew.auktionsystem.models.Bud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PagaendeAuktionerController {
@@ -28,33 +30,42 @@ public class PagaendeAuktionerController {
     @FXML
     ListView listView;
 
+    private List<Auktion> arrayAuktion;
+
 
     @FXML
     public void initialize(){
-      //  populateView();
+        DatabaseLoader dbLoader = new DatabaseLoader();
+        dbLoader.loadLeverantor();
+        dbLoader.loadAddresses();
+        dbLoader.loadKund();
+        dbLoader.loadProdukt();
+        dbLoader.loadAuktion();
+        dbLoader.loadBud();
+        dbLoader.setAuktionsBud();
+        this.arrayAuktion = dbLoader.getAuktioner();
+
+        for (Auktion a : arrayAuktion){
+            cbAuktion.getItems().add(a.getProdukt().getNamn());
+        }
+        cbAuktion.getSelectionModel().selectFirst();
+
         System.out.println("inne i initialize");
     }
+
+
+
     public void populateView() {
 
-        DatabaseLoader dbLoader = new DatabaseLoader();
-        dbLoader.loadAddresses();
-        dbLoader.loadLeverantor();
-        dbLoader.loadKund();
-        dbLoader.loadBud();
-        List<Bud> budList = dbLoader.getBud();
-
-
-        ObservableList<String> items = FXCollections.observableArrayList ();
+        ObservableList<Bud> items = FXCollections.observableArrayList ();
         String förnamn, efternamn, personnummer, belopp, tid;
-        for (Bud b : budList) {
-            //if (b.getAuktion().getId() == Integer.parseInt(cbAuktion.getValue().toString()))
-            {
-                förnamn = b.getKund().getFornamn();
-                efternamn = b.getKund().getEfternamn();
-                personnummer = b.getKund().getPersonnummer();
-                belopp = String.valueOf(b.getBelopp());
-                tid = b.getTid();
-                items.add(personnummer + " "  +förnamn + " " + efternamn + "\n" + tid + "   " + belopp + ":-");}
+        for (Auktion b : arrayAuktion) {
+            if (b.getProdukt().getNamn().equals(cbAuktion.getValue().toString()))
+            for (Bud bud: b.getBudArrayList()  ) {
+                items.add(bud);
+
+            }
+
         }
 
         listView.setItems(items);

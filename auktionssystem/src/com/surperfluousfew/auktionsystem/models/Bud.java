@@ -1,5 +1,7 @@
 package com.surperfluousfew.auktionsystem.models;
 
+import com.sun.javafx.binding.StringFormatter;
+
 public class Bud {
 
     Kund kund;
@@ -32,11 +34,9 @@ public class Bud {
 
     @Override
     public String toString() {
-        return "Bud{" +
-                "kund=" + kund +
-                ", auktion=" + auktion +
-                ", belopp=" + belopp +
-                ", tid='" + tid + '\'' +
-                '}';
+
+       return String.format
+                ("Namn : %s %s, Personnummer : %s \nBud  : %.02f   Tid  : %s", kund.getFornamn(),kund.getEfternamn(),kund.getPersonnummer(),getBelopp(), getTid());
+        //return string;
     }
 }

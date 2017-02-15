@@ -12,13 +12,13 @@
 
     <top>
         <HBox alignment="center">
-            <ChoiceBox fx:id="cbAuktion"  prefWidth="150.0" GridPane.columnIndex="1"/>
+            <ChoiceBox fx:id="cbAuktion"  onAction="#populateView" prefWidth="150.0" GridPane.columnIndex="1"/>
         </HBox>
     </top>
     <center>
-        <HBox alignment="center">
+        <HBox alignment="center" >
             <children>
-                <ListView fx:id="listView">
+                <ListView fx:id="listView" prefWidth="400" >
                     <items>
                         <FXCollections fx:factory="observableArrayList">
 
