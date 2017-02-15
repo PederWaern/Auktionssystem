@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
 
@@ -29,50 +30,18 @@ public class AuktionTidsintervallController {
     @FXML
     DatePicker dpSlut;
     @FXML
-    ListView lvName;
-    @FXML
-    ListView lvProvandel;
-    @FXML
-    ListView lvSlutdatum;
-    @FXML
-    ListView lvBerprov;
-    @FXML
-    ListView lvHogstaBud;
+    TableView tableView;
 
-    public void initialize(){
-    }
 
-    private void loadAllAuktions() {
+
+    public void loadAllAuktions() {
+
         oList = FXCollections.observableList(dbLoader.getAuktionTidsintervall
                 (dpStart.getValue().toString(), dpSlut.getValue().toString()));
-    }
-
-    public void getAuktioner(ActionEvent actionEvent) {
-        {
-            clearAllLists();
-            lvBerprov.getItems().clear();
-            loadAllAuktions();
-            for (AuktionTidsintervall a :
-                    oList) {
-                names.add(a.getProduktNamn());
-                dates.add(a.getSlutDatum());
-                highestBids.add(a.getHogstaBud());
-                provisionandels.add(a.getProvandel());
-                beraknadProvisions.add(a.getBeraknadProvision());
-            }
-            lvName.setItems(FXCollections.observableList(names));
-            lvProvandel.setItems(FXCollections.observableList(provisionandels));
-            lvBerprov.setItems(FXCollections.observableList(beraknadProvisions));
-            lvHogstaBud.setItems(FXCollections.observableList(highestBids));
-            lvSlutdatum.setItems(FXCollections.observableList(dates));
+            tableView.getItems().clear();
+        for (AuktionTidsintervall a : oList){
+            tableView.getItems().add(a);
         }
     }
 
-    private void clearAllLists(){
-        lvBerprov.getItems().clear();
-        lvSlutdatum.getItems().clear();
-        lvHogstaBud.getItems().clear();
-        lvName.getItems().clear();
-        lvProvandel.getItems().clear();
-    }
 }
