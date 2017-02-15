@@ -12,7 +12,7 @@
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="tableView" prefWidth="550">
+            <TableView fx:id="tableView" minWidth="700">
                <columns>
                   <TableColumn text="Förnamn">
                      <cellValueFactory>
