@@ -1,56 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
-<GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.112-ea"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.surperfluousfew.auktionsystem.controllers.AddAuktionController"
-          prefHeight="600"
-          prefWidth="800"
->
+
+<GridPane fx:id="root" alignment="center" hgap="10" prefHeight="600" prefWidth="800" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.AddAuktionController">
     <children>
-        <ChoiceBox fx:id="cbProdukt"
-                   prefWidth="150.0"
-                   GridPane.columnIndex="1"
-                   GridPane.rowIndex="0"/>
+        <ChoiceBox fx:id="cbProdukt" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-        <Button fx:id="addAuction"
-                text="Lägg till"
-                GridPane.columnIndex="3"
-                GridPane.rowIndex="0"
-                onAction="#add"/>
+        <Button fx:id="addAuction" onAction="#add" text="Lägg till" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
 
-        <Label text="Utgångspris:"
-               GridPane.columnIndex="0"
-               GridPane.rowIndex="1"/>
+        <Label text="Utgångspris:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-        <TextField fx:id="txfUpris"
-                   GridPane.columnIndex="1"
-                   GridPane.rowIndex="1"/>
+        <TextField fx:id="txfUpris" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <Label text="Acceptpris:"
-               GridPane.columnIndex="2"
-               GridPane.rowIndex="1"/>
+        <Label text="Acceptpris:" GridPane.rowIndex="2" />
 
-        <TextField fx:id="txfApris"
-                   GridPane.columnIndex="3"
-                   GridPane.rowIndex="1"/>
+        <TextField fx:id="txfApris" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <DatePicker fx:id="dpStart"
-                    promptText="Startdatum"
-                    GridPane.columnIndex="1"
-                    GridPane.rowIndex="2"/>
+        <DatePicker fx:id="dpStart" promptText="Startdatum" GridPane.rowIndex="3" />
 
-        <DatePicker fx:id="dpSlut"
-                    promptText="Slutdatum"
-                    GridPane.columnIndex="3"
-                    GridPane.rowIndex="2"/>
+        <DatePicker fx:id="dpSlut" promptText="Slutdatum" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-        <Text fx:id="tInfo"
-              text=""
-              GridPane.columnIndex="1"
-              GridPane.rowIndex="3"/>
+        <Text fx:id="tInfo" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label layoutX="163.0" layoutY="260.0" text="Produkt:" />
 
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

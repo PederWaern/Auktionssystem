@@ -5,14 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 
 public class HomeController {
 
     @FXML
     AnchorPane root;
-    @FXML
-    GridPane gpHome;
 
     public void setScenePGA(ActionEvent actionEvent) throws Exception {
         Parent pgaScene = FXMLLoader.load(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));

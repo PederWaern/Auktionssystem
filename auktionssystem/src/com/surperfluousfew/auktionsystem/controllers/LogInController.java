@@ -36,6 +36,8 @@ public class LogInController {
                 Stage oldStage = stageHandler.getParentStage(root);
                 Stage primaryStage = new Stage();
                 primaryStage.setTitle("Auktionsystem");
+                primaryStage.setHeight(600);
+                primaryStage.setWidth(800);
                 primaryStage.setScene(new Scene(homeScreen));
                 primaryStage.setResizable(false);
                 primaryStage.show();

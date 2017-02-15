@@ -7,13 +7,13 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController">
+<SplitPane dividerPositions="0.5" orientation="VERTICAL"  xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.HomeController">
    <items>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Lägg till">
             <items>
-              <MenuItem fx:id="setSceneAddAuktion" mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Auktion" />
+              <MenuItem mnemonicParsing="false" onAction="#setSceneAddAuktion" text="Auktion" />
                   <MenuItem mnemonicParsing="false" onAction="#setSceneAddKund" text="Kund" />
                   <MenuItem mnemonicParsing="false" onAction="#setSceneAddLeverantor" text="Leverantör" />
             </items>
