@@ -3,24 +3,12 @@ package com.surperfluousfew.auktionsystem.controllers;
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 
 public class AddLeverantorController {
 
     @FXML
-    Parent root;
-    @FXML
-    TextField txfName;
-    @FXML
-    TextField txfOnummer;
-    @FXML
-    TextField txfTelnummer;
-    @FXML
-    TextField txfEpost;
-    @FXML
-    TextField txfProvision;
+    private TextField txfName, txfOnummer, txfTelnummer, txfEpost, txfProvision;
 
     private DatabaseLoader dbLoader = new DatabaseLoader();
 
@@ -29,8 +17,8 @@ public class AddLeverantorController {
         String orgnummer = txfOnummer.getText();
         String telnummer = txfTelnummer.getText();
         String epost = txfEpost.getText();
-        double prov = Double.parseDouble(txfProvision.getText())/100;
+        double prov = Double.parseDouble(txfProvision.getText()) / 100;
 
-        dbLoader.addLeverantor(name, orgnummer,telnummer,epost,prov);
+        dbLoader.addLeverantor(name, orgnummer, telnummer, epost, prov);
     }
 }

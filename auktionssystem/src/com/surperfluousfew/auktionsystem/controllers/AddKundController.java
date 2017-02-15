@@ -4,7 +4,6 @@ import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.models.Adress;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,27 +14,11 @@ import java.util.List;
 public class AddKundController {
 
     @FXML
-    Parent root;
+    private TextField txfFirstName, txfLastName, txfPnummer, txfEpost, txfTelnummer, txfGata, txfPostnummer, txfOrt;
     @FXML
-    TextField txfFirstName;
+    private Button bAddKund;
     @FXML
-    TextField txfLastName;
-    @FXML
-    TextField txfPnummer;
-    @FXML
-    TextField txfEpost;
-    @FXML
-    TextField txfTelnummer;
-    @FXML
-    TextField txfGata;
-    @FXML
-    TextField txfPostnummer;
-    @FXML
-    TextField txfOrt;
-    @FXML
-    Button bAddKund;
-    @FXML
-    Label labelNyKundStatus;
+    private Label labelNyKundStatus;
 
     private DatabaseLoader dbLoader = new DatabaseLoader();
 

@@ -6,13 +6,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 
 public class AuktionTidsintervallController {
+
+    @FXML
+    private DatePicker dpStart, dpSlut;
+    @FXML
+    private ListView lvName, lvProvandel, lvSlutdatum, lvBerprov, lvHogstaBud;
+
 
     private DatabaseLoader dbLoader = new DatabaseLoader();
     private ObservableList<AuktionTidsintervall> oList;
@@ -22,24 +27,7 @@ public class AuktionTidsintervallController {
     private ArrayList<String> provisionandels = new ArrayList<>();
     private ArrayList<Double> beraknadProvisions = new ArrayList<>();
 
-    @FXML
-    Button btSubmit;
-    @FXML
-    DatePicker dpStart;
-    @FXML
-    DatePicker dpSlut;
-    @FXML
-    ListView lvName;
-    @FXML
-    ListView lvProvandel;
-    @FXML
-    ListView lvSlutdatum;
-    @FXML
-    ListView lvBerprov;
-    @FXML
-    ListView lvHogstaBud;
-
-    public void initialize(){
+    public void initialize() {
     }
 
     private void loadAllAuktions() {
@@ -68,7 +56,7 @@ public class AuktionTidsintervallController {
         }
     }
 
-    private void clearAllLists(){
+    private void clearAllLists() {
         lvBerprov.getItems().clear();
         lvSlutdatum.getItems().clear();
         lvHogstaBud.getItems().clear();

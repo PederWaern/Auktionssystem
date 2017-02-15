@@ -13,25 +13,24 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LogInController {
+
+    @FXML
+    private Parent root;
+    @FXML
+    private TextField txfAnstallninsnummer, txfPassword;
+    @FXML
+    private Text tInfo;
+
     private DatabaseLoader dbLoader = new DatabaseLoader();
-    StageHandler stageHandler = new StageHandler();
-    @FXML
-    Parent root;
-    @FXML
-    TextField txfAnstallninsnummer;
-    @FXML
-    TextField txfPassword;
-    @FXML
-    Text tInfo;
-
-
+    private StageHandler stageHandler = new StageHandler();
+    
     public void logIn(ActionEvent actionEvent) throws Exception {
         String loginAnstallningsnummer = txfAnstallninsnummer.getText();
         String loginLosenord = txfPassword.getText();
         dbLoader.loadAdmins();
         for (Admin admin : dbLoader.getAdmins()) {
             String adminAnstallningsnummer = String.valueOf(admin.getAnstallningsnummer());
-            if (adminAnstallningsnummer.equals(loginAnstallningsnummer)&& admin.getLosenord().equals(loginLosenord)){
+            if (adminAnstallningsnummer.equals(loginAnstallningsnummer) && admin.getLosenord().equals(loginLosenord)) {
                 Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
                 Stage oldStage = stageHandler.getParentStage(root);
                 Stage primaryStage = new Stage();

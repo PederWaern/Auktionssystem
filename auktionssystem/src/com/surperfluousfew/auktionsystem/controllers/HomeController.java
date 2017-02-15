@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 public class HomeController {
 
     @FXML
-    AnchorPane root;
+    private AnchorPane root;
 
     public void setScenePGA(ActionEvent actionEvent) throws Exception {
         Parent pgaScene = FXMLLoader.load(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));

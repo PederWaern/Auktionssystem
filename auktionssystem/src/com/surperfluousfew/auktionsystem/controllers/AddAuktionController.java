@@ -18,26 +18,18 @@ import java.util.regex.Pattern;
 
 
 public class AddAuktionController {
+    @FXML
+    private ChoiceBox cbProdukt;
+    @FXML
+    private TextField txfUpris, txfApris;
+    @FXML
+    private DatePicker dpStart, dpSlut;
+    @FXML
+    private Text tInfo;
 
-    DatabaseLoader dbLoader = new DatabaseLoader();
-    List<Produkt> produkter;
-    Pattern doublePattern = Pattern.compile("\\d+\\.*\\d+");
-
-
-    @FXML
-    Parent root;
-    @FXML
-    ChoiceBox cbProdukt;
-    @FXML
-    TextField txfUpris;
-    @FXML
-    TextField txfApris;
-    @FXML
-    DatePicker dpStart;
-    @FXML
-    DatePicker dpSlut;
-    @FXML
-    Text tInfo;
+    private DatabaseLoader dbLoader = new DatabaseLoader();
+    private List<Produkt> produkter;
+    private Pattern doublePattern = Pattern.compile("\\d+\\.*\\d+");
 
     public void initialize() {
         loadProducts();
