@@ -388,7 +388,7 @@ CREATE VIEW provision_per_manad AS
   FROM avslutade_auktioner
     INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
     INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-  GROUP BY År, Månad, Provision;
+  GROUP BY År, Månad;
 
 USE auktionssystem;
 
