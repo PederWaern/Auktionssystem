@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LogInController {
@@ -20,6 +21,8 @@ public class LogInController {
     TextField txfAnstallninsnummer;
     @FXML
     TextField txfPassword;
+    @FXML
+    Text tInfo;
 
 
     public void logIn(ActionEvent actionEvent) throws Exception {
@@ -37,6 +40,8 @@ public class LogInController {
                 primaryStage.setResizable(false);
                 primaryStage.show();
                 oldStage.close();
+            } else {
+                tInfo.setText("Felaktiga inloggningsuppgifter");
             }
         }
     }

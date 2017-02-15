@@ -2,15 +2,37 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <GridPane fx:id="root" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.112-ea"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.surperfluousfew.auktionsystem.controllers.AddAuktionController">
     <children>
-        <ChoiceBox fx:id="cbProdukt" prefWidth="150.0" GridPane.columnIndex="1"/>
-        <Label text="Utgångspris:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="txfUpris" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label text="Acceptpris:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <TextField fx:id="txfApris" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <ChoiceBox fx:id="cbProdukt"
+                   prefWidth="150.0"
+                   GridPane.columnIndex="1"
+                   GridPane.rowIndex="0"/>
+
+        <Button fx:id="addAuction"
+                text="Lägg till"
+                GridPane.columnIndex="3"
+                GridPane.rowIndex="0"
+                onAction="#add"/>
+
+        <Label text="Utgångspris:"
+               GridPane.columnIndex="0"
+               GridPane.rowIndex="1"/>
+
+        <TextField fx:id="txfUpris"
+                   GridPane.columnIndex="1"
+                   GridPane.rowIndex="1"/>
+
+        <Label text="Acceptpris:"
+               GridPane.columnIndex="2"
+               GridPane.rowIndex="1"/>
+
+        <TextField fx:id="txfApris"
+                   GridPane.columnIndex="3"
+                   GridPane.rowIndex="1"/>
 
         <DatePicker fx:id="dpStart"
                     promptText="Startdatum"
@@ -22,10 +44,10 @@
                     GridPane.columnIndex="3"
                     GridPane.rowIndex="2"/>
 
-        <Button fx:id="addAuction"
-                text="Lägg till"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="3"
-                onAction="#add"/>
+        <Text fx:id="tInfo"
+              text=""
+              GridPane.columnIndex="1"
+              GridPane.rowIndex="3"/>
+
     </children>
 </GridPane>

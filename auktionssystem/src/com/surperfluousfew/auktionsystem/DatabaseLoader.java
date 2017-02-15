@@ -58,6 +58,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
             FileInputStream in = new FileInputStream("C:/Users/an/DatagripProjects/Auktionssystem/auktionssystem/configuration/db.properties");
+
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");

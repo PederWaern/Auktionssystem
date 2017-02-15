@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -35,6 +36,8 @@ public class AddAuktionController {
     DatePicker dpStart;
     @FXML
     DatePicker dpSlut;
+    @FXML
+    Text tInfo;
 
     public void initialize() {
         loadProducts();
@@ -73,6 +76,6 @@ public class AddAuktionController {
         } else {
             message = "Felaktigt utgångspris eller acceptpris";
         }
-        System.out.println(message);
+        tInfo.setText(message);
     }
 }
