@@ -277,6 +277,7 @@ public class DatabaseLoader {
 
     public void loadAdmins() {
         admins = new ArrayList<>();
+        loadAddresses();
         setup();
         try {
             statement = connection.createStatement();
