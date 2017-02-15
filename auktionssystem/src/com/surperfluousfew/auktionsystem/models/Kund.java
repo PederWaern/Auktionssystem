@@ -52,4 +52,17 @@ public class Kund {
     public Adress getAdress() {
         return adress;
     }
+
+    @Override
+    public String toString() {
+        return "Kund{" +
+                "personnummer='" + personnummer + '\'' +
+                ", fornamn='" + fornamn + '\'' +
+                ", efternamn='" + efternamn + '\'' +
+                ", telefonnummer='" + telefonnummer + '\'' +
+                ", epost='" + epost + '\'' +
+                ", orderSum=" + orderSum +
+                ", adress=" + adress +
+                '}';
+    }
 }
