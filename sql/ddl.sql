@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS auktionssystem;
 CREATE DATABASE auktionssystem;
 USE auktionssystem;
--- SET GLOBAL event_scheduler = ON;
+SET GLOBAL event_scheduler = ON;
 
 -- adress
 CREATE TABLE adress (

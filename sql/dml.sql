@@ -64,12 +64,16 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('7309824728', 4, 1500),
   ('5503047294', 5, 1500),
   ('7706034568', 7, 2000),
-  ('7706034568', 8, 1520);
+  ('7706034568', 8, 1520),
+  ('7706034568', 1, 2000);
+
 
 
 -- test select
 SELECT *
 FROM rakna_ut_provision;
+
+SELECT * from bud;
 
 SELECT * FROM avslutade_auktioner;
 SELECT *
