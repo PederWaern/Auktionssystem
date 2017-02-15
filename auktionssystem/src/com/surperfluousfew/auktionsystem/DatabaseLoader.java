@@ -416,6 +416,36 @@ public class DatabaseLoader {
         }
     }
 
+    public List<String> getAuktionTidsintervall(String startDatum, String slutSatum){
+        setup();
+        List<String> list = new ArrayList<>();
+        try {
+            callableStatement = connection.prepareCall("{CALL provision_pagaende_auktioner_specifierat_tidsintervall(?,?)}");
+            callableStatement.setString(1, startDatum);
+            callableStatement.setString(2, slutSatum);
+            resultSet = callableStatement.executeQuery();
+
+            while (resultSet.next()){
+                list.add(resultSet.getInt(1)
+                        + "\t" + resultSet.getInt(2)
+                        + "\t" + resultSet.getDouble(3)
+                        + "\t" + resultSet.getDouble(4)
+                        + "\t" + resultSet.getString(5)
+                        + "\t" + resultSet.getString(6)
+                        + "\t" + resultSet.getDouble(7)
+                        + "\t" + resultSet.getDouble(8)
+                        + "\t" + resultSet.getString(9));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeResources();
+        }
+        return list;
+    }
+
 
     private void closeResources() {
         try {
