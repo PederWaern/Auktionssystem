@@ -242,6 +242,7 @@ CREATE PROCEDURE provision_pagaende_auktioner_specifierat_tidsintervall(IN in_sl
                                                                            in_slutdatum_slut  DATE)
   BEGIN
     SELECT
+      produkt.namn,
       auktion.id                              AS auktion_id,
       auktion.produkt_id,
       auktion.acceptpris,
