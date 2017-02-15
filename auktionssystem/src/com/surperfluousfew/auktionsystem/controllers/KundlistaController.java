@@ -5,45 +5,33 @@ import com.surperfluousfew.auktionsystem.models.TotalOrderVärdePerKund;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import java.util.ArrayList;
+import javafx.scene.control.TableView;
 
 public class KundlistaController {
 
     TotalOrderVärdePerKund kund;
     private DatabaseLoader databaseLoader = new DatabaseLoader();
     private ObservableList<TotalOrderVärdePerKund> totalOrderVärdePerKunds;
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<String> pnummers = new ArrayList<>();
-    private ArrayList<Double> order = new ArrayList<>();
 
 
     @FXML
-    ListView lvPnummer;
-    @FXML
-    ListView lvNamn;
-    @FXML
-    ListView lvOrder;
-
-
+    private TableView tableView;
 
 
     public void initialize(){
+
         loadAllCustomers();
     }
 
     private void loadAllCustomers(){
 
         totalOrderVärdePerKunds  = FXCollections.observableList(databaseLoader.totalOrderVärdePerKundLista());
-        for (TotalOrderVärdePerKund t :
-                totalOrderVärdePerKunds) {
-            names.add(t.getFornamn()+ " " + t.getEfternamn());
-            pnummers.add(t.getPersonNummer());
-            order.add(t.getTotalOrderVarde());
+
+        tableView.getItems().clear();
+        for (TotalOrderVärdePerKund t: totalOrderVärdePerKunds) {
+            tableView.getItems().add(t);
         }
-        lvPnummer.setItems(FXCollections.observableList(pnummers));
-        lvNamn.setItems(FXCollections.observableList(names));
-        lvOrder.setItems(FXCollections.observableList(order));
+
 
 
     }

@@ -6,18 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
 
 public class AuktionTidsintervallController {
-
-    @FXML
-    private DatePicker dpStart, dpSlut;
-    @FXML
-    private ListView lvName, lvProvandel, lvSlutdatum, lvBerprov, lvHogstaBud;
-
 
     private DatabaseLoader dbLoader = new DatabaseLoader();
     private ObservableList<AuktionTidsintervall> oList;
@@ -27,40 +23,25 @@ public class AuktionTidsintervallController {
     private ArrayList<String> provisionandels = new ArrayList<>();
     private ArrayList<Double> beraknadProvisions = new ArrayList<>();
 
-    public void initialize() {
-    }
+    @FXML
+    Button btSubmit;
+    @FXML
+    DatePicker dpStart;
+    @FXML
+    DatePicker dpSlut;
+    @FXML
+    TableView tableView;
 
-    private void loadAllAuktions() {
+
+
+    public void loadAllAuktions() {
+
         oList = FXCollections.observableList(dbLoader.getAuktionTidsintervall
                 (dpStart.getValue().toString(), dpSlut.getValue().toString()));
-    }
-
-    public void getAuktioner(ActionEvent actionEvent) {
-        {
-            clearAllLists();
-            lvBerprov.getItems().clear();
-            loadAllAuktions();
-            for (AuktionTidsintervall a :
-                    oList) {
-                names.add(a.getProduktNamn());
-                dates.add(a.getSlutDatum());
-                highestBids.add(a.getHogstaBud());
-                provisionandels.add(a.getProvandel());
-                beraknadProvisions.add(a.getBeraknadProvision());
-            }
-            lvName.setItems(FXCollections.observableList(names));
-            lvProvandel.setItems(FXCollections.observableList(provisionandels));
-            lvBerprov.setItems(FXCollections.observableList(beraknadProvisions));
-            lvHogstaBud.setItems(FXCollections.observableList(highestBids));
-            lvSlutdatum.setItems(FXCollections.observableList(dates));
+            tableView.getItems().clear();
+        for (AuktionTidsintervall a : oList){
+            tableView.getItems().add(a);
         }
     }
 
-    private void clearAllLists() {
-        lvBerprov.getItems().clear();
-        lvSlutdatum.getItems().clear();
-        lvHogstaBud.getItems().clear();
-        lvName.getItems().clear();
-        lvProvandel.getItems().clear();
-    }
 }

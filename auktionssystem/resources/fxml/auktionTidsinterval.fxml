@@ -6,16 +6,43 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.AuktionTidsintervallController">
     <center>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <ListView fx:id="lvName" prefHeight="200.0" prefWidth="200.0" />
-                <ListView fx:id="lvSlutdatum" prefHeight="200.0" prefWidth="200.0" />
-                <ListView fx:id="lvProvandel" prefHeight="200.0" prefWidth="200.0" />
-                <ListView fx:id="lvBerprov" prefHeight="200.0" prefWidth="200.0" />
-                <ListView fx:id="lvHogstaBud" prefHeight="200.0" prefWidth="200.0" />
-            </children>
+
+                <TableView fx:id="tableView" prefWidth="550"  >
+                    <columns>
+                        <TableColumn text="Namn">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="produktNamn"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Slutdatum" >
+                            <cellValueFactory>
+                                <PropertyValueFactory property="slutDatum"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Högsta bud" minWidth="80">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="hogstaBud"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Beräknad provision" minWidth="120">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="beraknadProvision"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Provisionsandel" minWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="provandel"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+
         </HBox>
     </center>
    <top>
@@ -23,7 +50,7 @@
          <children>
             <DatePicker fx:id="dpStart" promptText="Startdatum" />
             <DatePicker fx:id="dpSlut" promptText="Slutdatum" />
-            <Button mnemonicParsing="false" text="Button" onAction="#getAuktioner"/>
+            <Button fx:id="btSubmit" mnemonicParsing="false" text="Button" onAction="#loadAllAuktions"/>
          </children>
       </HBox>
    </top>

@@ -10,17 +10,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<BorderPane fx:id="root" fx:controller="com.surperfluousfew.auktionsystem.controllers.PagaendeAuktionerController"
-            xmlns:fx="http://javafx.com/fxml">
+<GridPane fx:id="root" fx:controller="com.surperfluousfew.auktionsystem.controllers.PagaendeAuktionerController"
+            xmlns:fx="http://javafx.com/fxml" alignment="CENTER" vgap="10" prefHeight="550" prefWidth="800">
 
-    <top>
-        <HBox alignment="center">
-            <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.columnIndex="1"/>
-        </HBox>
-    </top>
-    <center>
-        <HBox alignment="center">
-            <TableView fx:id="tableView"  prefWidth="450" >
+
+
+            <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
+
+            <TableView fx:id="tableView" GridPane.rowIndex="1" GridPane.halignment="CENTER" prefHeight="400" prefWidth="700">
                 <columns>
                     <TableColumn text="Personnummer">
                         <cellValueFactory>
@@ -49,6 +46,5 @@
                     </TableColumn>
                 </columns>
             </TableView>
-        </HBox>
-    </center>
-</BorderPane>
+
+</GridPane>
