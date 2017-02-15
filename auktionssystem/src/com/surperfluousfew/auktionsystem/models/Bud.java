@@ -29,4 +29,14 @@ public class Bud {
     public String getTid() {
         return tid;
     }
+
+    @Override
+    public String toString() {
+        return "Bud{" +
+                "kund=" + kund +
+                ", auktion=" + auktion +
+                ", belopp=" + belopp +
+                ", tid='" + tid + '\'' +
+                '}';
+    }
 }

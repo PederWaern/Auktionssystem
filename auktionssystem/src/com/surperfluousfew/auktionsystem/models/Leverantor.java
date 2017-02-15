@@ -47,5 +47,13 @@ public class Leverantor {
         this.epost = epost;
     }
 
-
+    @Override
+    public String toString() {
+        return "Leverantor{" +
+                "organisitionsnummer='" + organisitionsnummer + '\'' +
+                ", name='" + name + '\'' +
+                ", telefonnummer='" + telefonnummer + '\'' +
+                ", epost='" + epost + '\'' +
+                '}';
+    }
 }
