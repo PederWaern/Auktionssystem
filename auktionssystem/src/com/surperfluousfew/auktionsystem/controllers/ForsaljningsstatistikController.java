@@ -20,8 +20,9 @@ public class ForsaljningsstatistikController {
         root.setCenter(kundlistaScene);
     }
 
-    public void showAuktioner(ActionEvent actionEvent) {
-        
+    public void showAuktioner(ActionEvent actionEvent) throws Exception {
+        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/auktionTidsinterval.fxml"));
+        root.setCenter(auktionScene);
     }
 
     public void showProvision(ActionEvent actionEvent) {

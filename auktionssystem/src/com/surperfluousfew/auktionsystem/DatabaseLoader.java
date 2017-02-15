@@ -58,7 +58,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("C:\\Users\\Sam\\Documents\\Auktionssystem\\auktionssystem\\configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -441,6 +441,30 @@ public class DatabaseLoader {
         }
         return list;
     }
+
+
+    public List<ProvisionPerManad> getProvisionPerManad(){
+        setup();
+        List<ProvisionPerManad> list = new ArrayList<>();
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM provision_per_manad");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+
+                list.add(new ProvisionPerManad(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getDouble(3)));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return list;
+    }
+
 
 
     private void closeResources() {
