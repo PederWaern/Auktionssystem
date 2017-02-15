@@ -23,9 +23,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Försäljningsstatistik">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#setSceneForsaljning" text="Kunder"/>
-                        <MenuItem mnemonicParsing="false" onAction="#setSceneForsaljning" text="Auktioner"/>
-                        <MenuItem mnemonicParsing="false" onAction="#setSceneForsaljning" text="Provision"/>
+                        <MenuItem mnemonicParsing="false" onAction="#setSceneKundLista" text="Kunder"/>
+                        <MenuItem mnemonicParsing="false" onAction="#setSceneAuktioner" text="Auktioner"/>
+                        <MenuItem mnemonicParsing="false" onAction="#setSceneProvision" text="Provision"/>
                     </items>
                 </Menu>
             </menus>

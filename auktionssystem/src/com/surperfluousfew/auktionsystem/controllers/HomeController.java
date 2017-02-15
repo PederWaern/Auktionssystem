@@ -18,21 +18,15 @@ public class HomeController {
     }
 
     public void setSceneAddAuktion(ActionEvent actionEvent) throws Exception {
-        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
+        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/addAuktion.fxml"));
         root.getChildren().clear();
-        root.getChildren().add(addAuktionScene);
+        root.getChildren().add(auktionScene);
     }
 
     public void setSceneAddKund(ActionEvent actionEvent) throws Exception {
-        Parent addAuktionScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
+        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/addKund.fxml"));
         root.getChildren().clear();
-        root.getChildren().add(addAuktionScene);
-    }
-
-    public void setSceneBudHistorik(ActionEvent actionEvent) throws Exception {
-        Parent budHistorikScene = FXMLLoader.load(getClass().getResource("/fxml/budHistorik.fxml"));
-        root.getChildren().clear();
-        root.getChildren().add(budHistorikScene);
+        root.getChildren().add(auktionScene);
     }
 
     public void setSceneKundLista(ActionEvent actionEvent) throws Exception {
@@ -42,14 +36,20 @@ public class HomeController {
     }
 
     public void setSceneAddLeverantor(ActionEvent actionEvent) throws Exception {
-        Parent addLeverantorScene = FXMLLoader.load(getClass().getResource("/fxml/addLeverantor.fxml"));
+        Parent leverantorScene = FXMLLoader.load(getClass().getResource("/fxml/addLeverantor.fxml"));
         root.getChildren().clear();
-        root.getChildren().add(addLeverantorScene);
+        root.getChildren().add(leverantorScene);
     }
 
-    public void setSceneForsaljning(ActionEvent actionEvent) throws Exception {
-        Parent addLeverantorScene = FXMLLoader.load(getClass().getResource("/fxml/forsaljningsstatistik.fxml"));
+    public void setSceneAuktioner(ActionEvent actionEvent) throws Exception{
+        Parent auktionScene = FXMLLoader.load(getClass().getResource("/fxml/auktionTidsinterval.fxml"));
         root.getChildren().clear();
-        root.getChildren().add(addLeverantorScene);
+        root.getChildren().add(auktionScene);
+    }
+
+    public void setSceneProvision(ActionEvent actionEvent) throws Exception {
+        Parent provisionScene = FXMLLoader.load(getClass().getResource("/fxml/provision.fxml"));
+        root.getChildren().clear();
+        root.getChildren().add(provisionScene);
     }
 }
