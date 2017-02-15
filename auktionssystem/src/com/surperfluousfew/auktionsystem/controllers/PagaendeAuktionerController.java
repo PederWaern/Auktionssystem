@@ -3,12 +3,15 @@ package com.surperfluousfew.auktionsystem.controllers;
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.models.Auktion;
 import com.surperfluousfew.auktionsystem.models.Bud;
+import com.surperfluousfew.auktionsystem.models.Kund;
+import com.surperfluousfew.auktionsystem.models.TableViewBud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 
 import java.util.List;
 
@@ -19,13 +22,13 @@ public class PagaendeAuktionerController {
     @FXML
     ChoiceBox cbAuktion;
     @FXML
-    ListView listView;
+    TableView tableView;
 
     private List<Auktion> arrayAuktion;
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         DatabaseLoader dbLoader = new DatabaseLoader();
         dbLoader.loadLeverantor();
         dbLoader.loadAddresses();
@@ -36,25 +39,26 @@ public class PagaendeAuktionerController {
         dbLoader.setAuktionsBud();
         this.arrayAuktion = dbLoader.getAuktioner();
 
-        for (Auktion a : arrayAuktion){
+        for (Auktion a : arrayAuktion) {
             cbAuktion.getItems().add(a.getProdukt().getNamn());
         }
         cbAuktion.getSelectionModel().selectFirst();
     }
 
 
-
     public void populateView() {
-        ObservableList<Bud> items = FXCollections.observableArrayList ();
+        ObservableList<TableViewBud> items = FXCollections.observableArrayList();
         for (Auktion b : arrayAuktion) {
             if (b.getProdukt().getNamn().equals(cbAuktion.getValue().toString()))
-            for (Bud bud: b.getBudArrayList()  ) {
-                items.add(bud);
+                for (Bud bud : b.getBudArrayList()) {
+                    items.add(new TableViewBud(bud.getKund().getPersonnummer(),
+                            bud.getKund().getFornamn(), bud.getKund().getEfternamn()
+                            , bud.getBelopp(), bud.getTid()));
 
-            }
+                }
 
         }
-
-        listView.setItems(items);
+        tableView.getItems().clear();
+        tableView.getItems().addAll(items);
     }
 }
