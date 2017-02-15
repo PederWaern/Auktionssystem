@@ -23,7 +23,7 @@
               <MenuItem mnemonicParsing="false" onAction="#setScenePGA" text="Pågående auktioner" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Försäljningsstatestik">
+          <Menu mnemonicParsing="false" text="Försäljningsstatistik">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#setSceneForsaljning" text="About" />
             </items>
