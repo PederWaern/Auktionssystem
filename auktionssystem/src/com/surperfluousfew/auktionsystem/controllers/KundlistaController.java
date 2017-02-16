@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
@@ -13,6 +14,8 @@ import java.io.IOException;
 
 public class KundlistaController extends AnchorPane {
 
+    @FXML
+    TableColumn sortCol;
     @FXML
     private TableView tableView;
 
@@ -32,6 +35,7 @@ public class KundlistaController extends AnchorPane {
         }
         this.dbLoader = dbLoader;
         loadAllCustomers();
+        sortCol.setSortType(TableColumn.SortType.DESCENDING);
     }
 
     private void loadAllCustomers() {
