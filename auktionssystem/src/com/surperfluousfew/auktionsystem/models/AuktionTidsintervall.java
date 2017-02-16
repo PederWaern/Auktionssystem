@@ -4,11 +4,11 @@ public class AuktionTidsintervall {
 
     private String produktNamn;
     private String slutDatum;
-    private double hogstaBud;
-    private double beraknadProvision;
+    private String hogstaBud;
+    private String beraknadProvision;
     private String provandel;
 
-    public AuktionTidsintervall(String produktNamn, String slutDatum, double hogstaBud, double beraknadProvision, String provandel) {
+    public AuktionTidsintervall(String produktNamn, String slutDatum, String hogstaBud, String beraknadProvision, String provandel) {
         this.produktNamn = produktNamn;
         this.slutDatum = slutDatum;
         this.hogstaBud = hogstaBud;
@@ -24,11 +24,11 @@ public class AuktionTidsintervall {
         return slutDatum;
     }
 
-    public double getHogstaBud() {
+    public String getHogstaBud() {
         return hogstaBud;
     }
 
-    public double getBeraknadProvision() {
+    public String getBeraknadProvision() {
         return beraknadProvision;
     }
 

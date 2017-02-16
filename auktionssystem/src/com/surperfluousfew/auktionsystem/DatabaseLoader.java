@@ -427,8 +427,8 @@ public class DatabaseLoader {
             while (resultSet.next()){
                 list.add(new AuktionTidsintervall(resultSet.getString(1),
                         resultSet.getString(7),
-                        resultSet.getDouble(8),
-                        resultSet.getDouble(9),
+                        resultSet.getDouble(8) + " kr",
+                        resultSet.getDouble(9) + " kr",
                         resultSet.getString(10)));
 
             }

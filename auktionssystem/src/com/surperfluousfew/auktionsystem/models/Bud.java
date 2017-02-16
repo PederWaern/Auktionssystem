@@ -4,10 +4,10 @@ import com.sun.javafx.binding.StringFormatter;
 
 public class Bud {
 
-    Kund kund;
-    Auktion auktion;
-    double belopp;
-    String tid;
+    private Kund kund;
+    private Auktion auktion;
+    private double belopp;
+    private String tid;
 
     public Bud(Kund kund, Auktion auktion, double belopp, String tid) {
         this.kund = kund;

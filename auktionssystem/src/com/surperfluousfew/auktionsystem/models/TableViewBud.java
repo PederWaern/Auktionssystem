@@ -5,10 +5,10 @@ public class TableViewBud {
     private String personnummer;
     private String fornamn;
     private String efternamn;
-    private double bud;
+    private String bud;
     private String tid;
 
-    public TableViewBud(String personnummer, String fornamn, String efternamn, double bud, String tid) {
+    public TableViewBud(String personnummer, String fornamn, String efternamn, String bud, String tid) {
         this.personnummer = personnummer;
         this.fornamn = fornamn;
         this.efternamn = efternamn;
@@ -28,7 +28,7 @@ public class TableViewBud {
         return efternamn;
     }
 
-    public double getBud() {
+    public String getBud() {
         return bud;
     }
 
