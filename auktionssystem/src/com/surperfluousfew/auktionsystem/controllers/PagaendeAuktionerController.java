@@ -61,7 +61,7 @@ public class PagaendeAuktionerController extends GridPane {
                 for (Bud bud : b.getBudArrayList()) {
                     items.add(new TableViewBud(bud.getKund().getPersonnummer(),
                             bud.getKund().getFornamn(), bud.getKund().getEfternamn()
-                            , bud.getBelopp(), bud.getTid()));
+                            , bud.getBelopp() + " kr", bud.getTid()));
 
                 }
 

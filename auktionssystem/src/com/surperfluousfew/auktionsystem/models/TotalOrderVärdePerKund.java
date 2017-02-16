@@ -4,9 +4,9 @@ public class TotalOrderVärdePerKund {
     private String fornamn;
     private String efternamn;
     private String personNummer;
-    private double totalOrderVarde;
+    private String totalOrderVarde;
 
-    public TotalOrderVärdePerKund(String fornamn, String efternamn, String personNummer, double totalOrderVarde) {
+    public TotalOrderVärdePerKund(String fornamn, String efternamn, String personNummer, String totalOrderVarde) {
         this.fornamn = fornamn;
         this.efternamn = efternamn;
         this.personNummer = personNummer;
@@ -25,7 +25,7 @@ public class TotalOrderVärdePerKund {
         return personNummer;
     }
 
-    public double getTotalOrderVarde() {
+    public String getTotalOrderVarde() {
         return totalOrderVarde;
     }
 
