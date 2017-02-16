@@ -19,33 +19,19 @@ public class Leverantor {
         return organisitionsnummer;
     }
 
-    public void setOrganisitionsnummer(String organisitionsnummer) {
-        this.organisitionsnummer = organisitionsnummer;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(String telefonnummer) {
-        this.telefonnummer = telefonnummer;
-    }
-
     public String getEpost() {
         return epost;
     }
 
-    public void setEpost(String epost) {
-        this.epost = epost;
-    }
+
 
     @Override
     public String toString() {

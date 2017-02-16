@@ -28,40 +28,20 @@ public class Auktion {
         return produkt;
     }
 
-    public void setProdukt(Produkt produkt) {
-        this.produkt = produkt;
-    }
-
     public double getAcceptpris() {
         return acceptpris;
-    }
-
-    public void setAcceptpris(double acceptpris) {
-        this.acceptpris = acceptpris;
     }
 
     public double getUtgangspris() {
         return utgangspris;
     }
 
-    public void setUtgangspris(double utgangspris) {
-        this.utgangspris = utgangspris;
-    }
-
     public String getStartDatum() {
         return startDatum;
     }
 
-    public void setStartDatum(String startDatum) {
-        this.startDatum = startDatum;
-    }
-
     public String getSlutDatum() {
         return slutDatum;
-    }
-
-    public void setSlutDatum(String slutDatum) {
-        this.slutDatum = slutDatum;
     }
 
     public int getId() {
@@ -72,7 +52,4 @@ public class Auktion {
         return budArrayList;
     }
 
-    public void setBudArrayList(ArrayList<Bud> budArrayList) {
-        this.budArrayList = budArrayList;
-    }
 }

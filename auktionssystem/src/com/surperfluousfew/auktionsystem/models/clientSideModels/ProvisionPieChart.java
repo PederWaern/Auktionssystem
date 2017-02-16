@@ -1,5 +1,7 @@
 package com.surperfluousfew.auktionsystem.models.clientSideModels;
 
+import java.util.Date;
+
 /**
  * Created by daniellindkarlberg on 2017-02-16.
  */
