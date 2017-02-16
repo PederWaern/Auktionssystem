@@ -67,6 +67,8 @@ public class LogInController extends VBox {
                 primaryStage.setResizable(false);
                 primaryStage.show();
                 oldStage.close();
+            } else if (adminAnstallningsnummer.equals(loginAnstallningsnummer) && !admin.getLosenord().equals(loginLosenord)) {
+                tInfo.setText("Felaktigt lösenord");
             } else {
                 tInfo.setText("Felaktiga inloggningsuppgifter");
             }
