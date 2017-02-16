@@ -14,9 +14,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         DatabaseLoader dbLoader = new DatabaseLoader();
 
-        // Parent root = FXMLLoader.load(getClass().getResource("/fxml/logIn.fxml"));
         LogInController logInController = new LogInController(dbLoader);
-        primaryStage.setTitle("Auktionsystem");
+        primaryStage.setTitle("Auktionssystem");
         primaryStage.setHeight(300);
         primaryStage.setWidth(400);
         primaryStage.setScene(new Scene(logInController));
