@@ -1,52 +1,37 @@
--- test select
-SELECT *
-FROM rakna_ut_provision;
+USE auktionssystem;
 
-SELECT * from bud;
+-- Registrera produkt --
 
-SELECT * FROM avslutade_auktioner;
-SELECT *
-FROM avslutade_auktioner_utan_kopare;
+INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn)
+VALUES ('111111111111', 'Badanka', 'Gul', NULL);
+
+
+-- Skapa en auktion --
+SET @msg = "";
+CALL lagg_till_auktion(11, 2000, 3000, '2017-02-16', '2017-03-16', @msg);
+
 SELECT * FROM auktion;
-SELECT * from provision_per_manad;
 
 
-/**********************
-  JAVAFUNKTIONALITET
-***********************/
-
--- registrera en produkt
-  INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn) VALUES
-  (?,?,?,?);
-
- -- lägg till auktion
-
-call lagg_till_auktion (?,?,?,?,?,?)
-
--- lista pågående auktioner
-
-SELECT * from pagaende_auktioner;
-
--- se budhistorik för en viss auktion samt vilka kunder som lagt bud
-
-call budhistorik_specificerad_auktion('?');
-
--- Vilka auktioner avslutas inom ett visst datum intervall och vad blir provisionen
-
-call provision_specifierat_tidsintervall('?', '?');
-
--- Visa view på avslutade auktioner utan köpare
-
-SELECT * from avslutade_auktioner_utan_kopare;
-
--- visa kundlista med kunder som köpt något samt deras totala ordervärde är
-
-SELECT * from total_order_value_per_customer;
-
--- vad är den totala provisionen per månad
-
-SELECT * from provision_per_manad;
+-- Visa pågående auktioner samt högsta bud --
+SELECT * FROM pagaende_auktioner;
 
 
+-- Se budhistorik för en specifik auktion --
+CALL budhistorik_specificerad_auktion(1);
 
-Call budhistorik_specificerad_auktion(1);
+
+-- Vilka auktioner avslutas inom ett visst datumontervall
+CALL provision_pagaende_auktioner_specifierat_tidsintervall('2017-01-01', '2017-03-23');
+
+
+-- Auktion som avslutats hamnar i avslutade auktioner, se event i ddl
+
+
+-- Visa en kundlista på kunder som köpt något
+SELECT * FROM total_order_value_per_customer;
+
+
+-- Total provisionen per månad --
+
+SELECT * FROM provision_per_manad;

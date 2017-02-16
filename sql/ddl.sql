@@ -453,9 +453,6 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
   (10, 3000, 1000, '2017-01-01', '2017-02-01');
 
 
-
-
-
 -- bud
 INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('6808033117', 1, 1500),
