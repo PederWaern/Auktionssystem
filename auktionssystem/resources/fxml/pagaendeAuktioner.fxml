@@ -28,27 +28,27 @@
       
                             <TableView fx:id="tableView" prefHeight="350.0" prefWidth="700" GridPane.halignment="CENTER" GridPane.rowIndex="1">
               <columns>
-                  <TableColumn minWidth="140.0" text="Personnummer">
+                  <TableColumn minWidth="140.0" resizable="false" text="Personnummer">
                       <cellValueFactory>
                           <PropertyValueFactory property="personnummer" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="140.0" text="Förnamn">
+                  <TableColumn minWidth="130.0" resizable="false" text="Förnamn">
                       <cellValueFactory>
                           <PropertyValueFactory property="fornamn" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="140.0" text="Efternamn">
+                  <TableColumn minWidth="140.0" resizable="false" text="Efternamn">
                       <cellValueFactory>
                           <PropertyValueFactory property="efternamn" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="140.0" text="Tid">
+                  <TableColumn minWidth="160.0" resizable="false" text="Tid">
                       <cellValueFactory>
                           <PropertyValueFactory property="tid" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="138.0" text="Bud">
+                  <TableColumn minWidth="128.0" resizable="false" text="Bud">
                       <cellValueFactory>
                           <PropertyValueFactory property="bud" />
                       </cellValueFactory>

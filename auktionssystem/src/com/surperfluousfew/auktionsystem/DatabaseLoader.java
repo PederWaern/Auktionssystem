@@ -58,7 +58,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("/Users/christopherolsson/Documents/Nackademin/Databasteknik/Examination/Auktionssystem/Auktionssystem/auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("C:\\Users\\Sam\\Documents\\Auktionssystem\\auktionssystem\\configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
