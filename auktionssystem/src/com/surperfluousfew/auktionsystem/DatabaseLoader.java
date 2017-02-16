@@ -61,7 +61,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("C:\\Users\\Sam\\Documents\\Auktionssystem\\auktionssystem\\configuration/db.properties");
+            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -254,8 +254,11 @@ public class DatabaseLoader {
     }
 
     public void loadKund() {
+        loadAddresses();
         kunder = new ArrayList<>();
         setup();
+
+
 
         try {
             statement = connection.createStatement();
@@ -472,7 +475,6 @@ public class DatabaseLoader {
         }
         return list;
     }
-
 
 
     private void closeResources() {

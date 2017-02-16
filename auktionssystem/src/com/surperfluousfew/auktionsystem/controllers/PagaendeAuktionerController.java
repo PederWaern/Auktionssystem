@@ -38,7 +38,6 @@ public class PagaendeAuktionerController extends StackPane {
         }
         this.dbLoader = dbLoader;
         dbLoader.loadLeverantor();
-        dbLoader.loadAddresses();
         dbLoader.loadKund();
         dbLoader.loadProdukt();
         dbLoader.loadAuktion();
