@@ -58,7 +58,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("../auktionssystem/configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -329,7 +329,7 @@ public class DatabaseLoader {
                String personNummer = resultSet.getString(3);
                double totaltOrderVärde = resultSet.getDouble(4);
 
-               list.add(new TotalOrderVärdePerKund(fornamn,efternamn,personNummer, totaltOrderVärde));
+               list.add(new TotalOrderVärdePerKund(fornamn,efternamn,personNummer, totaltOrderVärde + " kr"));
 
             }
 
