@@ -37,8 +37,6 @@ public class LogInController extends VBox {
             throw new RuntimeException(e);
         }
         this.dbLoader = dbLoader;
-
-
     }
 
     @FXML

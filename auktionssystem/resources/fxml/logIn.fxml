@@ -26,7 +26,7 @@
                     </padding>
                 </Label>
 
-                <TextField fx:id="txfAnstallninsnummer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <TextField fx:id="txfAnstallninsnummer" onAction="#onEnter" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
                 <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <GridPane.margin>
