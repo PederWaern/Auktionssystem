@@ -34,34 +34,12 @@ public class DatabaseLoader {
     private List<Auktion> auktioner = null;
     private List<Bud> bud = null;
 
-    public List<Bud> getBud() {
-        return bud;
-    }
 
-    public List<Kund> getKunder() {
-        return kunder;
-    }
-
-    public List<Adress> getAddresses() {
-        return addresses;
-    }
-
-    public List<Leverantor> getLeverantorer() {
-        return leverantorer;
-    }
-
-    public List<Produkt> getProdukter() {
-        return produkter;
-    }
-
-    public List<Auktion> getAuktioner() {
-        return auktioner;
-    }
 
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("../auktionssystem/configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -188,9 +166,7 @@ public class DatabaseLoader {
     }
 
     public void setAuktionsBud() {
-
-        for (Auktion a :
-                auktioner) {
+        for (Auktion a : auktioner) {
             for (Bud b : bud) {
                 if (b.getAuktion().getId() == a.getId())
                     a.getBudArrayList().add(b);
@@ -258,8 +234,6 @@ public class DatabaseLoader {
         kunder = new ArrayList<>();
         setup();
 
-
-
         try {
             statement = connection.createStatement();
             statement.executeQuery("SELECT  * FROM kund");
@@ -308,19 +282,54 @@ public class DatabaseLoader {
         }
     }
 
-    private Adress getAddress(int addressId) {
-        for (Adress adress : addresses) {
-            if (adress.getId() == addressId) {
-                return adress;
+    public List<AuktionTidsintervall> loadAuktionTidsintervall(String startDatum, String slutSatum){
+        setup();
+        List<AuktionTidsintervall> list = new ArrayList<>();
+        try {
+            callableStatement = connection.prepareCall("{CALL provision_pagaende_auktioner_specifierat_tidsintervall(?,?)}");
+            callableStatement.setString(1, startDatum);
+            callableStatement.setString(2, slutSatum);
+            resultSet = callableStatement.executeQuery();
+
+            while (resultSet.next()){
+                list.add(new AuktionTidsintervall(resultSet.getString(1),
+                        resultSet.getString(7),
+                        resultSet.getDouble(8) + " kr",
+                        resultSet.getDouble(9) + " kr",
+                        resultSet.getString(10)));
+
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeResources();
         }
-        return null;
+        return list;
     }
 
-    public List<Admin> getAdmins() {
-        return admins;
-    }
 
+
+    public List<ProvisionPerManad> loadProvisionPerManad(){
+        setup();
+        List<ProvisionPerManad> list = new ArrayList<>();
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM provision_per_manad");
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+
+                list.add(new ProvisionPerManad(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getDouble(3) + " kr"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return list;
+    }
 
     public ArrayList<TotalOrderVärdePerKund> totalOrderVärdePerKundLista () {
         setup();
@@ -345,6 +354,15 @@ public class DatabaseLoader {
             closeResources();
         }
         return list;
+    }
+
+    private Adress getAddress(int addressId) {
+        for (Adress adress : addresses) {
+            if (adress.getId() == addressId) {
+                return adress;
+            }
+        }
+        return null;
     }
 
     public void addNewAddressToDatabase(String gata, String postnummer, String ort) {
@@ -427,55 +445,32 @@ public class DatabaseLoader {
         return null;
     }
 
-    public List<AuktionTidsintervall> getAuktionTidsintervall(String startDatum, String slutSatum){
-        setup();
-        List<AuktionTidsintervall> list = new ArrayList<>();
-        try {
-            callableStatement = connection.prepareCall("{CALL provision_pagaende_auktioner_specifierat_tidsintervall(?,?)}");
-            callableStatement.setString(1, startDatum);
-            callableStatement.setString(2, slutSatum);
-            resultSet = callableStatement.executeQuery();
 
-            while (resultSet.next()){
-                list.add(new AuktionTidsintervall(resultSet.getString(1),
-                        resultSet.getString(7),
-                        resultSet.getDouble(8) + " kr",
-                        resultSet.getDouble(9) + " kr",
-                        resultSet.getString(10)));
-
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            closeResources();
-        }
-        return list;
+    public List<Adress> getAddresses() {
+        return addresses;
     }
 
-
-    public List<ProvisionPerManad> getProvisionPerManad(){
-        setup();
-        List<ProvisionPerManad> list = new ArrayList<>();
-        try {
-            statement = connection.createStatement();
-            statement.executeQuery("SELECT * FROM provision_per_manad");
-            resultSet = statement.getResultSet();
-            while (resultSet.next()) {
-
-                list.add(new ProvisionPerManad(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getDouble(3) + " kr"));
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeResources();
-        }
-        return list;
+    public List<Produkt> getProdukter() {
+        return produkter;
     }
 
+    public List<Auktion> getAuktioner() {
+        return auktioner;
+    }
+
+    public List<Admin> getAdmins() {return admins;}
+
+    public List<Bud> getBud() {
+        return bud;
+    }
+
+    public List<Kund> getKunder() {
+        return kunder;
+    }
+
+    public List<Leverantor> getLeverantorer() {
+        return leverantorer;
+    }
 
     private void closeResources() {
         try {

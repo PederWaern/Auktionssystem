@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<fx:root type="javafx.scene.layout.GridPane" alignment="center" hgap="10" prefHeight="550" prefWidth="800" vgap="10" xmlns:fx="http://javafx.com/fxml">
+<fx:root alignment="center" hgap="10" prefHeight="550" prefWidth="800" type="javafx.scene.layout.GridPane" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112">
     <children>
         <ChoiceBox fx:id="cbProdukt" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
@@ -24,9 +24,9 @@
 
         <TextField fx:id="txfApris" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <DatePicker fx:id="dpStart" promptText="Startdatum" GridPane.rowIndex="3" />
+        <DatePicker fx:id="dpStart" editable="false" promptText="Startdatum" GridPane.rowIndex="3" />
 
-        <DatePicker fx:id="dpSlut" promptText="Slutdatum" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <DatePicker fx:id="dpSlut" editable="false" promptText="Slutdatum" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
         <Text fx:id="tInfo" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <Label layoutX="163.0" layoutY="260.0" text="Produkt:" />
