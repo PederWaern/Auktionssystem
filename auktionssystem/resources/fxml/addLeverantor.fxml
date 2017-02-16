@@ -1,28 +1,55 @@
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<fx:root type="javafx.scene.layout.GridPane"
-         xmlns:fx="http://javafx.com/fxml"
-         alignment="center"
-         hgap="10"
-         vgap="10"
-         prefHeight="550"
-         prefWidth="800">
-    <children>
-        <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField fx:id="txfName" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <Label text="Organisitionsnummer:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-        <TextField fx:id="txfOnummer" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-        <Label text="Tel:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="txfTelnummer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label text="Epost:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <TextField fx:id="txfEpost" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-        <Label text="Provision:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <TextField fx:id="txfProvision" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Button fx:id="bAddKund"
-                text="Lägg till"
-                onAction="#addLeverantor"
-                GridPane.rowIndex="2"
-                GridPane.columnIndex="3"
-                GridPane.halignment="RIGHT"/>
-    </children>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<fx:root prefHeight="550.0" prefWidth="800.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="550.0" prefWidth="800.0">
+         <children>
+            <javafx.scene.layout.GridPane alignment="center" hgap="10" prefHeight="147.0" prefWidth="800" vgap="10">
+                <children>
+                    <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="txfName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="Organisitionsnummer:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <TextField fx:id="txfOnummer" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                    <Label text="Tel:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="txfTelnummer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Epost:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <TextField fx:id="txfEpost" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <Label text="Provision:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="txfProvision" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button fx:id="bAddKund" onAction="#addLeverantor" text="Lägg till" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                </children>
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+            </javafx.scene.layout.GridPane>
+            <Text fx:id="tInfo" strokeType="OUTSIDE" strokeWidth="0.0">
+               <VBox.margin>
+                  <Insets left="120.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+         <padding>
+            <Insets top="200.0" />
+         </padding>
+      </VBox>
+   </children>
 </fx:root>

@@ -5,14 +5,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class AddLeverantorController extends GridPane {
+public class AddLeverantorController extends AnchorPane {
 
     @FXML
     private TextField txfName, txfOnummer, txfTelnummer, txfEpost, txfProvision;
+    @FXML
+    private Text tInfo;
 
     private DatabaseLoader dbLoader;
 
@@ -28,14 +32,13 @@ public class AddLeverantorController extends GridPane {
         this.dbLoader = dbLoader;
     }
 
-    // TODO tell the user if the action was successful
     public void addLeverantor(ActionEvent actionEvent) {
         String name = txfName.getText();
         String orgnummer = txfOnummer.getText();
         String telnummer = txfTelnummer.getText();
         String epost = txfEpost.getText();
         double prov = Double.parseDouble(txfProvision.getText()) / 100;
-
-        dbLoader.addLeverantor(name, orgnummer, telnummer, epost, prov);
+        String message = dbLoader.addLeverantor(name, orgnummer, telnummer, epost, prov);
+        tInfo.setText(message);
     }
 }

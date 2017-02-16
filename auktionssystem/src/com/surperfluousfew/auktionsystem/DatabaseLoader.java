@@ -58,7 +58,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("C:\\Users\\Sam\\Documents\\Auktionssystem\\auktionssystem\\configuration/db.properties");
+            FileInputStream in = new FileInputStream("/Users/christopherolsson/Documents/Nackademin/Databasteknik/Examination/Auktionssystem/Auktionssystem/auktionssystem/configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");
@@ -398,21 +398,27 @@ public class DatabaseLoader {
         return null;
     }
 
-    public void addLeverantor(String name, String orgnummer, String telnummer, String epost, double prov){
+    public String addLeverantor(String name, String orgnummer, String telnummer, String epost, double prov){
         setup();
         try {
-            callableStatement = connection.prepareCall("{call lagg_till_leverantor (?,?,?,?,?)}");
+            callableStatement = connection.prepareCall("{call lagg_till_leverantor (?,?,?,?,?,?)}");
             callableStatement.setString(1, orgnummer);
             callableStatement.setString(2, name);
             callableStatement.setString(3, telnummer);
             callableStatement.setString(4, epost);
             callableStatement.setDouble(5, prov);
+            callableStatement.registerOutParameter(6, Types.VARCHAR);
             callableStatement.executeUpdate();
-        } catch (SQLException e) {
+            return callableStatement.getString(6);
+        } catch (SQLIntegrityConstraintViolationException icv) {
+            return "Leverantören finns redan i systemet";
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeResources();
         }
+        return null;
     }
 
     public List<AuktionTidsintervall> getAuktionTidsintervall(String startDatum, String slutSatum){
