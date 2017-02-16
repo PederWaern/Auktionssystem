@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="550.0" fitWidth="800.0">
          <image>
-            <Image url="@../images/welcome.jpg" />
+            <Image url="@../images/background.jpg" />
          </image>
       </ImageView>
       <javafx.scene.layout.GridPane alignment="CENTER" prefHeight="550.0" prefWidth="760.0" vgap="10">
