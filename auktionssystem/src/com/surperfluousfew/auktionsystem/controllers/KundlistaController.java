@@ -9,10 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-public class KundlistaController extends AnchorPane {
+public class KundlistaController extends StackPane {
 
     @FXML
     TableColumn sortCol;

@@ -10,11 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AuktionTidsintervallController extends AnchorPane {
+public class AuktionTidsintervallController extends StackPane {
 
     @FXML
     private Button btSubmit;

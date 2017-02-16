@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<fx:root type="javafx.scene.layout.AnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/">
-    <children>
-        <TableView fx:id="tableView"  minWidth="700" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0"
-                   AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="573.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/background.jpg" />
+         </image>
+      </ImageView>
+        <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="700" prefHeight="400.0" prefWidth="700.0">
             <columns>
-                <TableColumn  prefWidth="120.0" fx:id="sortCol" text="Förnamn">
+                <TableColumn fx:id="sortCol" prefWidth="120.0" text="Förnamn">
                     <cellValueFactory>
-                        <PropertyValueFactory property="fornamn"/>
+                        <PropertyValueFactory property="fornamn" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="120.0" text="Efternamn">
                     <cellValueFactory>
-                        <PropertyValueFactory property="efternamn"/>
+                        <PropertyValueFactory property="efternamn" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="120.0" text="Personnummer">
                     <cellValueFactory>
-                        <PropertyValueFactory property="personNummer"/>
+                        <PropertyValueFactory property="personNummer" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn  prefWidth="120.0" text="Totalt Ordervärde">
+                <TableColumn prefWidth="120.0" text="Totalt Ordervärde">
                     <cellValueFactory>
-                        <PropertyValueFactory property="totalOrderVarde"/>
+                        <PropertyValueFactory property="totalOrderVarde" />
                     </cellValueFactory>
                 </TableColumn>
             </columns>
 
-            <sortOrder>
-                <fx:reference  source="sortCol"/>
+                              <sortOrder>
+                <fx:reference source="sortCol" />
             </sortOrder>
         </TableView>
-    </children>
-
+   </children>
 </fx:root>

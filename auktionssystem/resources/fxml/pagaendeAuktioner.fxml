@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -20,31 +21,34 @@
       </ImageView>
       <javafx.scene.layout.GridPane alignment="CENTER" prefHeight="550.0" prefWidth="760.0" vgap="10">
       
-                            <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="0" />
+                            <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="0">
+            <GridPane.margin>
+               <Insets bottom="20.0" />
+            </GridPane.margin></ChoiceBox>
       
                             <TableView fx:id="tableView" prefHeight="400" prefWidth="700" GridPane.halignment="CENTER" GridPane.rowIndex="1">
               <columns>
-                  <TableColumn text="Personnummer">
+                  <TableColumn minWidth="140.0" text="Personnummer">
                       <cellValueFactory>
                           <PropertyValueFactory property="personnummer" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn text="Förnamn">
+                  <TableColumn minWidth="140.0" text="Förnamn">
                       <cellValueFactory>
                           <PropertyValueFactory property="fornamn" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn text="Efternamn">
+                  <TableColumn minWidth="140.0" text="Efternamn">
                       <cellValueFactory>
                           <PropertyValueFactory property="efternamn" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn text="Tid">
+                  <TableColumn minWidth="140.0" text="Tid">
                       <cellValueFactory>
                           <PropertyValueFactory property="tid" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn text="Bud">
+                  <TableColumn minWidth="140.0" text="Bud">
                       <cellValueFactory>
                           <PropertyValueFactory property="bud" />
                       </cellValueFactory>
