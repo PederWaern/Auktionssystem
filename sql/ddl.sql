@@ -198,10 +198,10 @@ CREATE PROCEDURE lagg_till_produkt(IN in_lev_orgnr CHAR, IN in_namn CHAR, IN in_
       (in_lev_orgnr, in_namn, in_beskrivning, in_bildnamn);
   END;
 -- Lagg till leverantor
-CREATE PROCEDURE lagg_till_leverantor(IN in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
-                                      IN in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
-                                      IN in_provision           DOUBLE,
-                                      OUT meddelande            VARCHAR(100))
+CREATE PROCEDURE lagg_till_leverantor(IN  in_organisitionsnummer CHAR(12), IN in_namn VARCHAR(50),
+                                      IN  in_telefonnummer       VARCHAR(13), IN in_epost VARCHAR(50),
+                                      IN  in_provision           DOUBLE,
+                                      OUT meddelande             VARCHAR(100))
   BEGIN
     INSERT INTO leverantor VALUES (in_organisitionsnummer, in_namn, in_telefonnummer, in_epost, in_provision);
     SET meddelande = Concat(in_namn, " lades till!");
@@ -353,14 +353,6 @@ CREATE VIEW pagaende_auktioner AS
     INNER JOIN produkt ON produkt.id = auktion.produkt_id
   WHERE bud.belopp = b2.hogsta_bud;
 
--- View rakna ut provision TODO - needs oversight
-DROP VIEW IF EXISTS rakna_ut_provision;
-CREATE VIEW rakna_ut_provision AS
-  SELECT avslutade_auktioner.hogsta_bud * leverantor.provision
-  FROM avslutade_auktioner
-    INNER JOIN produkt ON avslutade_auktioner.produkt_id = produkt.id
-    INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
-
 -- VIEW - Visa en kundlista på alla kunder som kopt nagot, samt summan for deras totala ordervarde.
 CREATE OR REPLACE VIEW total_order_value_per_customer AS
   SELECT
@@ -371,14 +363,6 @@ CREATE OR REPLACE VIEW total_order_value_per_customer AS
   FROM kund
     INNER JOIN avslutade_auktioner ON avslutade_auktioner.kund_personnummer = kund.personnummer
   GROUP BY kund.personnummer;
-
--- test select
-SELECT
-  auktion.acceptpris,
-  auktion.acceptpris * leverantor.provision
-FROM auktion
-  INNER JOIN produkt ON auktion.produkt_id = produkt.id
-  INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer;
 
 -- VIEW prov per månad
 DROP VIEW IF EXISTS provision_per_manad;
@@ -408,14 +392,14 @@ INSERT INTO adress (gata, postnummer, ort) VALUES
 
 -- kunder
 INSERT INTO kund (personnummer, fornamn, efternamn, telefonnummer, epost, adress_id) VALUES
-  ('6808033117', 'Fritte', 'Bohman', '0737482653', 'frittw.bohman@domäinen.de',  1),
+  ('6808033117', 'Fritte', 'Bohman', '0737482653', 'frittw.bohman@domäinen.de', 1),
   ('3212077743', 'Anna', 'Lund', '0743782644', 'hacker.c8s@anon.w', 2),
   ('8707736734', 'Noppe', 'Segelbåt', '0798375892', 'noppe.segelbåt@buissenes.com', 3),
-  ('7309824728', 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com',  4),
+  ('7309824728', 'Limpan', 'Persson', '0734683844', 'limpan123.ha@hotmail.com', 4),
   ('5503047294', 'Edit', 'Gärdeström', '0794782828', 'vadsadu@virus.com', 5),
-  ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se',  6);
+  ('7706034568', 'Bella', 'Bortskämd', '0783672837', 'Bellam@bloggen.se', 6);
 
-  -- admins
+-- admins
 INSERT INTO admin (personnummer, fornamn, efternamn, telefonnummer, epost, losenord, adress_id) VALUES
   ('1703052157', 'Gunnar', 'Tillhamre', '0738463987', 'gunnar.tillhamre@domäinen.de', '111', 7);
 
@@ -453,7 +437,6 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
   (8, 3000, 1000, '2017-01-01', '2017-02-01'),
   (9, 3000, 1000, '2017-01-01', '2017-02-01'),
   (10, 3000, 1000, '2017-01-01', '2017-02-01');
-
 
 -- bud
 INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
