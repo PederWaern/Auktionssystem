@@ -61,7 +61,7 @@ public class LogInController extends VBox {
                 HomeController homeController = new HomeController(dbLoader);
                 Stage oldStage = stageHandler.getParentStage(root);
                 Stage primaryStage = new Stage();
-                primaryStage.setTitle("Auktionsystem");
+                primaryStage.setTitle("Auktionssystem");
                 primaryStage.setHeight(600);
                 primaryStage.setWidth(800);
                 primaryStage.setScene(new Scene(homeController));
