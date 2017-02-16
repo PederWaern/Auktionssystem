@@ -2,10 +2,12 @@ package com.surperfluousfew.auktionsystem.controllers;
 
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.models.ProvisionPerManad;
+import com.surperfluousfew.auktionsystem.models.ProvisionPieChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,8 +17,12 @@ public class ProvisionController extends AnchorPane {
 
     @FXML
     private TableView tableView;
+    @FXML
+    private PieChart pieChart;
 
     private DatabaseLoader dbLoader;
+    private ObservableList<ProvisionPerManad> provisionPerManads;
+
 
     public ProvisionController(DatabaseLoader dbLoader) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/provision.fxml"));
@@ -29,10 +35,34 @@ public class ProvisionController extends AnchorPane {
         }
         this.dbLoader = dbLoader;
         populateTable();
+        populatePieChart();
     }
 
     private void populateTable() {
-        ObservableList<ProvisionPerManad> observableList = FXCollections.observableArrayList(dbLoader.getProvisionPerManad());
-        tableView.getItems().addAll(observableList);
+        provisionPerManads = FXCollections.observableArrayList(dbLoader.getProvisionPerManad());
+        tableView.getItems().addAll(provisionPerManads);
     }
+
+    private void populatePieChart(){
+
+        ObservableList<ProvisionPieChart> observablePieChartList = FXCollections.observableArrayList();
+
+        for (ProvisionPerManad provisionPerManad: provisionPerManads
+             ) {
+            observablePieChartList.add(new ProvisionPieChart(provisionPerManad.getManad(), provisionPerManad.getProvision()));
+        }
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (ProvisionPieChart p: observablePieChartList
+             ) {
+            pieChartData.add(new PieChart.Data(p.getManad(), p.getProvision()));
+
+        }
+        pieChart.setData(pieChartData);
+    }
+
 }
+
+
+
+
