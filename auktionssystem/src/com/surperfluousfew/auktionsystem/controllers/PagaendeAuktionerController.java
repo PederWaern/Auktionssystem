@@ -12,11 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.List;
 
-public class PagaendeAuktionerController extends GridPane {
+public class PagaendeAuktionerController extends StackPane {
 
     @FXML
     Parent root;
