@@ -355,11 +355,10 @@ public class DatabaseLoader {
             closeResources();
         }
     }
-
     public void addNewKundToDatabase(String personnummer, String fornamn, String efternamn, String telefonnummer, String epost, int addressId) {
         setup();
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO kund (personnummer, fornamn, efternamn, telefonnummer, epost, address_id) VALUES (?,?,?,?,?,?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO kund (personnummer, fornamn, efternamn, telefonnummer, epost, adress_id) VALUES (?,?,?,?,?,?)");
             preparedStatement.setString(1, personnummer);
             preparedStatement.setString(2, fornamn);
             preparedStatement.setString(3, efternamn);

@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
-
-
-<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.surperfluousfew.auktionsystem.controllers.KundlistaController">
-   <children>
-      <TableView fx:id="tableView" minWidth="700" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
-         <columns>
-            <TableColumn prefWidth="120.0" text="Förnamn">
-               <cellValueFactory>
-                  <PropertyValueFactory property="fornamn" />
-               </cellValueFactory>
-            </TableColumn>
-            <TableColumn prefWidth="120.0" text="Efternamn">
-               <cellValueFactory>
-                  <PropertyValueFactory property="efternamn" />
-               </cellValueFactory>
-            </TableColumn>
-            <TableColumn prefWidth="120.0" text="Personnummer">
-               <cellValueFactory>
-                  <PropertyValueFactory property="personNummer" />
-               </cellValueFactory>
-            </TableColumn>
-            <TableColumn prefWidth="120.0" text="Totalt Ordervärde">
-               <cellValueFactory>
-                  <PropertyValueFactory property="totalOrderVarde" />
-               </cellValueFactory>
-            </TableColumn>
-         </columns>
-      </TableView>
-   </children>
-</AnchorPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root type="javafx.scene.layout.AnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/">
+    <children>
+        <TableView fx:id="tableView" minWidth="700" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0"
+                   AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+            <columns>
+                <TableColumn prefWidth="120.0" text="Förnamn">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="fornamn"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="120.0" text="Efternamn">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="efternamn"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="120.0" text="Personnummer">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="personNummer"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="120.0" text="Totalt Ordervärde">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="totalOrderVarde"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </children>
+</fx:root>

@@ -5,8 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.surperfluousfew.auktionsystem.controllers.LogInController">
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <children>
         <GridPane fx:id="root" prefHeight="200.0" prefWidth="400.0">
             <children>
@@ -64,4 +63,4 @@
             </VBox.margin>
         </Text>
     </children>
-</VBox>
+</fx:root>

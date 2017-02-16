@@ -5,17 +5,29 @@ import com.surperfluousfew.auktionsystem.models.ProvisionPerManad;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
-public class ProvisionController {
-    DatabaseLoader dbLoader = new DatabaseLoader();
+public class ProvisionController extends AnchorPane {
 
     @FXML
-    TableView tableView;
+    private TableView tableView;
 
-    public void initialize(){
+    private DatabaseLoader dbLoader;
+
+    public ProvisionController(DatabaseLoader dbLoader) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/provision.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.dbLoader = dbLoader;
         populateTable();
     }
 

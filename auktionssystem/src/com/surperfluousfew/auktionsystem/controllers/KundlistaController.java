@@ -5,40 +5,50 @@ import com.surperfluousfew.auktionsystem.models.TotalOrderVärdePerKund;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
-public class KundlistaController {
+import java.io.IOException;
 
-    TotalOrderVärdePerKund kund;
-    private DatabaseLoader databaseLoader = new DatabaseLoader();
-    private ObservableList<TotalOrderVärdePerKund> totalOrderVärdePerKunds;
-
+public class KundlistaController extends AnchorPane {
 
     @FXML
     private TableView tableView;
 
+    private TotalOrderVärdePerKund kund;
+    private DatabaseLoader dbLoader;
+    private ObservableList<TotalOrderVärdePerKund> totalOrderVärdePerKunds;
 
-    public void initialize(){
 
+    public KundlistaController(DatabaseLoader dbLoader) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/kundlista.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.dbLoader = dbLoader;
         loadAllCustomers();
     }
 
-    private void loadAllCustomers(){
+    private void loadAllCustomers() {
 
-        totalOrderVärdePerKunds  = FXCollections.observableList(databaseLoader.totalOrderVärdePerKundLista());
+        totalOrderVärdePerKunds = FXCollections.observableList(dbLoader.totalOrderVärdePerKundLista());
 
         tableView.getItems().clear();
-        for (TotalOrderVärdePerKund t: totalOrderVärdePerKunds) {
+        for (TotalOrderVärdePerKund t : totalOrderVärdePerKunds) {
             tableView.getItems().add(t);
         }
 
 
-
     }
 
-    private String displayMessage(TotalOrderVärdePerKund kund){
+    private String displayMessage(TotalOrderVärdePerKund kund) {
         return (kund.getPersonNummer() + "\n" + kund.getFornamn() + " " + kund.getEfternamn() + "\n"
-        + kund.getTotalOrderVarde());
+                + kund.getTotalOrderVarde());
     }
 
 }

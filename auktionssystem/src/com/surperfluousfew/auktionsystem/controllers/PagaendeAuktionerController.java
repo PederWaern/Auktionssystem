@@ -3,19 +3,20 @@ package com.surperfluousfew.auktionsystem.controllers;
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.models.Auktion;
 import com.surperfluousfew.auktionsystem.models.Bud;
-import com.surperfluousfew.auktionsystem.models.Kund;
 import com.surperfluousfew.auktionsystem.models.TableViewBud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.util.List;
 
-public class PagaendeAuktionerController {
+public class PagaendeAuktionerController extends GridPane {
 
     @FXML
     Parent root;
@@ -23,13 +24,19 @@ public class PagaendeAuktionerController {
     ChoiceBox cbAuktion;
     @FXML
     TableView tableView;
-
+    private DatabaseLoader dbLoader;
     private List<Auktion> arrayAuktion;
 
-
-    @FXML
-    public void initialize() {
-        DatabaseLoader dbLoader = new DatabaseLoader();
+    public PagaendeAuktionerController(DatabaseLoader dbLoader) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/pagaendeAuktioner.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.dbLoader = dbLoader;
         dbLoader.loadLeverantor();
         dbLoader.loadAddresses();
         dbLoader.loadKund();
@@ -43,6 +50,7 @@ public class PagaendeAuktionerController {
             cbAuktion.getItems().add(a.getProdukt().getNamn());
         }
         cbAuktion.getSelectionModel().selectFirst();
+
     }
 
 

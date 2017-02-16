@@ -1,13 +1,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane fx:id="root"
-          fx:controller="com.surperfluousfew.auktionsystem.controllers.AddLeverantorController"
-          xmlns:fx="http://javafx.com/fxml"
-          alignment="center"
-          hgap="10"
-          vgap="10"
-          prefHeight="550"
-          prefWidth="800">
+<fx:root type="javafx.scene.layout.GridPane"
+         xmlns:fx="http://javafx.com/fxml"
+         alignment="center"
+         hgap="10"
+         vgap="10"
+         prefHeight="550"
+         prefWidth="800">
     <children>
         <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <TextField fx:id="txfName" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
@@ -26,4 +25,4 @@
                 GridPane.columnIndex="3"
                 GridPane.halignment="RIGHT"/>
     </children>
-</GridPane>
+</fx:root>

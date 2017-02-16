@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="root" alignment="CENTER" prefHeight="550" prefWidth="800" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.surperfluousfew.auktionsystem.controllers.PagaendeAuktionerController">
-
+<fx:root type="javafx.scene.layout.GridPane" alignment="CENTER" prefHeight="550" prefWidth="800" vgap="10" xmlns:fx="http://javafx.com/fxml">
 
     <ChoiceBox fx:id="cbAuktion" onAction="#populateView" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="0" />
 
@@ -50,4 +49,4 @@
       <RowConstraints />
    </rowConstraints>
 
-</GridPane>
+</fx:root>

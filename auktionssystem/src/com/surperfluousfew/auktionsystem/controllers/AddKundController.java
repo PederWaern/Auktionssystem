@@ -4,14 +4,17 @@ import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.models.Adress;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.util.List;
 
 
-public class AddKundController {
+public class AddKundController extends GridPane {
 
     @FXML
     private TextField txfFirstName, txfLastName, txfPnummer, txfEpost, txfTelnummer, txfGata, txfPostnummer, txfOrt;
@@ -20,7 +23,19 @@ public class AddKundController {
     @FXML
     private Label labelNyKundStatus;
 
-    private DatabaseLoader dbLoader = new DatabaseLoader();
+    private DatabaseLoader dbLoader;
+
+    public AddKundController(DatabaseLoader dbLoader) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/addKund.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.dbLoader = dbLoader;
+    }
 
     public void addKund(ActionEvent actionEvent) {
         getNewKundDataFromTextfields();

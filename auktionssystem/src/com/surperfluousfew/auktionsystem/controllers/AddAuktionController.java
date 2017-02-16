@@ -6,18 +6,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class AddAuktionController {
+public class AddAuktionController extends GridPane {
     @FXML
     private ChoiceBox cbProdukt;
     @FXML
@@ -27,11 +29,20 @@ public class AddAuktionController {
     @FXML
     private Text tInfo;
 
-    private DatabaseLoader dbLoader = new DatabaseLoader();
+    private DatabaseLoader dbLoader;
     private List<Produkt> produkter;
     private Pattern doublePattern = Pattern.compile("\\d+\\.*\\d+");
 
-    public void initialize() {
+    public AddAuktionController(DatabaseLoader dbLoader) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/addAuktion.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.dbLoader = dbLoader;
         loadProducts();
         showProducts();
     }
