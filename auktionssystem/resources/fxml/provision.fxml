@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,22 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root prefHeight="550.0" prefWidth="800.0" type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112">
+<fx:root prefHeight="550.0" prefWidth="800.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-   <HBox>
+   <HBox AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <TableView fx:id="tableView" prefHeight="550.0" prefWidth="300.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
         <columns>
-            <TableColumn prefWidth="100.0" text="År">
+            <TableColumn prefWidth="100.0" resizable="false" text="År">
                 <cellValueFactory>
                     <PropertyValueFactory property="år" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="Månad">
+            <TableColumn prefWidth="99.0" resizable="false" text="Månad">
                 <cellValueFactory>
                     <PropertyValueFactory property="manad" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="Total">
+            <TableColumn prefWidth="99.0" resizable="false" text="Total">
                 <cellValueFactory>
                     <PropertyValueFactory property="provision" />
                 </cellValueFactory>
@@ -31,6 +32,9 @@
       </TableView>
        
    </HBox>
-      <PieChart fx:id="pieChart" layoutX="294.0" layoutY="44.0" />
+      <PieChart fx:id="pieChart" layoutX="335.0" layoutY="44.0" prefHeight="400.0" prefWidth="459.0" />
    </children>
+   <padding>
+      <Insets bottom="20.0" left="10.0" top="10.0" />
+   </padding>
 </fx:root>
