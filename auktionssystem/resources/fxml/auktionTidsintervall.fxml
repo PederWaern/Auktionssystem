@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.layout.*?>
-<fx:root type="javafx.scene.layout.AnchorPane"
-         prefHeight="550.0"
-         prefWidth="800.0"
-         xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root prefHeight="550.0" prefWidth="800.0" type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112">
     <children>
-        <VBox layoutX="20.0" layoutY="31.0" prefHeight="519.0" prefWidth="780.0" AnchorPane.bottomAnchor="10.0"
-              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="20.0" layoutY="31.0" prefHeight="519.0" prefWidth="780.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                     <children>
-                        <DatePicker fx:id="dpStart" promptText="Startdatum"/>
-                        <DatePicker fx:id="dpSlut" promptText="Slutdatum"/>
-                        <Button fx:id="btSubmit" mnemonicParsing="false" onAction="#loadAllAuktions" text="Sök"/>
+                        <DatePicker fx:id="dpStart" editable="false" promptText="Startdatum" />
+                        <DatePicker fx:id="dpSlut" editable="false" promptText="Slutdatum" />
+                        <Button fx:id="btSubmit" mnemonicParsing="false" onAction="#loadAllAuktions" text="Sök" />
                     </children>
                 </HBox>
 
@@ -24,38 +26,38 @@
                     <columns>
                         <TableColumn prefWidth="156.0" text="Namn">
                             <cellValueFactory>
-                                <PropertyValueFactory property="produktNamn"/>
+                                <PropertyValueFactory property="produktNamn" />
                             </cellValueFactory>
                         </TableColumn>
                         <TableColumn prefWidth="156.0" text="Slutdatum">
                             <cellValueFactory>
-                                <PropertyValueFactory property="slutDatum"/>
+                                <PropertyValueFactory property="slutDatum" />
                             </cellValueFactory>
                         </TableColumn>
                         <TableColumn minWidth="21.0" prefWidth="156.0" text="Högsta bud">
                             <cellValueFactory>
-                                <PropertyValueFactory property="hogstaBud"/>
+                                <PropertyValueFactory property="hogstaBud" />
                             </cellValueFactory>
                         </TableColumn>
                         <TableColumn minWidth="8.0" prefWidth="156.0" text="Beräknad provision">
                             <cellValueFactory>
-                                <PropertyValueFactory property="beraknadProvision"/>
+                                <PropertyValueFactory property="beraknadProvision" />
                             </cellValueFactory>
                         </TableColumn>
                         <TableColumn minWidth="16.0" prefWidth="156.0" text="Provisionsandel">
                             <cellValueFactory>
-                                <PropertyValueFactory property="provandel"/>
+                                <PropertyValueFactory property="provandel" />
                             </cellValueFactory>
                         </TableColumn>
                     </columns>
                 </TableView>
             </children>
             <padding>
-                <Insets top="20.0"/>
+                <Insets top="20.0" />
             </padding>
         </VBox>
     </children>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 </fx:root>
