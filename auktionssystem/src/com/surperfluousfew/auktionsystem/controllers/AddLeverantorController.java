@@ -37,8 +37,28 @@ public class AddLeverantorController extends AnchorPane {
         String orgnummer = txfOnummer.getText();
         String telnummer = txfTelnummer.getText();
         String epost = txfEpost.getText();
-        double prov = Double.parseDouble(txfProvision.getText()) / 100;
-        String message = dbLoader.addLeverantor(name, orgnummer, telnummer, epost, prov);
-        tInfo.setText(message);
+        double prov = 1;
+        if (addLeverantorInputParameterCheck()) {
+            try {
+                prov = Double.parseDouble(txfProvision.getText()) / 100;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String message = dbLoader.addLeverantor(name, orgnummer, telnummer, epost, prov);
+            tInfo.setText(message);
+        } else {
+            tInfo.setText("Alla fält måste fyllas i för att lägga till en leverantör");
+        }
+    }
+
+    // TextField txfName, txfOnummer, txfTelnummer, txfEpost, txfProvision;
+    private boolean addLeverantorInputParameterCheck() {
+        if (txfName.getText().isEmpty() || txfOnummer.getText().isEmpty() || txfTelnummer.getText().isEmpty() || txfEpost.getText().isEmpty() || txfProvision.getText().isEmpty()) {
+            return false;
+        } else if (txfOnummer.getText().length() != 12) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
