@@ -48,7 +48,7 @@ public class AuktionTidsintervallController extends StackPane {
 
     public void loadAllAuktions() {
 
-        oList = FXCollections.observableList(dbLoader.getAuktionTidsintervall
+        oList = FXCollections.observableList(dbLoader.loadAuktionTidsintervall
                 (dpStart.getValue().toString(), dpSlut.getValue().toString()));
         tableView.getItems().clear();
         for (AuktionTidsintervall a : oList) {

@@ -39,7 +39,7 @@ public class ProvisionController extends AnchorPane {
     }
 
     private void populateTable() {
-        provisionPerManads = FXCollections.observableArrayList(dbLoader.getProvisionPerManad());
+        provisionPerManads = FXCollections.observableArrayList(dbLoader.loadProvisionPerManad());
         tableView.getItems().addAll(provisionPerManads);
     }
 
