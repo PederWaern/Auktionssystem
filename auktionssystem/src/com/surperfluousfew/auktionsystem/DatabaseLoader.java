@@ -453,7 +453,7 @@ public class DatabaseLoader {
 
                 list.add(new ProvisionPerManad(resultSet.getInt(1),
                         resultSet.getString(2),
-                        resultSet.getDouble(3)));
+                        resultSet.getDouble(3) + " kr"));
 
             }
         } catch (SQLException e) {

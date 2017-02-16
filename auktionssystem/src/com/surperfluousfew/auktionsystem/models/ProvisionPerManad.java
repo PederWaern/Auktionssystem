@@ -7,10 +7,10 @@ public class ProvisionPerManad {
 
     private int år;
     private String manad;
-    private double provision;
+    private String provision;
 
 
-    public ProvisionPerManad(int år, String manad, double provision) {
+    public ProvisionPerManad(int år, String manad, String provision) {
         this.år = år;
         this.manad = manad;
         this.provision = provision;
@@ -24,7 +24,7 @@ public class ProvisionPerManad {
         return manad;
     }
 
-    public double getProvision() {
+    public String getProvision() {
         return provision;
     }
 }
