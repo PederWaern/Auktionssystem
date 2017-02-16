@@ -1,8 +1,8 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
-import com.surperfluousfew.auktionsystem.models.ProvisionPerManad;
-import com.surperfluousfew.auktionsystem.models.ProvisionPieChart;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.ProvisionPerManad;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.ProvisionPieChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

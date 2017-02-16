@@ -1,14 +1,13 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
-import com.surperfluousfew.auktionsystem.models.TotalOrderVärdePerKund;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.TotalOrderVärdePerKund;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;

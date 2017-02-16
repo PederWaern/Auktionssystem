@@ -3,7 +3,7 @@ package com.surperfluousfew.auktionsystem.controllers;
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
 import com.surperfluousfew.auktionsystem.models.Auktion;
 import com.surperfluousfew.auktionsystem.models.Bud;
-import com.surperfluousfew.auktionsystem.models.TableViewBud;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.TableViewBud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
