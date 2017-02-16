@@ -34,7 +34,7 @@
                     </GridPane.margin>
                 </Label>
 
-                <PasswordField fx:id="txfPassword" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <PasswordField fx:id="txfPassword" onAction="#onEnter" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>

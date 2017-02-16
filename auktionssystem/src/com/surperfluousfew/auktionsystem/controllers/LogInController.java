@@ -37,6 +37,17 @@ public class LogInController extends VBox {
             throw new RuntimeException(e);
         }
         this.dbLoader = dbLoader;
+
+
+    }
+
+    @FXML
+    public void onEnter(ActionEvent ae){
+        try {
+            logIn(ae);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
