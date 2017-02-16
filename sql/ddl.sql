@@ -83,6 +83,7 @@ CREATE TABLE bud (
     ON DELETE CASCADE
 );
 
+
 -- avslutade auktioner
 CREATE TABLE avslutade_auktioner (
   auktion_id        INT    NOT NULL,
@@ -374,7 +375,10 @@ CREATE VIEW provision_per_manad AS
   FROM avslutade_auktioner
     INNER JOIN produkt ON produkt.id = avslutade_auktioner.produkt_id
     INNER JOIN leverantor ON produkt.leverantor_organisationsnummer = leverantor.organisitionsnummer
-  GROUP BY År, Månad;
+  GROUP BY datum_sald
+ORDER BY datum_sald DESC;
+
+SELECT * from provision_per_manad;
 
 USE auktionssystem;
 
