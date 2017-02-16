@@ -48,7 +48,7 @@
                           <PropertyValueFactory property="tid" />
                       </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="140.0" text="Bud">
+                  <TableColumn minWidth="138.0" text="Bud">
                       <cellValueFactory>
                           <PropertyValueFactory property="bud" />
                       </cellValueFactory>
