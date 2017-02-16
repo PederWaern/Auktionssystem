@@ -47,7 +47,11 @@ public class AddLeverantorController extends AnchorPane {
             String message = dbLoader.addLeverantor(name, orgnummer, telnummer, epost, prov);
             tInfo.setText(message);
         } else {
-            tInfo.setText("Alla fält måste fyllas i för att lägga till en leverantör");
+            if (txfOnummer.getText().length() != 12) {
+                tInfo.setText("Organisationsnummret måste vara 12 siffror långt");
+            } else {
+                tInfo.setText("Alla fält måste fyllas i för att lägga till en leverantör");
+            }
         }
     }
 
