@@ -57,7 +57,6 @@ public class LogInController extends VBox {
             String adminAnstallningsnummer = String.valueOf(admin.getAnstallningsnummer());
             String inloggMisslyckadTomtFalt = "Inloggning misslyckades ange: ";
             if (adminAnstallningsnummer.equals(loginAnstallningsnummer) && admin.getLosenord().equals(loginLosenord)) {
-                //Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
                 HomeController homeController = new HomeController(dbLoader);
                 Stage oldStage = stageHandler.getParentStage(root);
                 Stage primaryStage = new Stage();
