@@ -40,7 +40,7 @@ public class LogInController extends VBox {
     }
 
     @FXML
-    public void onEnter(ActionEvent ae){
+    public void onEnter(ActionEvent ae) {
         try {
             logIn(ae);
         } catch (Exception e) {
@@ -55,6 +55,7 @@ public class LogInController extends VBox {
         dbLoader.loadAdmins();
         for (Admin admin : dbLoader.getAdmins()) {
             String adminAnstallningsnummer = String.valueOf(admin.getAnstallningsnummer());
+            String inloggMisslyckadTomtFalt = "Inloggning misslyckades ange: ";
             if (adminAnstallningsnummer.equals(loginAnstallningsnummer) && admin.getLosenord().equals(loginLosenord)) {
                 //Parent homeScreen = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
                 HomeController homeController = new HomeController(dbLoader);
@@ -67,10 +68,19 @@ public class LogInController extends VBox {
                 primaryStage.setResizable(false);
                 primaryStage.show();
                 oldStage.close();
-            } else if (adminAnstallningsnummer.equals(loginAnstallningsnummer) && !admin.getLosenord().equals(loginLosenord)) {
-                tInfo.setText("Felaktigt lösenord");
+            } else if (adminAnstallningsnummer.equals(loginAnstallningsnummer) && (!loginLosenord.isEmpty() && !admin.getLosenord().equals(loginLosenord))) {
+                tInfo.setText(inloggMisslyckadTomtFalt + "Felaktigt lösenord");
+            } else if (loginAnstallningsnummer.isEmpty() || loginLosenord.isEmpty()) {
+
+                if (loginAnstallningsnummer.isEmpty() && !loginLosenord.isEmpty()) {
+                    tInfo.setText(inloggMisslyckadTomtFalt + "Anställningsnummer");
+                } else if (!loginAnstallningsnummer.isEmpty() && loginLosenord.isEmpty()) {
+                    tInfo.setText(inloggMisslyckadTomtFalt + "Lösenord");
+                } else {
+                    tInfo.setText("Inloggning misslyckades: Inloggningsuppgifter saknas");
+                }
             } else {
-                tInfo.setText("Felaktiga inloggningsuppgifter");
+                tInfo.setText("Felaktiga Inloggningsuppgifter");
             }
         }
     }
