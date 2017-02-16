@@ -1,6 +1,9 @@
 package com.surperfluousfew.auktionsystem;
 
 import com.surperfluousfew.auktionsystem.models.*;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.AuktionTidsintervall;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.ProvisionPerManad;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.TotalOrderVärdePerKund;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,7 +61,7 @@ public class DatabaseLoader {
     public DatabaseLoader() {
         try {
 
-            FileInputStream in = new FileInputStream("/Users/christopherolsson/Documents/Nackademin/Databasteknik/Examination/Auktionssystem/Auktionssystem/auktionssystem/configuration/db.properties");
+            FileInputStream in = new FileInputStream("C:\\Users\\Sam\\Documents\\Auktionssystem\\auktionssystem\\configuration/db.properties");
             properties.load(in);
 
             String driver = properties.getProperty("jdbc.driver");

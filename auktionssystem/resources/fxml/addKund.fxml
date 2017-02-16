@@ -22,7 +22,7 @@
                 <Label text="Efternamn:" GridPane.columnIndex="3" />
                 <TextField fx:id="txfLastName" GridPane.columnIndex="4" />
                 <Label text="Personnummer:" GridPane.rowIndex="1" />
-                <TextField fx:id="txfPnummer" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="txfPnummer" promptText="YYMMDDXXXX" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <Label text="Telefonnummer" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                 <TextField fx:id="txfTelnummer" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                 <Label text="Epost:" GridPane.rowIndex="2" />

@@ -1,4 +1,4 @@
-package com.surperfluousfew.auktionsystem.models;
+package com.surperfluousfew.auktionsystem.models.clientSideModels;
 
 /**
  * Created by daniellindkarlberg on 2017-02-15.

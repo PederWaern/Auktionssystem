@@ -1,7 +1,7 @@
 package com.surperfluousfew.auktionsystem.controllers;
 
 import com.surperfluousfew.auktionsystem.DatabaseLoader;
-import com.surperfluousfew.auktionsystem.models.AuktionTidsintervall;
+import com.surperfluousfew.auktionsystem.models.clientSideModels.AuktionTidsintervall;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;

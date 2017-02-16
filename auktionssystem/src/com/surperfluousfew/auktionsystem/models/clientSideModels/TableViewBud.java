@@ -1,4 +1,4 @@
-package com.surperfluousfew.auktionsystem.models;
+package com.surperfluousfew.auktionsystem.models.clientSideModels;
 
 
 public class TableViewBud {
