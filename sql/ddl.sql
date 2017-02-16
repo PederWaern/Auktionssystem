@@ -435,7 +435,9 @@ INSERT INTO produkt (leverantor_organisationsnummer, namn, beskrivning, bildnamn
   ('555555555555', 'Tekopp', 'Klassisk kolonialkopp', 'img_5.jpg'),
   ('666666666666', 'Crazy-haze', 'För dig som alltid är sist kvar', 'img_5.jpg'),
   ('666666666666', 'Soffa', '90-tal IKEA', 'img_6.jpg'),
-  ('666666666666', 'Fåtölj', 'Vintage, superskön', 'img_7.jpg');
+  ('666666666666', 'Fåtölj', 'Vintage, superskön', 'img_7.jpg'),
+  ('111111111111', 'Leksaksbil', 'Engelsk, vintage', 'img_8.jpg'),
+  ('111111111111', 'Uppstoppad räv', 'Transylvansk', 'img_9.jpg');
 
 -- auktioner
 INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum) VALUES
@@ -446,7 +448,13 @@ INSERT INTO auktion (produkt_id, acceptpris, utgangspris, startdatum, slutdatum)
   (5, 3000, 1500, '2017-01-20', '2017-02-13'),
   (6, 3000, 2500, '2017-01-20', '2017-02-14'),
   (7, 3000, 1000, '2017-01-01', '2017-02-01'),
-  (8, 3000, 1000, '2017-01-01', '2017-02-01');
+  (8, 3000, 1000, '2017-01-01', '2017-02-01'),
+  (9, 3000, 1000, '2017-01-01', '2017-02-01'),
+  (10, 3000, 1000, '2017-01-01', '2017-02-01');
+
+
+
+
 
 -- bud
 INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
@@ -457,4 +465,7 @@ INSERT INTO bud (kund_personnummer, auktion_id, belopp) VALUES
   ('5503047294', 5, 1500),
   ('7706034568', 7, 2000),
   ('7706034568', 8, 1520),
-  ('7706034568', 1, 2000);
+  ('7706034568', 1, 2000),
+  ('3212077743', 9, 2500),
+  ('8707736734', 10, 2100);
+

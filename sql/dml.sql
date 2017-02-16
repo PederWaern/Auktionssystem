@@ -8,6 +8,7 @@ SELECT * FROM avslutade_auktioner;
 SELECT *
 FROM avslutade_auktioner_utan_kopare;
 SELECT * FROM auktion;
+SELECT * from provision_per_manad;
 
 
 /**********************
